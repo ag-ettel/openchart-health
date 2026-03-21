@@ -1,10 +1,10 @@
-// Renders a ComparisonResult as a labeled, color-coded badge.
+// Renders a ComparisonResult as a labeled badge with neutral visual treatment.
 // Used by MeasureCard for both national and state average comparisons.
-// Color system: blue = better, orange = worse, gray = no significant
-// difference or cannot determine. The two gray states carry different
-// labels because they mean different things to a consumer.
-// Use confidence intervals to determine whether a provider's measure value is
-// significantly better or worse than a reference value (national average or another provider).
+// All states use the same neutral gray — no directional color coding (DEC-009).
+// The four states carry different labels because they mean different things
+// to a consumer, but visual weight is uniform.
+// Comparison result is derived from confidence interval overlap with a
+// reference value (national average or another provider).
 // Used by compareToAverage() and compareProviders() in lib/utils.ts.
 
 import type { ComparisonResult } from "@/types/provider";
@@ -20,15 +20,15 @@ const RESULT_CONFIG: Record<
 > = {
   BETTER: {
     label: "Performs better than",
-    className: "text-blue-700 bg-blue-50 border-blue-200",
+    className: "text-gray-700 bg-gray-50 border-gray-200",
   },
   WORSE: {
     label: "Performs worse than",
-    className: "text-orange-700 bg-orange-50 border-orange-200",
+    className: "text-gray-700 bg-gray-50 border-gray-200",
   },
   NO_SIGNIFICANT_DIFFERENCE: {
     label: "No significant difference from",
-    className: "text-gray-500 bg-gray-50 border-gray-200",
+    className: "text-gray-700 bg-gray-50 border-gray-200",
   },
   CANNOT_DETERMINE: {
     label: "Insufficient data to compare with",

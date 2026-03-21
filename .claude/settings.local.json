@@ -22,7 +22,21 @@
       "Bash(where python:*)",
       "Bash(ls /c/Python*/python.exe /c/Users/*/AppData/Local/Programs/Python/*/python.exe)",
       "Bash(/c/Users/legion/miniconda3/python.exe -c \":*)",
-      "Bash(/c/Users/legion/miniconda3/python.exe scripts/recon/confirm_dataset_ids.py)"
+      "Bash(/c/Users/legion/miniconda3/python.exe scripts/recon/confirm_dataset_ids.py)",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import pypdf; print\\(''''pypdf available''''\\)\")",
+      "Bash(python -c \"import PyPDF2; print\\(''''PyPDF2 available''''\\)\")",
+      "Bash(__NEW_LINE_bf5fa16340c6c763__ for:*)",
+      "Bash(do echo:*)",
+      "Bash(sed 's/.*\"\"\"\"measure_id\"\"\"\"\\\\s*:\\\\s*\"\"\"\"//')",
+      "Bash(sed 's/\"\"\"\".*//')",
+      "Bash(python -c \"import fitz; print\\(''pymupdf available''\\)\")",
+      "Bash(python -c \"import pdfminer; print\\(''pdfminer available''\\)\")",
+      "Bash(python -c \"import PyPDF2; print\\(''PyPDF2 available''\\)\")",
+      "Bash(curl -s \"https://data.cms.gov/provider-data/api/1/datastore/query/y2hd-n93e/0?offset=0&count=true&results=true&schema=true&keys=true&format=json&rowIds=false&limit=100\" -o \"e:/openchart-health/tests/pipeline/fixtures/nursing_home/y2hd-n93e.json\")"
+    ],
+    "additionalDirectories": [
+      "e:\\openchart-health"
     ]
   }
 }

@@ -18,11 +18,8 @@ export type PaymentProgram   = "HRRP" | "HACRP" | "VBP" | "SNF_VBP";
 // Result of a statistically honest comparison between a provider's measure
 // value and a reference value (national average or another provider).
 // Used by compareToAverage() and compareProviders() in lib/utils.ts.
-// Color mapping in components:
-//   BETTER                  → blue-700 text, blue-50 tint
-//   WORSE                   → orange-700 text, orange-50 tint
-//   NO_SIGNIFICANT_DIFFERENCE → gray-500 text, gray-50 tint
-//   CANNOT_DETERMINE        → gray-500 text, gray-50 tint, distinct label
+// All states render with neutral gray visual treatment (DEC-009: no directional
+// color coding). CANNOT_DETERMINE uses lighter gray to distinguish from known states.
 export type ComparisonResult =
   | "BETTER"
   | "WORSE"
@@ -74,17 +71,6 @@ export interface Measure {
   trend:                     TrendPeriod[]; // ordered chronologically, oldest first
   trend_valid:               boolean;
   trend_period_count:        number;
-}
-
-export interface Summary {
-  summary_scope:            "page" | "measure_group";
-  measure_group:            string | null; // null when summary_scope is "page"
-  summary_text:             string;
-  fallback_used:            boolean;       // true = full template fallback; no LLM call made
-  sentence_3_fallback_used: boolean;       // true = LLM call made but sentence 3 fell back
-  prompt_version:           string;
-  llm_model_id:             string;
-  generation_timestamp:     string;        // ISO8601
 }
 
 export interface PaymentAdjustment {
@@ -145,7 +131,6 @@ export interface Provider {
   last_updated:         string;          // ISO8601; use in all measure AttributionLine renders
   pipeline_run_id:      string;          // UUID
   measures:             Measure[];
-  summaries:            Summary[];
   payment_adjustments:  PaymentAdjustment[];
   hospital_context:     HospitalContext | null;     // non-null for HOSPITAL only
   nursing_home_context: NursingHomeContext | null;  // non-null for NURSING_HOME only

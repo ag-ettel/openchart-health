@@ -45,7 +45,7 @@
 //
 // SESDisclosureBlock: any group with HIGH or MODERATE sensitivity measures.
 // ProviderContextPanel: both hospitals, side by side, same visual plane.
-// No composite ranking or aggregate score. No personalization language.
+// No composite score or aggregate ordering. No personalization language.
 
 export default function ComparePage(): JSX.Element {
   return <div data-page="compare" />;

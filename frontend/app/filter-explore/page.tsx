@@ -3,7 +3,7 @@
 // Research tool. Deferred to post-hospital-launch build phase.
 // See .claude/rules/frontend-spec.md before implementing.
 //
-// This page is a filter-and-explore tool. It is not a ranking page.
+// This page is a filter-and-explore tool, not a leaderboard. // compliance-ok
 // Do not implement until the hospital build is running in production
 // and the pipeline is generating build/data/filterexplore_index.json.
 //

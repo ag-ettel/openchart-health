@@ -1,0 +1,615 @@
+Hospital directories: ['current', 'hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+Nursing home directories: ['current', 'nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2024', 'nursing_homes_including_rehab_services_07_2025']
+
+################################################################################
+# HOSPITAL DATASETS
+################################################################################
+
+================================================================================
+  Complications_and_Deaths-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (18 columns)
+
+  --- Unique Categorical Values ---
+
+  Compared to National:
+    'No Different Than the National Rate'                             total=  182,073  [current:46,793, hospitals_02_2025:43,852, hospitals_07_2024:44,306, hospitals_08_2025:47,122]
+    'Not Available'                                                   total=  122,807  [current:31,720, hospitals_02_2025:30,219, hospitals_07_2024:30,148, hospitals_08_2025:30,720]
+    'Number of Cases Too Small'                                       total=   46,822  [current:11,926, hospitals_02_2025:11,556, hospitals_07_2024:11,504, hospitals_08_2025:11,836]
+    'No Different Than the National Value'                            total=   10,833  [current:2,697, hospitals_02_2025:2,702, hospitals_07_2024:2,750, hospitals_08_2025:2,684]
+    'Better Than the National Rate'                                   total=    4,693  [current:1,296, hospitals_02_2025:1,017, hospitals_07_2024:1,059, hospitals_08_2025:1,321]
+    'Worse Than the National Rate'                                    total=    4,322  [current:1,125, hospitals_02_2025:1,010, hospitals_07_2024:1,025, hospitals_08_2025:1,162]
+    'Worse Than the National Value'                                   total=      662  [current:162, hospitals_02_2025:170, hospitals_07_2024:160, hospitals_08_2025:170]
+    'Better Than the National Value'                                  total=      308  [current:61, hospitals_02_2025:85, hospitals_07_2024:77, hospitals_08_2025:85]
+
+  Footnote:
+    '1, 28'                                                           total=      119  [current:10, hospitals_02_2025:49, hospitals_07_2024:43, hospitals_08_2025:17]
+    '7, 28'                                                           total=       10  [hospitals_02_2025:5, hospitals_07_2024:5]
+    '1, 23'                                                           total=        5  [current:1, hospitals_02_2025:1, hospitals_07_2024:2, hospitals_08_2025:1]
+    '5, 23'                                                           total=        1  [current:1]
+
+  --- Reporting Periods ---
+
+  current:
+    ('07/01/2022', '06/30/2024'): 57,468 rows
+    ('07/01/2021', '06/30/2024'): 28,734 rows
+    ('04/01/2021', '03/31/2024'): 4,789 rows
+    ('07/01/2023', '06/30/2024'): 4,789 rows
+
+  hospitals_02_2025:
+    ('07/01/2021', '06/30/2023'): 57,228 rows
+    ('07/01/2020', '06/30/2023'): 28,614 rows
+    ('07/01/2020', '03/31/2023'): 4,769 rows
+
+  hospitals_07_2024:
+    ('07/01/2020', '06/30/2022'): 57,492 rows
+    ('07/01/2020', '06/30/2023'): 28,746 rows
+    ('07/01/2020', '03/31/2023'): 4,791 rows
+
+  hospitals_08_2025:
+    ('07/01/2021', '06/30/2023'): 57,060 rows
+    ('07/01/2021', '06/30/2024'): 28,530 rows
+    ('04/01/2021', '03/31/2024'): 4,755 rows
+    ('07/01/2023', '06/30/2024'): 4,755 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 20
+    Hybrid_HWM: present in ['current', 'hospitals_08_2025'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024']
+
+================================================================================
+  Healthcare_Associated_Infections-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (15 columns)
+
+  --- Unique Categorical Values ---
+
+  Compared to National:
+    'Not Available'                                                   total=  415,944  [current:104,772, hospitals_02_2025:103,428, hospitals_07_2024:104,100, hospitals_08_2025:103,644]
+    'No Different than National Benchmark'                            total=  191,826  [current:46,758, hospitals_02_2025:48,420, hospitals_07_2024:49,362, hospitals_08_2025:47,286]
+    'Better than the National Benchmark'                              total=   73,656  [current:19,608, hospitals_02_2025:18,108, hospitals_07_2024:17,214, hospitals_08_2025:18,726]
+    'Worse than the National Benchmark'                               total=    6,318  [current:1,266, hospitals_02_2025:1,728, hospitals_07_2024:1,800, hospitals_08_2025:1,524]
+
+  Footnote:
+    '3, 29'                                                           total=    3,993  [current:1,353, hospitals_02_2025:1,380, hospitals_08_2025:1,260]
+    '3, 13'                                                           total=    2,115  [current:554, hospitals_02_2025:574, hospitals_07_2024:449, hospitals_08_2025:538]
+    '13, 29'                                                          total=    1,084  [current:356, hospitals_02_2025:296, hospitals_08_2025:432]
+    '3, 13, 29'                                                       total=      539  [current:175, hospitals_02_2025:148, hospitals_08_2025:216]
+    '13, 28'                                                          total=      279  [current:39, hospitals_02_2025:96, hospitals_07_2024:105, hospitals_08_2025:39]
+    '8, 29'                                                           total=      122  [current:41, hospitals_02_2025:40, hospitals_08_2025:41]
+    '8, 28'                                                           total=       23  [current:4, hospitals_02_2025:9, hospitals_07_2024:8, hospitals_08_2025:2]
+
+  --- Reporting Periods ---
+
+  current:
+    ('04/01/2024', '03/31/2025'): 172,404 rows
+
+  hospitals_02_2025:
+    ('04/01/2023', '03/31/2024'): 171,684 rows
+
+  hospitals_07_2024:
+    ('10/01/2022', '09/30/2023'): 172,476 rows
+
+  hospitals_08_2025:
+    ('10/01/2023', '09/30/2024'): 171,180 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 36
+
+================================================================================
+  Unplanned_Hospital_Visits-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (20 columns)
+
+  --- Unique Categorical Values ---
+
+  Compared to National:
+    'No Different Than the National Rate'                             total=   94,630  [current:23,457, hospitals_02_2025:23,802, hospitals_07_2024:23,846, hospitals_08_2025:23,525]
+    'Not Available'                                                   total=   62,146  [current:15,844, hospitals_02_2025:15,352, hospitals_07_2024:15,549, hospitals_08_2025:15,401]
+    'Number of Cases Too Small'                                       total=   59,801  [current:15,078, hospitals_02_2025:14,872, hospitals_07_2024:14,921, hospitals_08_2025:14,930]
+    'Average Days per 100 Discharges'                                 total=   19,918  [current:3,720, hospitals_02_2025:6,219, hospitals_07_2024:6,250, hospitals_08_2025:3,729]
+    'No Different than expected'                                      total=    9,285  [current:2,590, hospitals_02_2025:2,161, hospitals_07_2024:2,380, hospitals_08_2025:2,154]
+    'More Days Than Average per 100 Discharges'                       total=    8,457  [current:2,837, hospitals_02_2025:1,387, hospitals_07_2024:1,391, hospitals_08_2025:2,842]
+    'Fewer Days Than Average per 100 Discharges'                      total=    5,201  [current:1,791, hospitals_02_2025:805, hospitals_07_2024:808, hospitals_08_2025:1,797]
+    'Number of cases too small'                                       total=    3,269  [current:844, hospitals_02_2025:825, hospitals_07_2024:780, hospitals_08_2025:820]
+    'Worse Than the National Rate'                                    total=    1,708  [current:424, hospitals_02_2025:431, hospitals_07_2024:422, hospitals_08_2025:431]
+    'Better Than the National Rate'                                   total=    1,254  [current:326, hospitals_02_2025:301, hospitals_07_2024:293, hospitals_08_2025:334]
+    'Better than expected'                                            total=      921  [current:87, hospitals_02_2025:315, hospitals_07_2024:207, hospitals_08_2025:312]
+    'Worse than expected'                                             total=      866  [current:48, hospitals_02_2025:296, hospitals_07_2024:227, hospitals_08_2025:295]
+
+  Footnote:
+    '1, 28'                                                           total=      121  [current:12, hospitals_02_2025:45, hospitals_07_2024:49, hospitals_08_2025:15]
+    '7, 28'                                                           total=        8  [current:1, hospitals_02_2025:3, hospitals_07_2024:3, hospitals_08_2025:1]
+    '1, 23'                                                           total=        3  [hospitals_08_2025:3]
+    '5, 23'                                                           total=        1  [current:1]
+
+  --- Reporting Periods ---
+
+  current:
+    ('07/01/2021', '06/30/2024'): 43,101 rows
+    ('01/01/2024', '12/31/2024'): 14,367 rows
+    ('07/01/2023', '06/30/2024'): 4,789 rows
+    ('01/01/2022', '12/31/2024'): 4,789 rows
+
+  hospitals_02_2025:
+    ('07/01/2020', '06/30/2023'): 42,921 rows
+    ('01/01/2023', '12/31/2023'): 14,307 rows
+    ('01/01/2021', '12/31/2023'): 4,769 rows
+    ('07/01/2022', '06/30/2023'): 4,769 rows
+
+  hospitals_07_2024:
+    ('07/01/2020', '06/30/2023'): 43,119 rows
+    ('01/01/2022', '12/31/2022'): 14,373 rows
+    ('01/01/2020', '12/31/2022'): 4,791 rows
+    ('07/01/2022', '06/30/2023'): 4,791 rows
+
+  hospitals_08_2025:
+    ('07/01/2021', '06/30/2024'): 42,795 rows
+    ('01/01/2023', '12/31/2023'): 14,265 rows
+    ('07/01/2023', '06/30/2024'): 4,755 rows
+    ('01/01/2021', '12/31/2023'): 4,755 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 15
+    Hybrid_HWR: present in ['current', 'hospitals_08_2025'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024']
+    READM_30_HOSP_WIDE: present in ['hospitals_02_2025', 'hospitals_07_2024'], MISSING from ['current', 'hospitals_08_2025']
+
+================================================================================
+  HCAHPS-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (22 columns)
+
+  --- Unique Categorical Values ---
+
+  Patient Survey Star Rating:
+    'Not Applicable'                                                  total=1,456,381  [current:282,551, hospitals_02_2025:391,058, hospitals_07_2024:392,862, hospitals_08_2025:389,910]
+    'Not Available'                                                   total=   66,330  [current:14,454, hospitals_02_2025:17,292, hospitals_07_2024:17,215, hospitals_08_2025:17,369]
+
+  HCAHPS Answer Percent:
+    'Not Applicable'                                                  total=  382,028  [current:81,413, hospitals_02_2025:100,149, hospitals_07_2024:100,611, hospitals_08_2025:99,855]
+    'Not Available'                                                   total=  258,759  [current:51,272, hospitals_02_2025:69,111, hospitals_07_2024:67,368, hospitals_08_2025:71,008]
+
+  HCAHPS Linear Mean Value:
+    'Not Applicable'                                                  total=1,475,485  [current:287,340, hospitals_02_2025:395,827, hospitals_07_2024:397,653, hospitals_08_2025:394,665]
+    'Not Available'                                                   total=   60,008  [current:12,848, hospitals_02_2025:15,720, hospitals_07_2024:15,650, hospitals_08_2025:15,790]
+
+  --- Reporting Periods ---
+
+  current:
+    ('04/01/2024', '03/31/2025'): 325,652 rows
+
+  hospitals_02_2025:
+    ('04/01/2023', '03/31/2024'): 443,517 rows
+
+  hospitals_07_2024:
+    ('10/01/2022', '09/30/2023'): 445,563 rows
+
+  hospitals_08_2025:
+    ('10/01/2023', '09/30/2024'): 442,215 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 93
+    H_BATH_HELP_A_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_BATH_HELP_SN_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_BATH_HELP_U_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CALL_BUTTON_A_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CALL_BUTTON_SN_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CALL_BUTTON_U_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_3_A_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_3_LINEAR_SCORE: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_3_SN_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_3_STAR_RATING: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_3_U_P: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_7_A: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_7_D_SD: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_7_LINEAR_SCORE: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_7_SA: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_COMP_7_STAR_RATING: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_MED_A: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_MED_D_SD: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_MED_SA: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_PREFER_A: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_PREFER_D_SD: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_PREFER_SA: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_UNDER_A: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_UNDER_D_SD: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    H_CT_UNDER_SA: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+
+================================================================================
+  Timely_and_Effective_Care-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (16 columns)
+
+  --- Unique Categorical Values ---
+
+  Score:
+    'Not Available'                                                   total=  259,836  [current:80,534, hospitals_02_2025:63,631, hospitals_07_2024:51,989, hospitals_08_2025:63,682]
+    'low'                                                             total=    6,673  [current:1,672, hospitals_02_2025:1,678, hospitals_07_2024:1,659, hospitals_08_2025:1,664]
+    'medium'                                                          total=    3,777  [current:917, hospitals_02_2025:951, hospitals_07_2024:964, hospitals_08_2025:945]
+    'very high'                                                       total=    2,693  [current:704, hospitals_02_2025:673, hospitals_07_2024:643, hospitals_08_2025:673]
+    'high'                                                            total=    2,268  [current:553, hospitals_02_2025:576, hospitals_07_2024:565, hospitals_08_2025:574]
+
+  Footnote:
+    '1, 3'                                                            total=    6,823  [current:1,646, hospitals_02_2025:1,784, hospitals_07_2024:1,770, hospitals_08_2025:1,623]
+    '1, 2, 3'                                                         total=    2,024  [current:526, hospitals_02_2025:466, hospitals_07_2024:508, hospitals_08_2025:524]
+    '1, 2'                                                            total=    1,122  [current:284, hospitals_02_2025:262, hospitals_07_2024:289, hospitals_08_2025:287]
+    '3, 7'                                                            total=      766  [current:212, hospitals_02_2025:189, hospitals_07_2024:190, hospitals_08_2025:175]
+    '2, 3'                                                            total=      611  [current:171, hospitals_02_2025:145, hospitals_07_2024:148, hospitals_08_2025:147]
+    '2, 3, 29'                                                        total=      546  [current:190, hospitals_02_2025:213, hospitals_08_2025:143]
+    '3, 29'                                                           total=      542  [current:229, hospitals_02_2025:195, hospitals_08_2025:118]
+    '1, 3, 29'                                                        total=      416  [current:168, hospitals_02_2025:95, hospitals_08_2025:153]
+    '1, 2, 3, 29'                                                     total=      180  [current:52, hospitals_02_2025:32, hospitals_08_2025:96]
+    '1, 29'                                                           total=       53  [current:53]
+    '2, 3, 7'                                                         total=       46  [current:18, hospitals_02_2025:8, hospitals_07_2024:8, hospitals_08_2025:12]
+    '2, 7'                                                            total=       42  [current:12, hospitals_02_2025:8, hospitals_07_2024:9, hospitals_08_2025:13]
+    '3, 7, 29'                                                        total=       28  [current:15, hospitals_02_2025:3, hospitals_08_2025:10]
+    '2, 3, 7, 29'                                                     total=        1  [hospitals_02_2025:1]
+
+  Condition:
+    'Electronic Clinical Quality Measure'                             total=  215,130  [current:68,274, hospitals_02_2025:53,388, hospitals_07_2024:40,257, hospitals_08_2025:53,211]
+    'Emergency Department'                                            total=  102,184  [current:32,599, hospitals_02_2025:23,185, hospitals_07_2024:23,285, hospitals_08_2025:23,115]
+    'Sepsis Care'                                                     total=   92,870  [current:23,285, hospitals_02_2025:23,185, hospitals_07_2024:23,285, hospitals_08_2025:23,115]
+    'Healthcare Personnel Vaccination'                                total=   32,491  [current:4,657, hospitals_02_2025:9,274, hospitals_07_2024:9,314, hospitals_08_2025:9,246]
+    'Colonoscopy care'                                                total=   18,574  [current:4,657, hospitals_02_2025:4,637, hospitals_07_2024:4,657, hospitals_08_2025:4,623]
+    'Cataract surgery outcome'                                        total=   18,574  [current:4,657, hospitals_02_2025:4,637, hospitals_07_2024:4,657, hospitals_08_2025:4,623]
+
+  --- Reporting Periods ---
+
+  current:
+    ('01/01/2024', '12/31/2024'): 86,902 rows
+    ('04/01/2024', '03/31/2025'): 46,570 rows
+    ('10/01/2024', '03/31/2025'): 4,657 rows
+
+  hospitals_02_2025:
+    ('01/01/2023', '12/31/2023'): 71,936 rows
+    ('04/01/2023', '03/31/2024'): 37,096 rows
+    ('01/01/2024', '03/31/2024'): 4,637 rows
+    ('10/01/2023', '03/31/2024'): 4,637 rows
+
+  hospitals_07_2024:
+    ('01/01/2022', '12/31/2022'): 58,885 rows
+    ('10/01/2022', '09/30/2023'): 37,256 rows
+    ('07/01/2023', '09/30/2023'): 4,657 rows
+    ('10/01/2022', '03/31/2023'): 4,657 rows
+
+  hospitals_08_2025:
+    ('01/01/2023', '12/31/2023'): 71,703 rows
+    ('10/01/2023', '09/30/2024'): 36,984 rows
+    ('07/01/2024', '09/30/2024'): 4,623 rows
+    ('10/01/2023', '03/31/2024'): 4,623 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 36
+    ED_2_Strata_1: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    ED_2_Strata_2: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    GMCS: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    GMCS_Malnutrition_Diagnosis_Documented: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    GMCS_Malnutrition_Screening: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    GMCS_Nutrition_Assessment: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    GMCS_Nutritional_Care_Plan: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    HCP_COVID_19: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+    HH_01: present in ['hospitals_02_2025', 'hospitals_08_2025'], MISSING from ['current', 'hospitals_07_2024']
+    HH_02: present in ['hospitals_02_2025', 'hospitals_08_2025'], MISSING from ['current', 'hospitals_07_2024']
+    HH_HYPER: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    HH_HYPO: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    HH_ORAE: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    OP_18a: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    OP_18d: present in ['current'], MISSING from ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025']
+    OP_40: present in ['current', 'hospitals_02_2025', 'hospitals_08_2025'], MISSING from ['hospitals_07_2024']
+    STK_06: present in ['hospitals_02_2025', 'hospitals_07_2024', 'hospitals_08_2025'], MISSING from ['current']
+
+================================================================================
+  Outpatient_Imaging_Efficiency-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (14 columns)
+
+  --- Unique Categorical Values ---
+
+  Footnote:
+    '1, 23'                                                           total=        4  [current:2, hospitals_08_2025:2]
+
+  --- Reporting Periods ---
+
+  current:
+    ('07/01/2023', '06/30/2024'): 18,500 rows
+
+  hospitals_02_2025:
+    ('07/01/2022', '06/30/2023'): 18,420 rows
+
+  hospitals_07_2024:
+    ('07/01/2022', '06/30/2023'): 18,500 rows
+
+  hospitals_08_2025:
+    ('07/01/2023', '06/30/2024'): 18,364 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 4
+
+================================================================================
+  Medicare_Hospital_Spending_Per_Patient-Hospital.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (14 columns)
+
+  --- Unique Categorical Values ---
+
+  --- Reporting Periods ---
+
+  current:
+    ('01/01/2024', '12/31/2024'): 4,625 rows
+
+  hospitals_02_2025:
+    ('01/01/2023', '12/31/2023'): 4,605 rows
+
+  hospitals_07_2024:
+    ('01/01/2022', '12/31/2022'): 4,625 rows
+
+  hospitals_08_2025:
+    ('01/01/2023', '12/31/2023'): 4,591 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 1
+
+================================================================================
+  Hospital_General_Information.csv
+================================================================================
+
+  HEADER CHANGES: current -> hospitals_07_2024
+    Added: {'Meets criteria for promoting interoperability of EHRs'}
+
+  --- Unique Categorical Values ---
+
+  Hospital Type:
+    'Acute Care Hospitals'                                            total=   12,553  [current:3,116, hospitals_02_2025:3,145, hospitals_07_2024:3,165, hospitals_08_2025:3,127]
+    'Critical Access Hospitals'                                       total=    5,483  [current:1,376, hospitals_02_2025:1,368, hospitals_07_2024:1,369, hospitals_08_2025:1,370]
+    'Psychiatric'                                                     total=    2,492  [current:633, hospitals_02_2025:627, hospitals_07_2024:606, hospitals_08_2025:626]
+    'Acute Care - Veterans Administration'                            total=      530  [current:132, hospitals_02_2025:132, hospitals_07_2024:134, hospitals_08_2025:132]
+    'Childrens'                                                       total=      371  [current:94, hospitals_02_2025:92, hospitals_07_2024:91, hospitals_08_2025:94]
+    'Acute Care - Department of Defense'                              total=      128  [current:32, hospitals_02_2025:32, hospitals_07_2024:32, hospitals_08_2025:32]
+    'Rural Emergency Hospital'                                        total=       39  [current:39]
+    'Long-term'                                                       total=        4  [current:4]
+    'Not Available'                                                   total=        1  [hospitals_07_2024:1]
+
+  Hospital Ownership:
+    'Voluntary non-profit - Private'                                  total=    9,141  [current:2,304, hospitals_02_2025:2,278, hospitals_07_2024:2,276, hospitals_08_2025:2,283]
+    'Proprietary'                                                     total=    4,230  [current:1,069, hospitals_02_2025:1,059, hospitals_07_2024:1,043, hospitals_08_2025:1,059]
+    'Government - Hospital District or Authority'                     total=    2,066  [current:519, hospitals_02_2025:519, hospitals_07_2024:515, hospitals_08_2025:513]
+    'Government - Local'                                              total=    1,595  [current:401, hospitals_02_2025:398, hospitals_07_2024:406, hospitals_08_2025:390]
+    'Voluntary non-profit - Other'                                    total=    1,449  [current:355, hospitals_02_2025:366, hospitals_07_2024:368, hospitals_08_2025:360]
+    'Voluntary non-profit - Church'                                   total=    1,101  [current:271, hospitals_02_2025:273, hospitals_07_2024:285, hospitals_08_2025:272]
+    'Government - State'                                              total=      829  [current:209, hospitals_02_2025:206, hospitals_07_2024:206, hospitals_08_2025:208]
+    'Veterans Health Administration'                                  total=      530  [current:132, hospitals_02_2025:132, hospitals_07_2024:134, hospitals_08_2025:132]
+    'Physician'                                                       total=      301  [current:76, hospitals_02_2025:76, hospitals_07_2024:75, hospitals_08_2025:74]
+    'Government - Federal'                                            total=      170  [current:43, hospitals_02_2025:42, hospitals_07_2024:42, hospitals_08_2025:43]
+    'Department of Defense'                                           total=      128  [current:32, hospitals_02_2025:32, hospitals_07_2024:32, hospitals_08_2025:32]
+    'Tribal'                                                          total=       60  [current:15, hospitals_02_2025:15, hospitals_07_2024:15, hospitals_08_2025:15]
+    'Not Available'                                                   total=        1  [hospitals_07_2024:1]
+
+  Emergency Services:
+    'Yes'                                                             total=   17,950  [current:4,499, hospitals_02_2025:4,480, hospitals_07_2024:4,509, hospitals_08_2025:4,462]
+    'No'                                                              total=    3,651  [current:927, hospitals_02_2025:916, hospitals_07_2024:889, hospitals_08_2025:919]
+
+  Hospital overall rating:
+    'Not Available'                                                   total=   10,206  [current:2,560, hospitals_02_2025:2,573, hospitals_07_2024:2,564, hospitals_08_2025:2,509]
+
+  Hospital overall rating footnote:
+    '16, 23'                                                          total=        4  [current:2, hospitals_02_2025:1, hospitals_07_2024:1]
+
+  Meets criteria for birthing friendly designation:
+    'Y'                                                               total=    8,951  [current:2,265, hospitals_02_2025:2,233, hospitals_07_2024:2,225, hospitals_08_2025:2,228]
+
+################################################################################
+# NURSING HOME DATASETS
+################################################################################
+
+================================================================================
+  NH_ProviderInfo_*.csv
+================================================================================
+
+  HEADER CHANGES: current -> nursing_homes_including_rehab_services_02_2025
+    Added: {'Rating Cycle 3 Number of Standard Health Deficiencies', 'Rating Cycle 3 Health Deficiency Score', 'Rating Cycle 3 Number of Complaint Health Deficiencies', 'Rating Cycle 3 Total Health Score', 'Affiliated Entity Name', 'Rating Cycle 2 Health Revisit Score', 'Rating Cycle 2 Number of Health Revisits', 'Number of Facility Reported Incidents', 'Rating Cycle 3 Standard Health Survey Date', 'Rating Cycle 2 Total Number of Health Deficiencies', 'Rating Cycle 3 Health Revisit Score', 'Rating Cycle 2 Health Deficiency Score', 'Affiliated Entity ID', 'Number of Substantiated Complaints', 'Rating Cycle 2 Total Health Score', 'Rating Cycle 3 Total Number of Health Deficiencies', 'Rating Cycle 2 Number of Complaint Health Deficiencies', 'Rating Cycle 3 Number of Health Revisits'}
+    Removed: {'Urban', 'Chain Average QM Rating', 'Rating Cycle 2/3 Health Revisit Score', 'Number of Facilities in Chain', 'Chain Average Health Inspection Rating', 'Rating Cycle 2/3 Total Health Score', 'Rating Cycle 2/3 Health Deficiency Score', 'Rating Cycle 2/3 Number of Complaint Health Deficiencies', 'Rating Cycle 2/3 Number of Health Revisits', 'Chain ID', 'Chain Average Overall 5-star Rating', 'Rating Cycle 2/3 Total Number of Health Deficiencies', 'Chain Average Staffing Rating', 'Chain Name'}
+
+  HEADER CHANGES: current -> nursing_homes_including_rehab_services_07_2024
+    Added: {'Rating Cycle 3 Number of Standard Health Deficiencies', 'Rating Cycle 3 Health Deficiency Score', 'Rating Cycle 3 Number of Complaint Health Deficiencies', 'Rating Cycle 3 Total Health Score', 'Affiliated Entity Name', 'Rating Cycle 2 Health Revisit Score', 'Rating Cycle 2 Number of Health Revisits', 'Number of Facility Reported Incidents', 'Rating Cycle 3 Standard Health Survey Date', 'Rating Cycle 2 Total Number of Health Deficiencies', 'Rating Cycle 3 Health Revisit Score', 'Rating Cycle 2 Health Deficiency Score', 'Affiliated Entity ID', 'Number of Substantiated Complaints', 'Rating Cycle 2 Total Health Score', 'Rating Cycle 3 Total Number of Health Deficiencies', 'Rating Cycle 2 Number of Complaint Health Deficiencies', 'Rating Cycle 3 Number of Health Revisits'}
+    Removed: {'Urban', 'Chain Average QM Rating', 'Rating Cycle 2/3 Health Revisit Score', 'Number of Facilities in Chain', 'Chain Average Health Inspection Rating', 'Rating Cycle 2/3 Total Health Score', 'Rating Cycle 2/3 Health Deficiency Score', 'Rating Cycle 2/3 Number of Complaint Health Deficiencies', 'Rating Cycle 2/3 Number of Health Revisits', 'Chain ID', 'Chain Average Overall 5-star Rating', 'Rating Cycle 2/3 Total Number of Health Deficiencies', 'Chain Average Staffing Rating', 'Chain Name'}
+
+  HEADER CHANGES: current -> nursing_homes_including_rehab_services_07_2025
+    Added: {'Number of Facility Reported Incidents', 'Number of Substantiated Complaints'}
+    Removed: {'Urban'}
+
+  --- Unique Categorical Values ---
+
+  Ownership Type:
+    'For profit - Corporation'                                        total=   21,413  [current:4,939, nursing_homes_including_rehab_services_02_2025:5,439, nursing_homes_including_rehab_services_07_2024:5,849, nursing_homes_including_rehab_services_07_2025:5,186]
+    'For profit - Limited Liability company'                          total=   17,130  [current:4,832, nursing_homes_including_rehab_services_02_2025:4,169, nursing_homes_including_rehab_services_07_2024:3,617, nursing_homes_including_rehab_services_07_2025:4,512]
+    'Non profit - Corporation'                                        total=    9,617  [current:2,305, nursing_homes_including_rehab_services_02_2025:2,443, nursing_homes_including_rehab_services_07_2024:2,504, nursing_homes_including_rehab_services_07_2025:2,365]
+    'For profit - Individual'                                         total=    2,772  [current:669, nursing_homes_including_rehab_services_02_2025:688, nursing_homes_including_rehab_services_07_2024:749, nursing_homes_including_rehab_services_07_2025:666]
+    'For profit - Partnership'                                        total=    1,865  [current:408, nursing_homes_including_rehab_services_02_2025:471, nursing_homes_including_rehab_services_07_2024:534, nursing_homes_including_rehab_services_07_2025:452]
+    'Government - County'                                             total=    1,494  [current:358, nursing_homes_including_rehab_services_02_2025:381, nursing_homes_including_rehab_services_07_2024:384, nursing_homes_including_rehab_services_07_2025:371]
+    'Non profit - Other'                                              total=    1,305  [current:332, nursing_homes_including_rehab_services_02_2025:324, nursing_homes_including_rehab_services_07_2024:316, nursing_homes_including_rehab_services_07_2025:333]
+    'Non profit - Church related'                                     total=    1,164  [current:285, nursing_homes_including_rehab_services_02_2025:286, nursing_homes_including_rehab_services_07_2024:316, nursing_homes_including_rehab_services_07_2025:277]
+    'Government - Hospital district'                                  total=    1,162  [current:294, nursing_homes_including_rehab_services_02_2025:290, nursing_homes_including_rehab_services_07_2024:270, nursing_homes_including_rehab_services_07_2025:308]
+    'Government - State'                                              total=      628  [current:159, nursing_homes_including_rehab_services_02_2025:156, nursing_homes_including_rehab_services_07_2024:156, nursing_homes_including_rehab_services_07_2025:157]
+    'Government - City/county'                                        total=      240  [current:64, nursing_homes_including_rehab_services_02_2025:63, nursing_homes_including_rehab_services_07_2024:59, nursing_homes_including_rehab_services_07_2025:54]
+    'Government - City'                                               total=      226  [current:54, nursing_homes_including_rehab_services_02_2025:56, nursing_homes_including_rehab_services_07_2024:60, nursing_homes_including_rehab_services_07_2025:56]
+    'Government - Federal'                                            total=       62  [current:11, nursing_homes_including_rehab_services_02_2025:16, nursing_homes_including_rehab_services_07_2024:20, nursing_homes_including_rehab_services_07_2025:15]
+
+  Provider Type:
+    'Medicare and Medicaid'                                           total=   55,808  [current:13,904, nursing_homes_including_rehab_services_02_2025:13,963, nursing_homes_including_rehab_services_07_2024:14,002, nursing_homes_including_rehab_services_07_2025:13,939]
+    'Medicare'                                                        total=    2,242  [current:551, nursing_homes_including_rehab_services_02_2025:562, nursing_homes_including_rehab_services_07_2024:571, nursing_homes_including_rehab_services_07_2025:558]
+    'Medicaid'                                                        total=    1,028  [current:255, nursing_homes_including_rehab_services_02_2025:257, nursing_homes_including_rehab_services_07_2024:261, nursing_homes_including_rehab_services_07_2025:255]
+
+  Urban:
+    'Y'                                                               total=   10,694  [current:10,694]
+    'N'                                                               total=    4,016  [current:4,016]
+
+  Special Focus Status:
+    'SFF Candidate'                                                   total=    1,763  [current:442, nursing_homes_including_rehab_services_02_2025:440, nursing_homes_including_rehab_services_07_2024:440, nursing_homes_including_rehab_services_07_2025:441]
+    'SFF'                                                             total=      345  [current:88, nursing_homes_including_rehab_services_02_2025:85, nursing_homes_including_rehab_services_07_2024:87, nursing_homes_including_rehab_services_07_2025:85]
+
+  Abuse Icon:
+    'N'                                                               total=   53,292  [current:13,166, nursing_homes_including_rehab_services_02_2025:13,329, nursing_homes_including_rehab_services_07_2024:13,520, nursing_homes_including_rehab_services_07_2025:13,277]
+    'Y'                                                               total=    5,786  [current:1,544, nursing_homes_including_rehab_services_02_2025:1,453, nursing_homes_including_rehab_services_07_2024:1,314, nursing_homes_including_rehab_services_07_2025:1,475]
+
+  Continuing Care Retirement Community:
+    'N'                                                               total=   52,809  [current:13,154, nursing_homes_including_rehab_services_02_2025:13,206, nursing_homes_including_rehab_services_07_2024:13,271, nursing_homes_including_rehab_services_07_2025:13,178]
+    'Y'                                                               total=    6,269  [current:1,556, nursing_homes_including_rehab_services_02_2025:1,576, nursing_homes_including_rehab_services_07_2024:1,563, nursing_homes_including_rehab_services_07_2025:1,574]
+
+  Provider Changed Ownership in Last 12 Months:
+    'N'                                                               total=   58,107  [current:14,699, nursing_homes_including_rehab_services_02_2025:14,563, nursing_homes_including_rehab_services_07_2024:14,354, nursing_homes_including_rehab_services_07_2025:14,491]
+    'Y'                                                               total=      971  [current:11, nursing_homes_including_rehab_services_02_2025:219, nursing_homes_including_rehab_services_07_2024:480, nursing_homes_including_rehab_services_07_2025:261]
+
+  With a Resident and Family Council:
+    'Resident'                                                        total=   48,382  [current:12,082, nursing_homes_including_rehab_services_02_2025:12,117, nursing_homes_including_rehab_services_07_2024:12,067, nursing_homes_including_rehab_services_07_2025:12,116]
+    'Both'                                                            total=    7,258  [current:1,809, nursing_homes_including_rehab_services_02_2025:1,786, nursing_homes_including_rehab_services_07_2024:1,877, nursing_homes_including_rehab_services_07_2025:1,786]
+    'None'                                                            total=    3,327  [current:819, nursing_homes_including_rehab_services_02_2025:843, nursing_homes_including_rehab_services_07_2024:856, nursing_homes_including_rehab_services_07_2025:809]
+    'Family'                                                          total=      111  [nursing_homes_including_rehab_services_02_2025:36, nursing_homes_including_rehab_services_07_2024:34, nursing_homes_including_rehab_services_07_2025:41]
+
+  Automatic Sprinkler Systems in All Required Areas:
+    'Yes'                                                             total=   58,918  [current:14,654, nursing_homes_including_rehab_services_02_2025:14,748, nursing_homes_including_rehab_services_07_2024:14,799, nursing_homes_including_rehab_services_07_2025:14,717]
+    'Partial'                                                         total=      134  [current:33, nursing_homes_including_rehab_services_02_2025:33, nursing_homes_including_rehab_services_07_2024:35, nursing_homes_including_rehab_services_07_2025:33]
+    'Data Not Available'                                              total=       26  [current:23, nursing_homes_including_rehab_services_02_2025:1, nursing_homes_including_rehab_services_07_2025:2]
+
+  Most Recent Health Inspection More Than 2 Years Ago:
+    'N'                                                               total=   54,078  [current:13,706, nursing_homes_including_rehab_services_02_2025:13,481, nursing_homes_including_rehab_services_07_2024:13,165, nursing_homes_including_rehab_services_07_2025:13,726]
+    'Y'                                                               total=    5,000  [current:1,004, nursing_homes_including_rehab_services_02_2025:1,301, nursing_homes_including_rehab_services_07_2024:1,669, nursing_homes_including_rehab_services_07_2025:1,026]
+
+================================================================================
+  NH_QualityMsr_MDS_*.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (23 columns)
+
+  --- Unique Categorical Values ---
+
+  Used in Quality Measure Five Star Rating:
+    'N'                                                               total=  531,702  [current:132,390, nursing_homes_including_rehab_services_02_2025:133,038, nursing_homes_including_rehab_services_07_2024:133,506, nursing_homes_including_rehab_services_07_2025:132,768]
+    'Y'                                                               total=  487,458  [current:117,680, nursing_homes_including_rehab_services_02_2025:118,256, nursing_homes_including_rehab_services_07_2024:133,506, nursing_homes_including_rehab_services_07_2025:118,016]
+
+  Resident type:
+    'Long Stay'                                                       total=  827,092  [current:205,940, nursing_homes_including_rehab_services_02_2025:206,948, nursing_homes_including_rehab_services_07_2024:207,676, nursing_homes_including_rehab_services_07_2025:206,528]
+    'Short Stay'                                                      total=  192,068  [current:44,130, nursing_homes_including_rehab_services_02_2025:44,346, nursing_homes_including_rehab_services_07_2024:59,336, nursing_homes_including_rehab_services_07_2025:44,256]
+
+  --- Reporting Periods ---
+
+  current:
+    ('2024Q4-2025Q3',): 220,650 rows
+    ('2024Q3-2025Q2',): 29,420 rows
+
+  nursing_homes_including_rehab_services_02_2025:
+    ('2023Q4-2024Q3',): 251,294 rows
+
+  nursing_homes_including_rehab_services_07_2024:
+    ('2023Q2-2024Q1',): 192,842 rows
+    ('2022Q4-2023Q3',): 74,170 rows
+
+  nursing_homes_including_rehab_services_07_2025:
+    ('2024Q2-2025Q1',): 221,280 rows
+    ('2023Q3-2024Q2',): 29,504 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 21
+    405: present in ['nursing_homes_including_rehab_services_07_2024'], MISSING from ['current', 'nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2025']
+    419: present in ['nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2024', 'nursing_homes_including_rehab_services_07_2025'], MISSING from ['current']
+    453: present in ['nursing_homes_including_rehab_services_07_2024'], MISSING from ['current', 'nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2025']
+    471: present in ['nursing_homes_including_rehab_services_07_2024'], MISSING from ['current', 'nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2025']
+    479: present in ['current', 'nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2025'], MISSING from ['nursing_homes_including_rehab_services_07_2024']
+    480: present in ['current', 'nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2025'], MISSING from ['nursing_homes_including_rehab_services_07_2024']
+    481: present in ['current'], MISSING from ['nursing_homes_including_rehab_services_02_2025', 'nursing_homes_including_rehab_services_07_2024', 'nursing_homes_including_rehab_services_07_2025']
+
+================================================================================
+  NH_QualityMsr_Claims_*.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (17 columns)
+
+  --- Unique Categorical Values ---
+
+  Used in Quality Measure Five Star Rating:
+    'Y'                                                               total=  236,312  [current:58,840, nursing_homes_including_rehab_services_02_2025:59,128, nursing_homes_including_rehab_services_07_2024:59,336, nursing_homes_including_rehab_services_07_2025:59,008]
+
+  Resident type:
+    'Short Stay'                                                      total=  118,156  [current:29,420, nursing_homes_including_rehab_services_02_2025:29,564, nursing_homes_including_rehab_services_07_2024:29,668, nursing_homes_including_rehab_services_07_2025:29,504]
+    'Long Stay'                                                       total=  118,156  [current:29,420, nursing_homes_including_rehab_services_02_2025:29,564, nursing_homes_including_rehab_services_07_2024:29,668, nursing_homes_including_rehab_services_07_2025:29,504]
+
+  --- Reporting Periods ---
+
+  current:
+    ('20240701-20250630',): 58,840 rows
+
+  nursing_homes_including_rehab_services_02_2025:
+    ('20230701-20240630',): 59,128 rows
+
+  nursing_homes_including_rehab_services_07_2024:
+    ('20230101-20231231',): 59,336 rows
+
+  nursing_homes_including_rehab_services_07_2025:
+    ('20240101-20241231',): 59,008 rows
+
+  --- Measure IDs ---
+  Total unique measure IDs across all vintages: 4
+
+================================================================================
+  NH_HealthCitations_*.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (23 columns)
+
+  --- Unique Categorical Values ---
+
+  Survey Type:
+    'Health'                                                          total=1,637,494  [current:419,452, nursing_homes_including_rehab_services_02_2025:407,553, nursing_homes_including_rehab_services_07_2024:399,033, nursing_homes_including_rehab_services_07_2025:411,456]
+
+  Scope Severity Code:
+    'D'                                                               total=1,017,045  [current:262,091, nursing_homes_including_rehab_services_02_2025:252,545, nursing_homes_including_rehab_services_07_2024:247,000, nursing_homes_including_rehab_services_07_2025:255,409]
+    'E'                                                               total=  376,014  [current:95,113, nursing_homes_including_rehab_services_02_2025:93,922, nursing_homes_including_rehab_services_07_2024:92,523, nursing_homes_including_rehab_services_07_2025:94,456]
+    'F'                                                               total=  111,257  [current:28,588, nursing_homes_including_rehab_services_02_2025:27,697, nursing_homes_including_rehab_services_07_2024:26,699, nursing_homes_including_rehab_services_07_2025:28,273]
+    'G'                                                               total=   52,656  [current:13,273, nursing_homes_including_rehab_services_02_2025:13,172, nursing_homes_including_rehab_services_07_2024:12,945, nursing_homes_including_rehab_services_07_2025:13,266]
+    'J'                                                               total=   25,634  [current:6,976, nursing_homes_including_rehab_services_02_2025:6,303, nursing_homes_including_rehab_services_07_2024:5,796, nursing_homes_including_rehab_services_07_2025:6,559]
+    'B'                                                               total=   21,358  [current:5,195, nursing_homes_including_rehab_services_02_2025:5,440, nursing_homes_including_rehab_services_07_2024:5,547, nursing_homes_including_rehab_services_07_2025:5,176]
+    'C'                                                               total=   19,162  [current:4,634, nursing_homes_including_rehab_services_02_2025:4,886, nursing_homes_including_rehab_services_07_2024:4,983, nursing_homes_including_rehab_services_07_2025:4,659]
+    'K'                                                               total=    9,216  [current:2,370, nursing_homes_including_rehab_services_02_2025:2,296, nursing_homes_including_rehab_services_07_2024:2,182, nursing_homes_including_rehab_services_07_2025:2,368]
+    'L'                                                               total=    2,901  [current:695, nursing_homes_including_rehab_services_02_2025:713, nursing_homes_including_rehab_services_07_2024:768, nursing_homes_including_rehab_services_07_2025:725]
+    'H'                                                               total=    2,157  [current:499, nursing_homes_including_rehab_services_02_2025:557, nursing_homes_including_rehab_services_07_2024:557, nursing_homes_including_rehab_services_07_2025:544]
+    'I'                                                               total=       94  [current:18, nursing_homes_including_rehab_services_02_2025:22, nursing_homes_including_rehab_services_07_2024:33, nursing_homes_including_rehab_services_07_2025:21]
+
+  Deficiency Prefix:
+    'F'                                                               total=1,637,494  [current:419,452, nursing_homes_including_rehab_services_02_2025:407,553, nursing_homes_including_rehab_services_07_2024:399,033, nursing_homes_including_rehab_services_07_2025:411,456]
+
+  Standard Deficiency:
+    'Y'                                                               total=1,244,373  [current:317,116, nursing_homes_including_rehab_services_02_2025:310,798, nursing_homes_including_rehab_services_07_2024:303,221, nursing_homes_including_rehab_services_07_2025:313,238]
+    'N'                                                               total=  393,121  [current:102,336, nursing_homes_including_rehab_services_02_2025:96,755, nursing_homes_including_rehab_services_07_2024:95,812, nursing_homes_including_rehab_services_07_2025:98,218]
+
+  Complaint Deficiency:
+    'N'                                                               total=1,123,941  [current:286,709, nursing_homes_including_rehab_services_02_2025:280,020, nursing_homes_including_rehab_services_07_2024:275,988, nursing_homes_including_rehab_services_07_2025:281,224]
+    'Y'                                                               total=  513,553  [current:132,743, nursing_homes_including_rehab_services_02_2025:127,533, nursing_homes_including_rehab_services_07_2024:123,045, nursing_homes_including_rehab_services_07_2025:130,232]
+
+  Infection Control Inspection Deficiency:
+    'N'                                                               total=1,618,316  [current:417,498, nursing_homes_including_rehab_services_02_2025:402,450, nursing_homes_including_rehab_services_07_2024:390,467, nursing_homes_including_rehab_services_07_2025:407,901]
+    'Y'                                                               total=   19,178  [current:1,954, nursing_homes_including_rehab_services_02_2025:5,103, nursing_homes_including_rehab_services_07_2024:8,566, nursing_homes_including_rehab_services_07_2025:3,555]
+
+  Citation under IDR:
+    'N'                                                               total=1,635,048  [current:418,955, nursing_homes_including_rehab_services_02_2025:407,028, nursing_homes_including_rehab_services_07_2024:398,282, nursing_homes_including_rehab_services_07_2025:410,783]
+    'Y'                                                               total=    2,446  [current:497, nursing_homes_including_rehab_services_02_2025:525, nursing_homes_including_rehab_services_07_2024:751, nursing_homes_including_rehab_services_07_2025:673]
+
+  Citation under IIDR:
+    'N'                                                               total=1,637,040  [current:419,333, nursing_homes_including_rehab_services_02_2025:407,449, nursing_homes_including_rehab_services_07_2024:398,928, nursing_homes_including_rehab_services_07_2025:411,330]
+    'Y'                                                               total=      454  [current:119, nursing_homes_including_rehab_services_02_2025:104, nursing_homes_including_rehab_services_07_2024:105, nursing_homes_including_rehab_services_07_2025:126]
+
+================================================================================
+  NH_Penalties_*.csv
+================================================================================
+
+  Headers: STABLE across 4 vintages (13 columns)
+
+  --- Unique Categorical Values ---
+
+  Penalty Type:
+    'Fine'                                                            total=   83,687  [current:14,835, nursing_homes_including_rehab_services_02_2025:21,472, nursing_homes_including_rehab_services_07_2024:29,660, nursing_homes_including_rehab_services_07_2025:17,720]
+    'Payment Denial'                                                  total=   12,030  [current:2,628, nursing_homes_including_rehab_services_02_2025:3,142, nursing_homes_including_rehab_services_07_2024:3,221, nursing_homes_including_rehab_services_07_2025:3,039]

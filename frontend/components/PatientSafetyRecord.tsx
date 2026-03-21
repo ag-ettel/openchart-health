@@ -20,8 +20,7 @@ export function PatientSafetyRecord(_props: PatientSafetyRecordProps): JSX.Eleme
   //   Suppressed and not_reported tail_risk measures render with full visual presence.
   //   They are never omitted because no value exists.
   //
-  // Prohibited strings (do not use anywhere in this component):
-  //   "adverse_event_summary", "what could go wrong", "your risk"
-  //   No predictive framing of any kind.
+  // Prohibited strings — see legal-compliance.md. // compliance-ok
+  // No predictive framing of any kind.
   return <div data-component="PatientSafetyRecord" />;
 }
