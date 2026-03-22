@@ -23,7 +23,7 @@ Schema decisions incorporated:
 - DEC-024 (AMB-5): score_text varchar for EDV categorical scores
 - DEC-025: provider_penalties table
 - DEC-011: VBP domain score columns on provider_payment_adjustments
-- DEC-010: provider_summaries table removed (deterministic templates, not stored)
+- DEC-031: provider_summaries table removed (deterministic templates, not stored)
 """
 
 from typing import Sequence, Union
@@ -271,6 +271,8 @@ def upgrade() -> None:
         sa.Column("measure_id", sa.String, nullable=False, unique=True),
         sa.Column("measure_name", sa.String, nullable=False),
         sa.Column("measure_plain_language", sa.Text, nullable=True),
+        sa.Column("cms_measure_definition", sa.Text, nullable=True,
+                  comment="DEC-037: verbatim CMS definition, not paraphrased"),
         sa.Column("measure_group", ENUM(*MEASURE_GROUP_VALUES, name="measure_group", create_type=False), nullable=False),
         sa.Column("direction", ENUM(*MEASURE_DIRECTION_VALUES, name="measure_direction", create_type=False), nullable=True,
                   comment="NULL for measures with no meaningful quality direction (EDV, HCAHPS middlebox)"),
@@ -278,7 +280,7 @@ def upgrade() -> None:
         sa.Column("tail_risk_flag", sa.Boolean, nullable=False, server_default=sa.text("false")),
         sa.Column("ses_sensitivity", ENUM(*SES_SENSITIVITY_VALUES, name="ses_sensitivity", create_type=False), nullable=False),
         sa.Column("direction_source", sa.String, nullable=True,
-                  comment="DEC-011: CMS_API, CMS_DATA_DICTIONARY, CMS_MEASURE_SPEC, or CMS_MEASURE_DEFINITION"),
+                  comment="DEC-032: CMS_API, CMS_DATA_DICTIONARY, CMS_MEASURE_SPEC, or CMS_MEASURE_DEFINITION"),
         sa.Column("risk_adjustment_model", sa.String, nullable=True,
                   comment="DEC-021: HGLM, SIR, PATIENT_MIX_ADJUSTMENT, NONE, OTHER"),
         sa.Column("cms_ci_published", sa.Boolean, nullable=True,
@@ -312,9 +314,13 @@ def upgrade() -> None:
         sa.Column("numeric_value", sa.Numeric(12, 4), nullable=True, comment="NULL if suppressed, not_reported, or categorical"),
         sa.Column("score_text", sa.String, nullable=True, comment="DEC-024 (AMB-5): categorical score for EDV etc."),
         sa.Column("confidence_interval_lower", sa.Numeric(12, 4), nullable=True,
-                  comment="CMS-published or Bayesian credible interval (DEC-008)"),
+                  comment="CMS-published or Bayesian credible interval (DEC-029)"),
         sa.Column("confidence_interval_upper", sa.Numeric(12, 4), nullable=True,
-                  comment="CMS-published or Bayesian credible interval (DEC-008)"),
+                  comment="CMS-published or Bayesian credible interval (DEC-029)"),
+        sa.Column("ci_source", sa.String, nullable=True,
+                  comment="DEC-029: 'cms_published' or 'calculated' — null when no interval"),
+        sa.Column("prior_source", sa.String, nullable=True,
+                  comment="DEC-029: 'state average', 'national average', or 'minimally informative' — null when ci_source is cms_published or no interval"),
         sa.Column("observed_value", sa.Numeric(12, 4), nullable=True,
                   comment="DEC-016: NH claims O/E observed score"),
         sa.Column("expected_value", sa.Numeric(12, 4), nullable=True,
@@ -349,12 +355,6 @@ def upgrade() -> None:
                   ENUM(*RELIABILITY_FLAG_VALUES, name="reliability_flag", create_type=False),
                   nullable=True),
 
-        # Benchmarks
-        sa.Column("national_avg", sa.Numeric(12, 4), nullable=True),
-        sa.Column("national_avg_period", sa.String, nullable=True),
-        sa.Column("state_avg", sa.Numeric(12, 4), nullable=True),
-        sa.Column("state_avg_period", sa.String, nullable=True),
-
         # Audit
         sa.Column("pipeline_run_id", UUID, sa.ForeignKey("pipeline_runs.run_id"), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
@@ -388,6 +388,47 @@ def upgrade() -> None:
     op.create_index("ix_pmv_provider_type", "provider_measure_values", ["provider_type"])
     op.create_index("ix_pmv_suppressed", "provider_measure_values", ["suppressed"],
                     postgresql_where=sa.text("suppressed = true"))
+
+    # ------------------------------------------------------------------
+    # measure_benchmarks — national and state averages per measure/period
+    # DEC-036: single source of truth for benchmark values.
+    # ------------------------------------------------------------------
+    op.create_table(
+        "measure_benchmarks",
+        sa.Column("id", UUID, primary_key=True, server_default=sa.text("gen_random_uuid()")),
+        sa.Column("measure_id", sa.String, nullable=False),
+        sa.Column("geography_type", sa.String, nullable=False,
+                  comment="'national' or 'state'"),
+        sa.Column("geography_code", sa.String, nullable=False,
+                  comment="'US' for national, state abbreviation for state"),
+        sa.Column("period_label", sa.String, nullable=False,
+                  comment="Same format as provider_measure_values.period_label"),
+        sa.Column("avg_value", sa.Numeric(12, 4), nullable=False),
+        sa.Column("sample_size", sa.Integer, nullable=True,
+                  comment="Number of providers contributing, when published"),
+        sa.Column("source", sa.String, nullable=False,
+                  comment="CMS filename pattern or dataset ID"),
+        sa.Column("source_vintage", sa.String, nullable=True,
+                  comment="Archive vintage label, e.g. '2025-11'"),
+        sa.Column("pipeline_run_id", UUID, sa.ForeignKey("pipeline_runs.run_id"), nullable=True),
+        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
+        sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
+    )
+
+    op.create_unique_constraint(
+        "uq_mb_upsert_key",
+        "measure_benchmarks",
+        ["measure_id", "geography_type", "geography_code", "period_label"],
+    )
+
+    op.create_foreign_key(
+        "fk_mb_measure_id",
+        "measure_benchmarks", "measures",
+        ["measure_id"], ["measure_id"],
+    )
+
+    op.create_index("ix_mb_measure_id", "measure_benchmarks", ["measure_id"])
+    op.create_index("ix_mb_geography", "measure_benchmarks", ["geography_type", "geography_code"])
 
     # ------------------------------------------------------------------
     # provider_payment_adjustments
@@ -602,6 +643,7 @@ def downgrade() -> None:
     op.drop_table("provider_ownership")
     op.drop_table("provider_inspection_events")
     op.drop_table("provider_payment_adjustments")
+    op.drop_table("measure_benchmarks")
     op.drop_table("provider_measure_values")
     op.drop_table("measures")
     op.drop_table("providers")

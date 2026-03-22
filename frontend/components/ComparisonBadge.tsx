@@ -1,51 +1,37 @@
-// Renders a ComparisonResult as a labeled badge with neutral visual treatment.
-// Used by MeasureCard for both national and state average comparisons.
-// All states use the same neutral gray — no directional color coding (DEC-009).
-// The four states carry different labels because they mean different things
-// to a consumer, but visual weight is uniform.
-// Comparison result is derived from confidence interval overlap with a
-// reference value (national average or another provider).
-// Used by compareToAverage() and compareProviders() in lib/utils.ts.
-
-import type { ComparisonResult } from "@/types/provider";
+// Displays CMS's own compared_to_national assessment as an attributed data point.
+// This is CMS-published data (DEC-022), not a computed verdict.
+// All states use the same neutral gray — no directional color coding (DEC-030).
+//
+// CMS canonical values (DEC-022): BETTER, NO_DIFFERENT, WORSE, TOO_FEW_CASES, NOT_AVAILABLE.
+// Returns null when compared_to_national is null (CMS did not publish a comparison
+// for this measure, e.g. HCAHPS, T&E process measures).
 
 interface ComparisonBadgeProps {
-  result:         ComparisonResult;
-  referenceLabel: string; // "national average" or "state average"
+  comparedToNational: string | null; // measure.compared_to_national
 }
 
-const RESULT_CONFIG: Record<
-  ComparisonResult,
-  { label: string; className: string }
-> = {
-  BETTER: {
-    label: "Performs better than",
-    className: "text-gray-700 bg-gray-50 border-gray-200",
-  },
-  WORSE: {
-    label: "Performs worse than",
-    className: "text-gray-700 bg-gray-50 border-gray-200",
-  },
-  NO_SIGNIFICANT_DIFFERENCE: {
-    label: "No significant difference from",
-    className: "text-gray-700 bg-gray-50 border-gray-200",
-  },
-  CANNOT_DETERMINE: {
-    label: "Insufficient data to compare with",
-    className: "text-gray-500 bg-gray-50 border-gray-200",
-  },
+const CMS_COMPARISON_LABELS: Record<string, string> = {
+  BETTER: "CMS rates as better than the national rate",
+  NO_DIFFERENT: "CMS rates as no different from the national rate",
+  WORSE: "CMS rates as worse than the national rate",
+  TOO_FEW_CASES: "Too few cases for CMS to compare",
+  NOT_AVAILABLE: "CMS comparison not available",
 };
 
 export function ComparisonBadge({
-  result,
-  referenceLabel,
-}: ComparisonBadgeProps): JSX.Element {
-  const { label, className } = RESULT_CONFIG[result];
+  comparedToNational,
+}: ComparisonBadgeProps): JSX.Element | null {
+  if (comparedToNational === null) {
+    return null;
+  }
+
+  const label =
+    CMS_COMPARISON_LABELS[comparedToNational] ??
+    `CMS comparison: ${comparedToNational}`;
+
   return (
-    <span
-      className={`inline-flex items-center rounded border px-2 py-1 text-xs font-medium ${className}`}
-    >
-      {label} {referenceLabel}
+    <span className="inline-flex items-center rounded border border-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700">
+      {label}
     </span>
   );
 }

@@ -1,15 +1,16 @@
-// Obligations: see CLAUDE.md: Frontend Specification: Components: NonReporterIndicator
 // Same visual footprint as SuppressionIndicator. Never de-emphasized.
+// Non-reporting is a distinct state from suppression (Rule 9).
+// Provider-agnostic language for hospital and nursing home reuse.
 
 import type { TrendPeriod } from "@/types/provider";
 
 interface NonReporterIndicatorProps {
   not_reported_reason: string | null;
-  trend:               TrendPeriod[]; // assumed chronologically ordered oldest-first
+  trend: TrendPeriod[] | null; // nullable — Measure.trend is TrendPeriod[] | null
 }
 
 // Counts the trailing run of not_reported: true periods.
-// Assumes trend[] is ordered oldest-first, which the pipeline must guarantee.
+// Assumes trend is ordered oldest-first (pipeline guarantee).
 function countConsecutiveNonReporting(trend: TrendPeriod[]): number {
   let count = 0;
   for (let i = trend.length - 1; i >= 0; i--) {
@@ -26,21 +27,20 @@ export function NonReporterIndicator({
   not_reported_reason,
   trend,
 }: NonReporterIndicatorProps): JSX.Element {
-  const consecutive = countConsecutiveNonReporting(trend);
+  const consecutive = countConsecutiveNonReporting(trend ?? []);
 
   return (
-    <div className="inline-flex flex-col gap-1 rounded border border-gray-200 bg-gray-50 px-3 py-2">
-      <span className="text-sm text-gray-500">
-        This hospital has not submitted data for this measure.
-      </span>
+    <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2">
+      <p className="text-sm text-gray-700">
+        This facility has not submitted data for this measure.
+      </p>
       {not_reported_reason && (
-        <span className="text-sm text-gray-500">{not_reported_reason}</span>
+        <p className="mt-1 text-sm text-gray-700">{not_reported_reason}</p>
       )}
       {consecutive > 1 && (
-        <span className="text-sm text-gray-500">
-          This hospital has not reported this measure for {consecutive} consecutive
-          periods.
-        </span>
+        <p className="mt-1 text-sm text-gray-700">
+          Data has not been reported for {consecutive} consecutive periods.
+        </p>
       )}
     </div>
   );

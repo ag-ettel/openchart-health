@@ -21,6 +21,8 @@ from typing import Any
 import sqlalchemy as sa
 from sqlalchemy.engine import Connection
 
+from pipeline.config import DATASET_NAMES
+
 logger = logging.getLogger(__name__)
 
 
@@ -100,19 +102,25 @@ def build_provider_json(
     if not provider:
         return None
 
-    # Load all measure values with measure metadata via JOIN
+    # Load all measure values with measure metadata via JOIN.
+    # Use only columns that exist in the reflected schema — the database may
+    # predate migrations that added cms_measure_definition, ci_source, etc.
+    measure_cols = [
+        measures.c.measure_name,
+        measures.c.measure_plain_language,
+        measures.c.measure_group,
+        measures.c.direction,
+        measures.c.unit,
+        measures.c.tail_risk_flag,
+        measures.c.ses_sensitivity,
+        measures.c.dataset_id.label("measure_dataset_id"),
+    ]
+    for col_name in ("direction_source", "cms_measure_definition"):
+        if hasattr(measures.c, col_name):
+            measure_cols.append(getattr(measures.c, col_name))
+
     stmt = (
-        sa.select(
-            pmv,
-            measures.c.measure_name,
-            measures.c.measure_plain_language,
-            measures.c.measure_group,
-            measures.c.direction,
-            measures.c.unit,
-            measures.c.tail_risk_flag,
-            measures.c.ses_sensitivity,
-            measures.c.dataset_id.label("measure_dataset_id"),
-        )
+        sa.select(pmv, *measure_cols)
         .select_from(pmv.join(measures, pmv.c.measure_id == measures.c.measure_id))
         .where(pmv.c.provider_id == provider_id)
         .order_by(pmv.c.measure_id, pmv.c.period_start)
@@ -136,9 +144,14 @@ def build_provider_json(
             "measure_id": mid,
             "measure_name": latest.get("measure_name"),
             "measure_plain_language": latest.get("measure_plain_language"),
+            "cms_measure_definition": latest.get("cms_measure_definition"),
             "measure_group": latest.get("measure_group"),
-            "source_dataset_id": latest.get("source_dataset_id"),
+            "source_dataset_id": latest.get("source_dataset_id") or latest.get("measure_dataset_id"),
+            "source_dataset_name": DATASET_NAMES.get(
+                latest.get("source_dataset_id") or latest.get("measure_dataset_id") or "", "CMS Provider Data"
+            ),
             "direction": latest.get("direction"),
+            "direction_source": latest.get("direction_source"),
             "unit": latest.get("unit"),
             "tail_risk_flag": latest.get("tail_risk_flag", False),
             "ses_sensitivity": latest.get("ses_sensitivity"),
@@ -148,6 +161,8 @@ def build_provider_json(
             "score_text": latest.get("score_text"),
             "confidence_interval_lower": latest.get("confidence_interval_lower"),
             "confidence_interval_upper": latest.get("confidence_interval_upper"),
+            "ci_source": latest.get("ci_source"),
+            "prior_source": latest.get("prior_source"),
             "compared_to_national": latest.get("compared_to_national"),
             "observed_value": latest.get("observed_value"),
             "expected_value": latest.get("expected_value"),

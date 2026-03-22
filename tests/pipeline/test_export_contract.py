@@ -45,38 +45,47 @@ TREND_PERIOD_FIELDS: dict[str, str] = {
 
 MEASURE_FIELDS: dict[str, str] = {
     "measure_id": "string",
-    "measure_name": "string",
-    "measure_plain_language": "string",
+    "measure_name": "string?",  # nullable for auto-registered retired stubs
+    "measure_plain_language": "string?",
+    "cms_measure_definition": "string?",  # DEC-037: verbatim CMS definition
     "measure_group": "string",
-    "source_dataset_id": "string",
+    "source_dataset_id": "string?",
     "source_dataset_name": "string",
-    "measure_spec_version": "string?",
-    "methodology_revision_date": "string?",
-    "direction": "string",  # MeasureDirection enum
-    "unit": "string",
+    "direction": "string?",  # null for EDV, HCAHPS middlebox
+    "direction_source": "string?",  # DEC-032: CMS_API, CMS_DATA_DICTIONARY, CMS_MEASURE_SPEC, CMS_MEASURE_DEFINITION
+    "unit": "string?",
     "tail_risk_flag": "boolean",
     "ses_sensitivity": "string",  # SesSensitivity enum
     "stratification": "string?",  # null = non-stratified
     "numeric_value": "number?",
+    "score_text": "string?",  # DEC-024: EDV categorical
     "confidence_interval_lower": "number?",
     "confidence_interval_upper": "number?",
+    "ci_source": "string?",  # DEC-029: "cms_published" | "calculated"
+    "prior_source": "string?",  # DEC-029: prior hierarchy label
+    "observed_value": "number?",  # DEC-016: NH claims O/E
+    "expected_value": "number?",  # DEC-016: NH claims O/E
+    "compared_to_national": "string?",  # DEC-022
     "suppressed": "boolean",
     "suppression_reason": "string?",
     "not_reported": "boolean",
     "not_reported_reason": "string?",
-    "footnote_codes": "array",
-    "footnote_text": "array",
+    "count_suppressed": "boolean",  # DEC-023
+    "footnote_codes": "array?",  # null when no footnotes
+    "footnote_text": "array?",  # null when no footnotes
     "period_label": "string",
     "period_start": "string?",
     "period_end": "string?",
     "sample_size": "number?",
     "denominator": "number?",
-    "reliability_flag": "string",  # ReliabilityFlag enum
+    "reliability_flag": "string?",  # nullable until transform layer runs
     "national_avg": "number?",
     "national_avg_period": "string?",
     "state_avg": "number?",
     "state_avg_period": "string?",
-    "trend": "array",
+    "ci_level": "string?",  # e.g. "95%"; null when no interval
+    "overlap_flag": "boolean?",  # CI contains national avg
+    "trend": "array?",  # null when only 1 period
     "trend_valid": "boolean",
     "trend_period_count": "number",
 }
@@ -84,44 +93,38 @@ MEASURE_FIELDS: dict[str, str] = {
 PAYMENT_ADJUSTMENT_FIELDS: dict[str, str] = {
     "program": "string",  # PaymentProgram enum
     "program_year": "number",
-    "penalty_flag": "boolean",
+    "penalty_flag": "boolean?",  # null = excluded from program (HACRP N/A)
     "payment_adjustment_pct": "number?",
     "total_score": "number?",
     "score_percentile": "number?",
 }
 
 HOSPITAL_CONTEXT_FIELDS: dict[str, str] = {
-    "staffed_beds": "number?",
-    "is_critical_access": "boolean",
-    "is_teaching_hospital": "boolean",
-    "is_emergency_services": "boolean",
-    "dsh_status": "boolean",
-    "dsh_percentage": "number?",
-    "dual_eligible_proportion": "number?",
-    "urban_rural_classification": "string?",
-    "cms_certification_date": "string?",
-    "offers_cardiac_surgery": "boolean",
-    "offers_cardiac_catheterization": "boolean",
-    "offers_emergency_cardiac_care": "boolean",
+    "is_critical_access": "boolean?",
+    "is_emergency_services": "boolean?",
+    "birthing_friendly_designation": "boolean?",
+    "hospital_overall_rating": "number?",
+    "hospital_overall_rating_footnote": "string?",
 }
 
 NURSING_HOME_CONTEXT_FIELDS: dict[str, str] = {
-    "resident_capacity": "number?",
-    "dual_eligible_proportion": "number?",
-    "urban_rural_classification": "string?",
-    "cms_certification_date": "string?",
-    "is_continuing_care_retirement_community": "boolean",
-    "is_special_focus_facility": "boolean",
-    "is_special_focus_facility_candidate": "boolean",
-    "is_hospital_based": "boolean",
-    "is_abuse_icon": "boolean",
+    "certified_beds": "number?",
+    "average_daily_census": "number?",
+    "is_continuing_care_retirement_community": "boolean?",
+    "is_special_focus_facility": "boolean?",
+    "is_special_focus_facility_candidate": "boolean?",
+    "is_hospital_based": "boolean?",
+    "is_abuse_icon": "boolean?",
+    "is_urban": "boolean?",
+    "chain_name": "string?",
+    "chain_id": "string?",
 }
 
 ADDRESS_FIELDS: dict[str, str] = {
     "street": "string?",
-    "city": "string",
-    "state": "string",
-    "zip": "string",
+    "city": "string?",
+    "state": "string?",
+    "zip": "string?",
 }
 
 PROVIDER_FIELDS: dict[str, str] = {
@@ -131,30 +134,33 @@ PROVIDER_FIELDS: dict[str, str] = {
     "is_active": "boolean",
     "phone": "string?",
     "address": "object",
-    "provider_subtype": "string",
+    "provider_subtype": "string?",
     "ownership_type": "string?",
     "last_updated": "string",
-    "pipeline_run_id": "string",
     "measures": "array",
     "payment_adjustments": "array",
     "hospital_context": "object?",
     "nursing_home_context": "object?",
+    "inspection_events": "array?",
+    "penalties": "array?",
+    "ownership": "array?",
 }
 
 # Fields that must NOT appear in provider.ts (removed by decisions)
 REMOVED_FIELDS: dict[str, str] = {
-    "summaries": "Removed by DEC-010 (LLM generation replaced by templates)",
+    "summaries": "Removed by DEC-031 (LLM generation replaced by templates)",
 }
 
 # Interfaces that must NOT appear in provider.ts (removed by decisions)
 REMOVED_INTERFACES: dict[str, str] = {
-    "Summary": "Removed by DEC-010 (LLM generation replaced by templates)",
+    "Summary": "Removed by DEC-031 (LLM generation replaced by templates)",
 }
 
 # Enum values that must appear in provider.ts
 EXPECTED_ENUMS: dict[str, list[str]] = {
     "ReliabilityFlag": ["RELIABLE", "LIMITED_SAMPLE", "NOT_REPORTED", "SUPPRESSED"],
     "MeasureDirection": ["LOWER_IS_BETTER", "HIGHER_IS_BETTER"],
+    "DirectionSource": ["CMS_API", "CMS_DATA_DICTIONARY", "CMS_MEASURE_SPEC", "CMS_MEASURE_DEFINITION"],
     "SesSensitivity": ["HIGH", "MODERATE", "LOW", "UNKNOWN"],
     "ProviderType": ["HOSPITAL", "NURSING_HOME", "HOME_HEALTH", "HOSPICE"],
     "PaymentProgram": ["HRRP", "HACRP", "VBP", "SNF_VBP"],
@@ -302,7 +308,7 @@ class TestProviderTsRemovedFields:
     """Verify fields and interfaces removed by decisions don't appear."""
 
     def test_no_summaries_field(self) -> None:
-        """DEC-010: summaries array removed from export."""
+        """DEC-031: summaries array removed from export."""
         ts = _read_provider_ts()
         ts_fields = _extract_interface_fields(ts, "Provider")
         for field, reason in REMOVED_FIELDS.items():
@@ -311,7 +317,7 @@ class TestProviderTsRemovedFields:
             )
 
     def test_no_summary_interface(self) -> None:
-        """DEC-010: Summary interface should not exist."""
+        """DEC-031: Summary interface should not exist."""
         ts = _read_provider_ts()
         for interface_name, reason in REMOVED_INTERFACES.items():
             assert f"interface {interface_name}" not in ts, (
@@ -410,9 +416,9 @@ class TestExportedJsonSchema:
         assert not errors, "\n".join(errors)
 
     def test_no_summaries_in_export(self, provider_data: dict[str, Any]) -> None:
-        """DEC-010: summaries must not appear in exported JSON."""
+        """DEC-031: summaries must not appear in exported JSON."""
         assert "summaries" not in provider_data, (
-            "Exported JSON contains 'summaries' — removed by DEC-010"
+            "Exported JSON contains 'summaries' — removed by DEC-031"
         )
 
     def test_measures_schema(self, provider_data: dict[str, Any]) -> None:

@@ -64,7 +64,7 @@ def normalize_row(raw: dict[str, str]) -> dict[str, Any] | None:
         "scope_severity_history": None,
         "originally_published_vintage": None,
         "last_seen_vintage": None,
-        # Context for derived measures (DEC-013)
+        # Context for derived measures (DEC-034)
         "_standard_deficiency": _parse_bool_yn(raw.get("standard_deficiency")),
         "_infection_control": _parse_bool_yn(raw.get("infection_control_inspection_deficiency")),
         "_citation_under_idr": _parse_bool_yn(raw.get("citation_under_idr")),

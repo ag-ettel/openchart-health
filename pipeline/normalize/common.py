@@ -379,8 +379,8 @@ def normalize_measure_row(
       - pipeline_run_id (from current pipeline run)
     The transform layer adds:
       - reliability_flag (computed from sample_size)
-      - national_avg, national_avg_period
-      - state_avg, state_avg_period
+      - confidence_interval_lower/upper, ci_source, prior_source (for calculable measures)
+    Benchmark values (national_avg, state_avg) live in measure_benchmarks table (DEC-036).
     """
     # Raw value preservation (Rule 7)
     score_raw = raw.get(score_field, "")
@@ -424,9 +424,13 @@ def normalize_measure_row(
         "score_text": None,  # Set by per-dataset normalizer for categorical measures
         "confidence_interval_lower": ci_lower,
         "confidence_interval_upper": ci_upper,
+        # ci_source / prior_source: set by normalize for CMS-published intervals,
+        # overwritten by transform layer for calculated intervals (DEC-029).
+        "ci_source": "cms_published" if (ci_lower is not None or ci_upper is not None) else None,
+        "prior_source": None,  # Only populated when ci_source == "calculated"
         "compared_to_national": compared_canonical,
         "suppressed": suppressed,
-        "suppression_reason": suppression_reason,
+        "suppression_reason": suppression_reason if suppressed else None,
         "not_reported": not_reported,
         "not_reported_reason": suppression_reason if not_reported else None,
         "count_suppressed": False,  # Set by per-dataset normalizer (HRRP)

@@ -72,6 +72,50 @@ NH_DATASET_IDS: dict[str, str] = {
 # Combined for backwards compatibility and pipeline orchestration
 DATASET_IDS: dict[str, str] = {**HOSPITAL_DATASET_IDS, **NH_DATASET_IDS}
 
+# Dataset ID → default direction_source (DEC-011/DEC-032)
+# Per-measure overrides can be added to MeasureEntry if needed.
+# See docs/direction_verification_checklist.md for full verification.
+DATASET_DIRECTION_SOURCE: dict[str, str] = {
+    "ynj2-r877": "CMS_API",              # Complications: compared_to_national has direction
+    "77hc-ibv8": "CMS_API",              # HAI: compared_to_national has direction
+    "632h-zaca": "CMS_API",              # Readmissions: compared_to_national has direction
+    "wkfw-kthe": "CMS_DATA_DICTIONARY",  # Imaging: Data Dictionary "lower = more efficient"
+    "yv7e-xc69": "CMS_MEASURE_DEFINITION",  # T&E: mixed — eCQMs have spec, others have definition
+    "dgck-syfz": "CMS_MEASURE_DEFINITION",  # HCAHPS: no explicit CMS direction statement
+    "rrqw-56er": "CMS_MEASURE_DEFINITION",  # MSPB: no explicit CMS direction statement
+    "9n3s-kdb3": "CMS_API",              # HRRP: excess ratio — lower is better per program
+    "djen-97ju": "CMS_MEASURE_DEFINITION",  # MDS Quality: measure descriptions carry direction
+    "ijh5-nb2v": "CMS_MEASURE_DEFINITION",  # Claims Quality: measure descriptions carry direction
+    "fykj-qjee": "CMS_API",              # SNF QRP: compared_to_national in API
+    "4pq5-n9py": "CMS_MEASURE_DEFINITION",  # Provider Info (Five-Star): higher = better
+    "r5ix-sfxw": "CMS_MEASURE_DEFINITION",  # Health Deficiencies: lower = better
+    "g6vv-u9sr": "CMS_MEASURE_DEFINITION",  # Penalties: lower = better
+}
+
+# Dataset ID → CMS dataset name mapping for per-measure attribution
+# (legal-compliance.md: required on every measure display)
+DATASET_NAMES: dict[str, str] = {
+    "xubh-q36u": "Hospital General Information",
+    "yv7e-xc69": "Timely and Effective Care — Hospital",
+    "dgck-syfz": "Patient Survey (HCAHPS) — Hospital",
+    "ynj2-r877": "Complications and Deaths — Hospital",
+    "77hc-ibv8": "Healthcare Associated Infections — Hospital",
+    "632h-zaca": "Unplanned Hospital Visits — Hospital",
+    "wkfw-kthe": "Outpatient Imaging Efficiency — Hospital",
+    "rrqw-56er": "Medicare Hospital Spending Per Patient — Hospital",
+    "9n3s-kdb3": "Hospital Readmissions Reduction Program",
+    "yq43-i98g": "Hospital-Acquired Condition Reduction Program",
+    "pudb-wetr": "Hospital Value-Based Purchasing Program",
+    "4pq5-n9py": "Nursing Home Provider Information",
+    "djen-97ju": "MDS Quality Measures",
+    "ijh5-nb2v": "Medicare Claims Quality Measures",
+    "r5ix-sfxw": "Health Deficiencies",
+    "g6vv-u9sr": "Penalties",
+    "y2hd-n93e": "Ownership",
+    "fykj-qjee": "SNF Quality Reporting Program — Provider Data",
+    "284v-j9fz": "SNF Value-Based Purchasing — Facility Performance",
+}
+
 # CMS DKAN API base URL
 CMS_API_BASE_URL = "https://data.cms.gov/provider-data/api/1/datastore/query"
 
@@ -150,6 +194,19 @@ COMPARED_TO_NATIONAL_MAPPING: dict[str, str] = {
 
 
 # ---------------------------------------------------------------------------
+# Credible interval configuration (DEC-029)
+# ---------------------------------------------------------------------------
+
+# Concentration parameter κ for Beta-Binomial prior.
+# Represents ~10 pseudo-observations. Weak enough that n ≥ 25 dominates the prior,
+# provides meaningful shrinkage for very small samples (n < 10).
+CREDIBLE_INTERVAL_CONCENTRATION: int = 10
+
+# Credible interval level (two-tailed).
+CREDIBLE_INTERVAL_LEVEL: float = 0.95
+
+
+# ---------------------------------------------------------------------------
 # MeasureEntry dataclass
 # ---------------------------------------------------------------------------
 
@@ -166,6 +223,14 @@ class MeasureEntry:
     tail_risk_flag: bool
     ses_sensitivity: str  # "HIGH", "MODERATE", "LOW", "UNKNOWN"
     dataset_id: str  # Socrata dataset ID for provenance
+    # CMS verbatim measure definition (DEC-037). Sourced from CMS data dictionary,
+    # measure information forms, or technical specifications. Must not be paraphrased.
+    # None = not yet sourced (REVIEW_NEEDED).
+    cms_measure_definition: Optional[str] = None
+    # Interval estimation fields (DEC-029, measure-registry.md)
+    risk_adjustment_model: Optional[str] = None  # "HGLM", "SIR", "PATIENT_MIX_ADJUSTMENT", "NONE", "OTHER", or None (REVIEW_NEEDED)
+    cms_ci_published: Optional[bool] = None  # True/False/None (REVIEW_NEEDED)
+    numerator_denominator_published: Optional[bool] = None  # True/False/None (REVIEW_NEEDED)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

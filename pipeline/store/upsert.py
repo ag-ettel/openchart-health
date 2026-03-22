@@ -282,6 +282,9 @@ def upsert_inspection_events(
         if not data.get("provider_id") or not data.get("deficiency_tag"):
             continue
 
+        # Preserve private fields for DEC-028 IDR tracking before they're stripped
+        idr_flag = row.get("_citation_under_idr", False)
+
         now = datetime.utcnow()
         data["updated_at"] = now
         data["last_seen_vintage"] = vintage
@@ -313,7 +316,6 @@ def upsert_inspection_events(
             # DEC-028: detect scope/severity change
             if old_ss and new_ss and old_ss != new_ss:
                 update_data["is_contested"] = True
-                # Append to history
                 history = existing.scope_severity_history or []
                 if isinstance(history, str):
                     history = json.loads(history)
@@ -321,6 +323,7 @@ def upsert_inspection_events(
                     "code": new_ss,
                     "vintage": vintage,
                     "previous": old_ss,
+                    "idr": bool(idr_flag),
                 })
                 update_data["scope_severity_history"] = history
 

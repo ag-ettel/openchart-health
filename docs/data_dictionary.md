@@ -18,7 +18,7 @@ Every MEASURE_REGISTRY entry must document three fields that determine whether a
 interval estimate is available, calculable, or neither. This classification drives
 the display layer's ability to show uncertainty alongside point estimates.
 
-See DEC-008 in `docs/pipeline_decisions.md` for full rationale on the Bayesian
+See DEC-029 in `docs/pipeline_decisions.md` for full rationale on the Bayesian
 credible interval methodology.
 
 ### Required Fields
@@ -841,7 +841,7 @@ used in the Five-Star QM rating calculation. All confirmed against live API (202
 ### Nursing Home Staffing Measures
 
 9 staffing measures are stored in MEASURE_REGISTRY / `provider_measure_values`.
-See DEC-012 in `docs/pipeline_decisions.md` for full rationale.
+See DEC-033 in `docs/pipeline_decisions.md` for full rationale.
 
 **Five-Star staffing sub-measures (6):** These are scored on decile scales and summed
 to produce the staffing star rating (380 max points). Source: PBJ system via Provider
@@ -899,7 +899,7 @@ via Five-Star staffing scoring tables.**
 ### Nursing Home Inspection Measures
 
 8 inspection-derived measures are stored in MEASURE_REGISTRY / `provider_measure_values`.
-See DEC-013 in `docs/pipeline_decisions.md` for full rationale.
+See DEC-034 in `docs/pipeline_decisions.md` for full rationale.
 
 **Tail risk measures (4):** Aggregated from individual deficiency citations in Health
 Deficiencies dataset (r5ix-sfxw). Computed by pipeline normalizer, not pre-computed

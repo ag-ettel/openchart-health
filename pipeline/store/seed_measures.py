@@ -13,7 +13,8 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.engine import Connection
 
-from pipeline.config import MEASURE_REGISTRY
+from pipeline.cms_definitions import CMS_MEASURE_DEFINITIONS
+from pipeline.config import DATASET_DIRECTION_SOURCE, MEASURE_REGISTRY
 
 logger = logging.getLogger(__name__)
 
@@ -36,8 +37,15 @@ def seed_measures(conn: Connection) -> int:
             "measure_id": entry.measure_id,
             "measure_name": entry.name,
             "measure_plain_language": entry.plain_language,
+            # DEC-037: CMS definition from the definitions mapping, with
+            # MeasureEntry field as override if set directly.
+            "cms_measure_definition": (
+                entry.cms_measure_definition
+                or CMS_MEASURE_DEFINITIONS.get(entry.measure_id)
+            ),
             "measure_group": entry.group,
             "direction": entry.direction,
+            "direction_source": DATASET_DIRECTION_SOURCE.get(entry.dataset_id),
             "unit": entry.unit,
             "tail_risk_flag": entry.tail_risk_flag,
             "ses_sensitivity": entry.ses_sensitivity,

@@ -64,6 +64,13 @@ PROHIBITED_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"\btop\s+\d+\b", re.I), "ranking language"),
     (re.compile(r"\bbottom\s+\d+\b", re.I), "ranking language"),
     (re.compile(r"\bleaderboard\b", re.I), "ranking language"),
+
+    # Ownership-quality (legal-compliance.md § Ownership Data)
+    (re.compile(r"\btrack\s+record\b", re.I), "ownership-quality: 'track record'"),
+    (re.compile(r"\bpattern\s+of\b", re.I), "ownership-quality: 'pattern of'"),
+    (re.compile(r"\bsystemic\b", re.I), "ownership-quality: 'systemic'"),
+    (re.compile(r"\bsignificantly\b", re.I), "statistical: 'significantly' without basis"),
+    (re.compile(r"\bsafety[\s-]*net\s+hospital\b", re.I), "prohibited term: 'safety net hospital'"),
 ]
 
 # Directional color classes (Tailwind) — prohibited in standard metric output
@@ -168,6 +175,11 @@ STANDARD_METRIC_CASES = [
                 "The percentage of patients who received all "
                 "recommended treatments within 3 hours of severe sepsis recognition."
             ),
+            "cms_measure_definition": (
+                "The measures of timely and effective care show the percentage of "
+                "hospital patients who got treatments known to get the best results "
+                "for certain common, serious medical conditions or surgical procedures."
+            ),
             "cms_direction": "higher",
             "ci_lower": "65%",
             "ci_upper": "79%",
@@ -179,6 +191,59 @@ STANDARD_METRIC_CASES = [
             "overlap_flag": True,
         },
         id="measure-definition-direction-source",
+    ),
+    pytest.param(
+        {
+            "facility_name": "Valley Medical Center",
+            "metric_name": "Heart Attack 30-Day Mortality Rate",
+            "metric_value": "11.5%",
+            "national_average": "12.8%",
+            "state_name": "Oregon",
+            "state_average": None,  # HGLM: CMS does not publish state avg (DEC-036)
+            "metric_plain_language": (
+                "The percentage of Medicare patients who died within "
+                "30 days of being admitted for a heart attack."
+            ),
+            "cms_measure_definition": (
+                "The 30-day death measures are estimates of deaths within 30 days "
+                "of the start of a hospital admission from any cause."
+            ),
+            "cms_direction": "lower",
+            "ci_lower": "8.2%",
+            "ci_upper": "15.1%",
+            "sample_size": 35,
+            "ci_source": "cms_published",
+            "prior_source": None,
+            "ci_level": "95%",
+            "direction_source": "CMS_API",
+            "overlap_flag": True,
+        },
+        id="no-state-avg-hglm-measure",
+    ),
+    pytest.param(
+        {
+            "facility_name": "Community Hospital",
+            "metric_name": "HCAHPS Nurse Communication",
+            "metric_value": "78%",
+            "national_average": "80%",
+            "state_name": "Iowa",
+            "state_average": "79%",
+            "metric_plain_language": (
+                "The percentage of patients who reported that their nurses "
+                "always communicated well."
+            ),
+            "cms_measure_definition": None,  # REVIEW_NEEDED: not yet sourced
+            "cms_direction": None,
+            "ci_lower": None,  # No CI for HCAHPS (patient-mix adjusted)
+            "ci_upper": None,
+            "sample_size": 300,
+            "ci_source": None,
+            "prior_source": None,
+            "ci_level": None,
+            "direction_source": "CMS_MEASURE_DEFINITION",
+            "overlap_flag": None,
+        },
+        id="no-ci-no-cms-definition-hcahps",
     ),
 ]
 
@@ -337,6 +402,27 @@ class TestStandardMetricBlock:
         if data.get("ci_lower") is None and data.get("ci_upper") is None:
             output = render_standard_metric_block(**data)
             assert "credible interval" not in output.lower()
+
+    def test_state_avg_note_conditional(self, data: dict) -> None:
+        """DEC-036: state average sentence omitted when state_avg is null."""
+        output = render_standard_metric_block(**data)
+        if data.get("state_average") is None:
+            assert "average for this measure is" not in output.split(
+                "national average", 1
+            )[-1], (
+                "State average sentence should be omitted when state_avg is null"
+            )
+        else:
+            assert data["state_name"] in output
+
+    def test_cms_definition_note_conditional(self, data: dict) -> None:
+        """DEC-037: CMS definition sentence omitted when null."""
+        output = render_standard_metric_block(**data)
+        if data.get("cms_measure_definition") is not None:
+            assert "CMS defines this measure as" in output
+            assert data["cms_measure_definition"] in output
+        else:
+            assert "CMS defines this measure as" not in output
 
     def test_facility_name_present(self, data: dict) -> None:
         """Basic contract: facility name appears in output."""
@@ -498,4 +584,28 @@ class TestValidationUtilities:
         with pytest.raises(AssertionError, match="green"):
             assert_no_directional_color(
                 '<span class="text-green-600">Below average</span>'
+            )
+
+    def test_ownership_track_record_caught(self) -> None:
+        with pytest.raises(AssertionError, match="ownership"):
+            assert_no_prohibited_language(
+                "This entity has a track record of poor quality"
+            )
+
+    def test_ownership_pattern_of_caught(self) -> None:
+        with pytest.raises(AssertionError, match="ownership"):
+            assert_no_prohibited_language(
+                "There is a pattern of deficiencies at these facilities"
+            )
+
+    def test_significantly_caught(self) -> None:
+        with pytest.raises(AssertionError, match="statistical"):
+            assert_no_prohibited_language(
+                "This rate is significantly higher than the national average"
+            )
+
+    def test_safety_net_hospital_caught(self) -> None:
+        with pytest.raises(AssertionError, match="prohibited term"):
+            assert_no_prohibited_language(
+                "This safety net hospital serves a vulnerable population"
             )

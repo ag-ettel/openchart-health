@@ -12,7 +12,7 @@ All 138 measures resolved. No outstanding items.
 | `CMS_API` | 44 | API `compared_to_national` or `measure_name` field contains explicit direction |
 | `CMS_DATA_DICTIONARY` | 4 | CMS Hospital Data Dictionary: "Lower percentages suggest more efficient use" |
 | `CMS_MEASURE_SPEC` | 12 | eCQM specs (ecqi.healthit.gov) or Joint Commission specs |
-| `CMS_MEASURE_DEFINITION` | 77 | Plain language is self-descriptive; no explicit citation needed (DEC-011) |
+| `CMS_MEASURE_DEFINITION` | 77 | Plain language is self-descriptive; no explicit citation needed (DEC-032) |
 | None (no direction) | 1 | EDV — categorical, no directional claim |
 | **Total** | **138** | |
 
@@ -113,11 +113,11 @@ each):
 
 ---
 
-## Resolution Approach (DEC-011)
+## Resolution Approach (DEC-032)
 
 For measures without explicit CMS direction language, the `plain_language` field
 carries directionality through CMS's own descriptive terms ("appropriate care,"
 "recommended treatment," "Hospital Harm," "improvement," "prophylaxis"). The template
-direction sentence is omitted for these measures. See DEC-011 in
+direction sentence is omitted for these measures. See DEC-032 in
 `docs/pipeline_decisions.md` and `[DIRECTION_NOTE]` conditional in
 `text-templates.md`.

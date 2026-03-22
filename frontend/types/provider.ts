@@ -1,6 +1,8 @@
 // Architectural contract. See CLAUDE.md: Frontend Specification: Types.
 // If the JSON export schema changes, this file changes in the same commit.
 // Do not redefine or widen these types in component files.
+//
+// Last synced with pipeline/export/build_json.py: 2026-03-21
 
 export type ReliabilityFlag =
   | "RELIABLE"
@@ -9,129 +11,165 @@ export type ReliabilityFlag =
   | "SUPPRESSED";
 
 export type MeasureDirection = "LOWER_IS_BETTER" | "HIGHER_IS_BETTER";
+export type DirectionSource  = "CMS_API" | "CMS_DATA_DICTIONARY" | "CMS_MEASURE_SPEC" | "CMS_MEASURE_DEFINITION";
 export type SesSensitivity   = "HIGH" | "MODERATE" | "LOW" | "UNKNOWN";
 export type ProviderType     = "HOSPITAL" | "NURSING_HOME" | "HOME_HEALTH" | "HOSPICE";
 export type PaymentProgram   = "HRRP" | "HACRP" | "VBP" | "SNF_VBP";
 
-// Add after the existing type declarations, before TrendPeriod.
-
-// Result of a statistically honest comparison between a provider's measure
-// value and a reference value (national average or another provider).
-// Used by compareToAverage() and compareProviders() in lib/utils.ts.
-// All states render with neutral gray visual treatment (DEC-009: no directional
-// color coding). CANNOT_DETERMINE uses lighter gray to distinguish from known states.
-export type ComparisonResult =
-  | "BETTER"
-  | "WORSE"
-  | "NO_SIGNIFICANT_DIFFERENCE"
-  | "CANNOT_DETERMINE";
-
-
 export interface TrendPeriod {
   period_label:            string;
-  numeric_value:           number | null; // parsed from Decimal(12,4); use formatValue() for display
+  numeric_value:           number | null;
   suppressed:              boolean;
   not_reported:            boolean;
-  methodology_change_flag: boolean;
+  methodology_change_flag: boolean;  // footnote 29 detected (Rule 11)
 }
 
 export interface Measure {
   measure_id:                string;
-  measure_name:              string;
-  measure_plain_language:    string;  // primary display label; never use measure_name in UI
-  measure_group:             string;  // must match measure_group enum in pipeline/config.py
-  source_dataset_id:         string;
-  source_dataset_name:       string;
-  measure_spec_version:      string | null;
-  methodology_revision_date: string | null; // ISO8601
-  direction:                 MeasureDirection;
-  unit:                      "percent" | "minutes" | "ratio" | "count" | "score" | string;
+  measure_name:              string | null;
+  measure_plain_language:    string | null;
+  cms_measure_definition:    string | null;  // DEC-037: verbatim CMS definition
+  measure_group:             string;
+  source_dataset_id:         string | null;
+  source_dataset_name:       string;  // CMS dataset display name for attribution
+  direction:                 MeasureDirection | null;  // null for EDV, HCAHPS middlebox
+  direction_source:          DirectionSource | null;  // DEC-032: governs [DIRECTION_NOTE] rendering
+  unit:                      string | null;
   tail_risk_flag:            boolean;
   ses_sensitivity:           SesSensitivity;
-  stratification:            string | null; // null = non-stratified; primary measure
+  stratification:            string | null;  // null = non-stratified
   numeric_value:             number | null;
-  confidence_interval_lower: number | null;
+  score_text:                string | null;  // DEC-024: EDV categorical ("very high", etc.)
+  confidence_interval_lower: number | null;  // CMS-published or Bayesian credible (DEC-029)
   confidence_interval_upper: number | null;
+  ci_source:                 string | null;  // DEC-029: "cms_published" | "calculated" | null
+  prior_source:              string | null;  // DEC-029: "state average" | "national average" | "minimally informative" | null
+  observed_value:            number | null;  // DEC-016: NH claims O/E observed
+  expected_value:            number | null;  // DEC-016: NH claims O/E expected
+  compared_to_national:      string | null;  // DEC-022: BETTER/NO_DIFFERENT/WORSE/etc.
   suppressed:                boolean;
   suppression_reason:        string | null;
   not_reported:              boolean;
   not_reported_reason:       string | null;
-  footnote_codes:            number[];
-  footnote_text:             string[];
+  count_suppressed:          boolean;  // DEC-023: counts hidden but value populated
+  footnote_codes:            number[] | null;
+  footnote_text:             string[] | null;
   period_label:              string;
-  period_start:              string | null; // ISO8601
-  period_end:                string | null; // ISO8601
+  period_start:              string | null;  // ISO8601
+  period_end:                string | null;  // ISO8601
   sample_size:               number | null;
   denominator:               number | null;
-  reliability_flag:          ReliabilityFlag;
+  reliability_flag:          ReliabilityFlag | null;
   national_avg:              number | null;
   national_avg_period:       string | null;
   state_avg:                 number | null;
   state_avg_period:          string | null;
-  trend:                     TrendPeriod[]; // ordered chronologically, oldest first
-  trend_valid:               boolean;
+  ci_level:                  string | null;  // e.g. "95%"; null when no interval
+  overlap_flag:              boolean | null; // CI contains national avg; null when no CI or no avg
+  trend:                     TrendPeriod[] | null;  // null if only 1 period; oldest first
+  trend_valid:               boolean;  // Rule 12: true when 3+ periods
   trend_period_count:        number;
 }
 
 export interface PaymentAdjustment {
   program:                PaymentProgram;
   program_year:           number;
-  penalty_flag:           boolean;
-  payment_adjustment_pct: number | null; // negative = penalty, positive = bonus
+  penalty_flag:           boolean | null;  // null = excluded from program (e.g., HACRP N/A)
+  payment_adjustment_pct: number | null;
   total_score:            number | null;
   score_percentile:       number | null;
 }
 
 // Non-null when provider_type is "HOSPITAL". Null for all other provider types.
 export interface HospitalContext {
-  staffed_beds:                   number | null;
-  is_critical_access:             boolean;
-  is_teaching_hospital:           boolean;
-  is_emergency_services:          boolean;
-  dsh_status:                     boolean;
-  dsh_percentage:                 number | null;
-  dual_eligible_proportion:       number | null;
-  urban_rural_classification:     string | null;
-  cms_certification_date:         string | null; // ISO8601
-  offers_cardiac_surgery:         boolean;
-  offers_cardiac_catheterization: boolean;
-  offers_emergency_cardiac_care:  boolean;
+  is_critical_access:             boolean | null;
+  is_emergency_services:          boolean | null;
+  birthing_friendly_designation:  boolean | null;  // DEC-007
+  hospital_overall_rating:        number | null;   // 1-5
+  hospital_overall_rating_footnote: string | null;
 }
 
 // Non-null when provider_type is "NURSING_HOME". Null for all other provider types.
-// Pipeline population deferred to nursing home build phase.
 export interface NursingHomeContext {
-  resident_capacity:                       number | null;
-  dual_eligible_proportion:                number | null;
-  urban_rural_classification:              string | null;
-  cms_certification_date:                  string | null; // ISO8601
-  is_continuing_care_retirement_community: boolean;
-  is_special_focus_facility:               boolean;
-  is_special_focus_facility_candidate:     boolean; // mutually exclusive with is_special_focus_facility
-  is_hospital_based:                       boolean;
-  is_abuse_icon:                           boolean;
+  certified_beds:                          number | null;
+  average_daily_census:                    number | null;
+  is_continuing_care_retirement_community: boolean | null;
+  is_special_focus_facility:               boolean | null;
+  is_special_focus_facility_candidate:     boolean | null;
+  is_hospital_based:                       boolean | null;
+  is_abuse_icon:                           boolean | null;
+  is_urban:                                boolean | null;
+  chain_name:                              string | null;
+  chain_id:                                string | null;
+}
+
+// DEC-028: inspection events with contested citation transparency
+export interface InspectionEvent {
+  survey_date:                          string | null;  // ISO8601
+  survey_type:                          string | null;
+  deficiency_tag:                       string;
+  deficiency_description:               string | null;
+  deficiency_category:                  string | null;
+  scope_severity_code:                  string | null;  // A-L; current CMS classification
+  is_immediate_jeopardy:                boolean;
+  is_complaint_deficiency:              boolean;
+  correction_date:                      string | null;  // ISO8601
+  inspection_cycle:                     number | null;
+  // Contested citation fields (DEC-028)
+  is_contested:                         boolean;
+  originally_published_scope_severity:  string | null;  // original finding before revision
+  scope_severity_history:               ScopeSeverityChange[] | null;
+}
+
+export interface ScopeSeverityChange {
+  code:     string;   // new scope/severity code
+  vintage:  string;   // CMS release date when change observed
+  previous: string;   // previous code
+  idr:      boolean;  // DEC-028: true if IDR was active at time of change
+}
+
+// DEC-028: penalties with fine amount change transparency
+export interface Penalty {
+  penalty_date:                    string | null;  // ISO8601
+  penalty_type:                    string;         // "Fine" or "Payment Denial"
+  fine_amount:                     number | null;  // current
+  payment_denial_start_date:       string | null;  // ISO8601
+  payment_denial_length_days:      number | null;
+  originally_published_fine_amount: number | null;
+  fine_amount_changed:             boolean;
+}
+
+export interface OwnershipEntry {
+  owner_name:                       string;
+  owner_type:                       string;  // "Individual" or "Organization"
+  role:                             string;
+  ownership_percentage:             number | null;
+  ownership_percentage_not_provided: boolean;
+  association_date:                 string | null;  // ISO8601
 }
 
 export interface Address {
   street: string | null;
-  city:   string;
-  state:  string; // 2-char
-  zip:    string;
+  city:   string | null;
+  state:  string | null;
+  zip:    string | null;
 }
 
 export interface Provider {
-  provider_id:          string;          // CCN, 6-char zero-padded
+  provider_id:          string;                       // CCN, 6-char zero-padded
   provider_type:        ProviderType;
   name:                 string;
   is_active:            boolean;
   phone:                string | null;
   address:              Address;
-  provider_subtype:     string;          // enum values confirmed in docs/data_dictionary.md
+  provider_subtype:     string | null;
   ownership_type:       string | null;
-  last_updated:         string;          // ISO8601; use in all measure AttributionLine renders
-  pipeline_run_id:      string;          // UUID
+  last_updated:         string;                       // ISO8601
   measures:             Measure[];
   payment_adjustments:  PaymentAdjustment[];
-  hospital_context:     HospitalContext | null;     // non-null for HOSPITAL only
-  nursing_home_context: NursingHomeContext | null;  // non-null for NURSING_HOME only
+  hospital_context:     HospitalContext | null;        // non-null for HOSPITAL only
+  nursing_home_context: NursingHomeContext | null;     // non-null for NURSING_HOME only
+  inspection_events:    InspectionEvent[] | null;      // non-null for NURSING_HOME only
+  penalties:            Penalty[] | null;              // non-null for NURSING_HOME only
+  ownership:            OwnershipEntry[] | null;       // non-null for NURSING_HOME only
 }

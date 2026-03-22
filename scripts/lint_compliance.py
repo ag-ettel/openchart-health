@@ -29,7 +29,10 @@ SCAN_PATHS: list[tuple[str, str]] = [
     ("**/*.ts", "frontend"),
     ("**/*.py", "pipeline/render"),
     ("**/*.py", "pipeline/export"),
+    ("**/*.py", "pipeline/transform"),
     ("**/*.py", "api"),
+    # CMS definitions module contains consumer-facing text
+    ("cms_definitions.py", "pipeline"),
 ]
 
 # ─── Prohibited patterns ──────────────────────────────────────────────
@@ -74,20 +77,35 @@ _ADVISORY_LANGUAGE: list[tuple[str, str]] = [
     (r"\bseek\s+care\b", "Prohibited clinical directive"),
     (r"\bshould\s+consider\b", "Prohibited clinical directive"),
     (r"\brecommend\b", "Prohibited clinical directive (use only in comments about what NOT to do)"),
+
+    # Ownership-quality prohibited language (legal-compliance.md § Ownership Data)
+    (r"\btrack\s+record\b", "Prohibited ownership-quality language"),
+    (r"\bpattern\s+of\b", "Prohibited ownership-quality language"),
+    (r"\bsystemic\b", "Prohibited ownership-quality language"),
+    (r"\bcomplex\s+ownership\b", "Prohibited ownership editorial characterization"),
+    (r"\bopaque\s+structure\b", "Prohibited ownership editorial characterization"),
+    (r"\bred\s+flag\b", "Prohibited editorial characterization"),
+    (r"\bwarning\s+sign\b", "Prohibited editorial characterization"),
+    (r"\bsince\s+the\s+ownership\s+change\b", "Prohibited ownership temporal causation"),
+    (r"\bunder\s+new\s+ownership\b", "Prohibited ownership attribution"),
+
+    # Statistical language without basis (legal-compliance.md § Prohibited Language)
+    (r"\bsignificantly\b", "Prohibited 'significantly' without statistical basis"),
+    (r"\bsafety[\s-]*net\s+hospital\b", "Prohibited term — use 'hospitals serving higher proportions of low-income or dual-eligible patients'"),
 ]
 
 _DIRECTIONAL_COLOR: list[tuple[str, str]] = [
-    # Directional color coding (DEC-009, frontend-spec.md, legal-compliance.md)
+    # Directional color coding (DEC-030, frontend-spec.md, legal-compliance.md)
     # These patterns target Tailwind classes that encode better/worse judgments.
     # orange-700/orange-50 is permitted ONLY for tail risk thresholds and repeat
     # deficiencies — those files are excluded below in ALLOWED_COLOR_FILES.
-    (r"\btext-red-\d+\b", "Prohibited red color — no directional color coding (DEC-009)"),
-    (r"\btext-green-\d+\b", "Prohibited green color — no directional color coding (DEC-009)"),
-    (r"\bbg-red-\d+\b", "Prohibited red background — no directional color coding (DEC-009)"),
-    (r"\bbg-green-\d+\b", "Prohibited green background — no directional color coding (DEC-009)"),
-    (r"\bborder-red-\d+\b", "Prohibited red border — no directional color coding (DEC-009)"),
-    (r"\bborder-green-\d+\b", "Prohibited green border — no directional color coding (DEC-009)"),
-    (r"\btext-blue-\d+\b", "Blue color in measure display — verify not encoding better/worse (DEC-009)"),
+    (r"\btext-red-\d+\b", "Prohibited red color — no directional color coding (DEC-030)"),
+    (r"\btext-green-\d+\b", "Prohibited green color — no directional color coding (DEC-030)"),
+    (r"\bbg-red-\d+\b", "Prohibited red background — no directional color coding (DEC-030)"),
+    (r"\bbg-green-\d+\b", "Prohibited green background — no directional color coding (DEC-030)"),
+    (r"\bborder-red-\d+\b", "Prohibited red border — no directional color coding (DEC-030)"),
+    (r"\bborder-green-\d+\b", "Prohibited green border — no directional color coding (DEC-030)"),
+    (r"\btext-blue-\d+\b", "Blue color in measure display — verify not encoding better/worse (DEC-030)"),
 ]
 
 # Files where orange color IS permitted (tail risk threshold, repeat deficiency)

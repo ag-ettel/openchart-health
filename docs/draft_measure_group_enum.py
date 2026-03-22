@@ -84,7 +84,7 @@ Nursing Home Measure Groups (8, confirmed 2026-03-19):
         Measures: 4 claims-based measures (codes 521, 522, 551, 552)
 
     NH_STAFFING
-        Five-Star staffing sub-measures + reported staffing (DEC-012)
+        Five-Star staffing sub-measures + reported staffing (DEC-033)
         Measures: 9 measures (6 Five-Star rated + 3 reported/unadjusted)
 
     NH_STAR_RATING
@@ -92,11 +92,11 @@ Nursing Home Measure Groups (8, confirmed 2026-03-19):
         Measures: 6 ratings (overall, health inspection, QM, long/short stay QM, staffing)
 
     NH_INSPECTION
-        Inspection-derived measures (DEC-013)
+        Inspection-derived measures (DEC-034)
         Measures: 8 measures (4 tail-risk + 4 context)
 
     NH_PENALTIES
-        Penalty and complaint measures (DEC-014)
+        Penalty and complaint measures (DEC-035)
         Measures: 5 measures (complaint citations, fine total, penalty count,
                   payment denials, fine count)
 

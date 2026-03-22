@@ -154,6 +154,29 @@ Three types of data mutation between CMS monthly snapshots:
 - Do not color-code original vs. revised (no red/green)
 - Do not editorialize about the dispute process
 
+## TODO: NH Deficiency Upsert Optimization
+
+**Problem:** The DEC-028 lifecycle tracking does a per-row SELECT existence check
+before every INSERT/UPDATE on provider_inspection_events. For 400K+ rows per monthly
+archive × 82 archives, this is ~33M individual SELECT queries. The full NH backfill
+takes ~50+ hours.
+
+**Fix for next backfill run:** Add a `backfill_mode` parameter to
+`upsert_inspection_events()`. In backfill mode (chronological first load):
+1. First archive for each provider: use INSERT ON CONFLICT DO NOTHING (all rows are
+   new, no lifecycle tracking needed)
+2. Subsequent archives: use the current SELECT-then-UPDATE logic for lifecycle tracking
+
+This is safe because archives are processed chronologically (DEC-028 requirement).
+The first archive's citations are guaranteed to be new inserts. Only subsequent
+archives can contain updates to existing citations.
+
+**Expected speedup:** ~10x for the initial backfill (eliminates 80% of SELECTs).
+Ongoing monthly refreshes (1 archive at a time) are already fast enough.
+
+**Gate item:** Optimize before the next full re-load. Not blocking current work
+since hospital data is already loaded and usable.
+
 ## Current Backfill Status
 
 - Hospital backfill: running, ~2021-2026 loading successfully

@@ -1,12 +1,20 @@
-// Annotation rendered at a trend chart period boundary.
-// Always visible. Never tooltip-only.
-// Obligations: see CLAUDE.md: Frontend Specification: Components: MethodologyChangeFlag
+// Annotation for methodology change boundaries (footnote 29, Rule 11).
+// Rendered by TrendChart at period boundaries where methodology_change_flag is true.
+// Neutral gray — methodology changes are not tail risk thresholds (DEC-030).
 
-export function MethodologyChangeFlag(): JSX.Element {
+import { METHODOLOGY_CHANGE_FOOTNOTE_TEXT } from "@/lib/constants";
+
+interface MethodologyChangeFlagProps {
+  periodLabel: string; // the period where the methodology changed
+}
+
+export function MethodologyChangeFlag({
+  periodLabel,
+}: MethodologyChangeFlagProps): JSX.Element {
   return (
-    <div className="rounded border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-      CMS methodology changed at this point. Values before and after may not be
-      directly comparable.
+    <div className="rounded border border-gray-300 bg-gray-50 px-3 py-2 text-xs text-gray-700">
+      <span className="font-medium">{periodLabel}:</span>{" "}
+      {METHODOLOGY_CHANGE_FOOTNOTE_TEXT}
     </div>
   );
 }

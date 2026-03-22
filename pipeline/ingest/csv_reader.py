@@ -196,6 +196,21 @@ HOSPITAL_FILE_PATTERNS: dict[str, list[str]] = {
     "readmissions_national": [
         r"Unplanned[ _]Hospital[ _]Visits[ _-]+National\.csv$",
     ],
+    "readmissions_state": [
+        r"Unplanned[ _]Hospital[ _]Visits[ _-]+State\.csv$",
+    ],
+    "imaging_national": [
+        r"Outpatient[ _]Imaging[ _]Efficiency[ _-]+National\.csv$",
+    ],
+    "imaging_state": [
+        r"Outpatient[ _]Imaging[ _]Efficiency[ _-]+State\.csv$",
+    ],
+    "mspb_national": [
+        r"Medicare[ _]Hospital[ _]Spending.*National\.csv$",
+    ],
+    "mspb_state": [
+        r"Medicare[ _]Hospital[ _]Spending.*State\.csv$",
+    ],
     "hcahps_national": [
         r"HCAHPS[ _-]+National\.csv$",
     ],
@@ -247,6 +262,10 @@ NH_FILE_PATTERNS: dict[str, list[str]] = {
     "snf_qrp": [
         r"Skilled.Nursing.Facility.Quality.Reporting.*Provider.data\.csv$",
         r"Skilled_Nursing_Facility_Quality_Reporting.*Provider_Data_\w+\.csv$",
+    ],
+    "snf_qrp_national": [
+        r"Skilled.Nursing.Facility.Quality.Reporting.*National.Data\.csv$",
+        r"Skilled_Nursing_Facility_Quality_Reporting.*National_Data_\w+\.csv$",
     ],
     "snf_vbp": [
         r"SNF.VBP.Facility.Performance\.csv$",
