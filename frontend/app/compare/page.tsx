@@ -47,6 +47,6 @@
 // ProviderContextPanel: both hospitals, side by side, same visual plane.
 // No composite score or aggregate ordering. No personalization language.
 
-export default function ComparePage(): JSX.Element {
+export default function ComparePage(): React.JSX.Element {
   return <div data-page="compare" />;
 }

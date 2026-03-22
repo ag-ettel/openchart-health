@@ -26,7 +26,7 @@ function countConsecutiveNonReporting(trend: TrendPeriod[]): number {
 export function NonReporterIndicator({
   not_reported_reason,
   trend,
-}: NonReporterIndicatorProps): JSX.Element {
+}: NonReporterIndicatorProps): React.JSX.Element {
   const consecutive = countConsecutiveNonReporting(trend ?? []);
 
   return (

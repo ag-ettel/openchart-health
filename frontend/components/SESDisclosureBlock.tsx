@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { SES_DISCLOSURE_TEXT } from "@/lib/constants";
 
-export function SESDisclosureBlock(): JSX.Element {
+export function SESDisclosureBlock(): React.JSX.Element {
   return (
     <div className="rounded border border-gray-200 bg-gray-50 px-4 py-3 text-sm leading-relaxed text-gray-700">
       <p>{SES_DISCLOSURE_TEXT}</p>

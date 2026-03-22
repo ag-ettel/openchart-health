@@ -1,57 +1,36 @@
-// PatientSafetyRecord — the primary view on a hospital profile page.
+// PatientSafetyRecord — condensed primary view of critical safety indicators.
 //
-// "Tail risk is the primary product, not a secondary tab." (Principle 2)
-//
-// Renders FIRST on the profile page, before MultipleComparisonDisclosure and all
-// MeasureGroup instances. Every measure with tail_risk_flag=true appears here
-// regardless of its value, suppression state, or reporting status.
-//
-// Sort philosophy: suppressed and non-reported tail risk measures sort to the TOP,
-// not the bottom. A suppressed mortality rate is a stronger signal of uncertainty
-// than a reported rate near the average. Absence is information (Principle 3).
-//
-// HACRP consecutive penalty integration: display-philosophy requires that
-// consecutive HACRP penalties surface prominently in this view, not only in
-// PaymentAdjustmentHistory. This component accepts payment adjustments and
-// detects the pattern.
+// Shows top measures by deviation from national average (most noteworthy first).
+// Limited to a preview count to keep the page scannable. The full set is
+// available in All Quality Measures filtered by "Critical Safety Indicators".
 
+"use client";
+
+import { useState } from "react";
 import type { Measure, PaymentAdjustment } from "@/types/provider";
-import { consecutivePenalties } from "@/lib/utils";
+import { consecutivePenalties, measureHasData } from "@/lib/utils";
 import { MeasureCard } from "./MeasureCard";
 
+const PREVIEW_COUNT = 5;
+
 interface PatientSafetyRecordProps {
-  measures: Measure[]; // full provider.measures array; filters internally
+  measures: Measure[];
   paymentAdjustments: PaymentAdjustment[];
   providerLastUpdated: string;
+  providerName?: string;
 }
 
-// Sort tail risk measures: suppressed/not-reported first (absence is the signal),
-// then by absolute deviation from national_avg descending, then measures without
-// a national_avg last among the valued group.
 function sortTailRisk(measures: Measure[]): Measure[] {
   return [...measures].sort((a, b) => {
-    const aAbsent = a.suppressed || a.not_reported;
-    const bAbsent = b.suppressed || b.not_reported;
-
-    // Absent measures sort first — absence on a tail risk measure is the
-    // strongest uncertainty signal.
-    if (aAbsent && !bAbsent) return -1;
-    if (!aAbsent && bAbsent) return 1;
-    if (aAbsent && bAbsent) return 0;
-
-    // Both have values. Sort by absolute deviation from national_avg.
-    const aHasDeviation =
-      a.numeric_value !== null && a.national_avg !== null;
-    const bHasDeviation =
-      b.numeric_value !== null && b.national_avg !== null;
-
-    if (aHasDeviation && !bHasDeviation) return -1;
-    if (!aHasDeviation && bHasDeviation) return 1;
-    if (!aHasDeviation && !bHasDeviation) return 0;
+    const aHasDev = a.numeric_value !== null && a.national_avg !== null;
+    const bHasDev = b.numeric_value !== null && b.national_avg !== null;
+    if (aHasDev && !bHasDev) return -1;
+    if (!aHasDev && bHasDev) return 1;
+    if (!aHasDev && !bHasDev) return 0;
 
     const aDev = Math.abs(a.numeric_value! - a.national_avg!);
     const bDev = Math.abs(b.numeric_value! - b.national_avg!);
-    return bDev - aDev; // larger deviation first
+    return bDev - aDev;
   });
 }
 
@@ -59,42 +38,67 @@ export function PatientSafetyRecord({
   measures,
   paymentAdjustments,
   providerLastUpdated,
-}: PatientSafetyRecordProps): JSX.Element {
+  providerName = "This hospital",
+}: PatientSafetyRecordProps): React.JSX.Element {
+  const [showAll, setShowAll] = useState(false);
+
   const tailRisk = sortTailRisk(
-    measures.filter((m) => m.tail_risk_flag)
+    measures.filter((m) => m.tail_risk_flag && m.stratification === null && measureHasData(m))
   );
   const hacrpConsecutive = consecutivePenalties(paymentAdjustments, "HACRP");
 
-  return (
-    <section aria-label="Patient safety record">
-      <h2 className="mb-3 text-base font-semibold text-gray-900">
-        Patient Safety Record
-      </h2>
+  const visible = showAll ? tailRisk : tailRisk.slice(0, PREVIEW_COUNT);
+  const hasMore = tailRisk.length > PREVIEW_COUNT;
 
-      {/* HACRP consecutive penalty — prominent warning per display-philosophy */}
+  return (
+    <section aria-label="Critical safety indicators">
+      <h2 className="mb-3 text-lg font-semibold text-gray-900">
+        Critical Safety Indicators
+      </h2>
+      <p className="mb-4 text-xs text-gray-500">
+        Measures related to mortality, serious complications, infections, and adverse events.
+        {tailRisk.length > PREVIEW_COUNT && !showAll && (
+          <> Showing top {PREVIEW_COUNT} of {tailRisk.length} measures.</>
+        )}
+      </p>
+
       {hacrpConsecutive >= 2 && (
         <div className="mb-4 rounded border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-700">
           This hospital has received a Hospital-Acquired Condition Reduction
           Program (HACRP) penalty in {hacrpConsecutive} consecutive years.
-          HACRP penalties are applied to hospitals in the bottom quartile of
-          patient safety scores.
         </div>
       )}
 
       {tailRisk.length === 0 ? (
         <p className="text-sm text-gray-500">
-          No tail risk measures available for this hospital.
+          No critical safety measures with data available for this hospital.
         </p>
       ) : (
-        <div className="space-y-3">
-          {tailRisk.map((m) => (
-            <MeasureCard
-              key={`${m.measure_id}-${m.period_label}-${m.stratification ?? ""}`}
-              measure={m}
-              providerLastUpdated={providerLastUpdated}
-            />
-          ))}
-        </div>
+        <>
+          <div className="space-y-4">
+            {visible.map((m) => (
+              <MeasureCard
+                key={`${m.measure_id}-${m.period_label}-${m.stratification ?? ""}`}
+                measure={m}
+                providerLastUpdated={providerLastUpdated}
+                providerName={providerName}
+                inlineTrend
+              />
+            ))}
+          </div>
+
+          {hasMore && (
+            <button
+              type="button"
+              onClick={() => setShowAll((prev) => !prev)}
+              className="mt-4 w-full rounded border border-gray-200 bg-gray-50 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100"
+            >
+              {showAll
+                ? "Show fewer"
+                : `Show all ${tailRisk.length} critical safety measures`}
+            </button>
+          )}
+        </>
       )}
     </section>
   );

@@ -22,7 +22,7 @@ const METHODOLOGY_CHANGE_CODE = 29;
 export function FootnoteDisclosure({
   footnote_codes,
   footnote_text,
-}: FootnoteDisclosureProps): JSX.Element | null {
+}: FootnoteDisclosureProps): React.JSX.Element | null {
   if (!footnote_codes || footnote_codes.length === 0) return null;
 
   const texts = footnote_text ?? [];

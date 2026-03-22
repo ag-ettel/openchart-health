@@ -10,7 +10,7 @@ interface MethodologyChangeFlagProps {
 
 export function MethodologyChangeFlag({
   periodLabel,
-}: MethodologyChangeFlagProps): JSX.Element {
+}: MethodologyChangeFlagProps): React.JSX.Element {
   return (
     <div className="rounded border border-gray-300 bg-gray-50 px-3 py-2 text-xs text-gray-700">
       <span className="font-medium">{periodLabel}:</span>{" "}

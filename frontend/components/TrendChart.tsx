@@ -2,32 +2,22 @@
 
 // TrendChart — temporal trajectory of a measure across reporting periods.
 //
-// Design principles:
-//   - Antifragile: handles every edge case CMS data produces as a first-class
-//     rendering path, not an afterthought. Suppressed periods, non-reporting gaps,
-//     methodology changes, and sub-threshold period counts all render explicitly.
-//   - Fail loudly: categorical measures (score_text only, no numeric_value) get a
-//     clear message rather than an empty chart.
-//   - Data Integrity Rule 12: < 3 periods → individual observations (dots only, no
-//     connecting line, no trend language). The floor is enforced here.
-//   - Methodology change (footnote 29 / Rule 11): line breaks between segments.
-//     The two sides of a methodology change are not visually connected because
-//     the values are not methodologically comparable.
-//   - Suppressed / not-reported: natural gaps in the line. The gap IS the signal;
-//     annotations below the chart explain why. Absence displayed as presence.
-//   - No directional color encoding (DEC-030). Data line and dots are a consistent
-//     neutral blue — visually distinct from gray reference lines, with no
-//     better/worse implication.
-//   - National and state averages render as horizontal reference lines so the
-//     consumer can see trajectory relative to benchmarks.
-//
-// Requires Recharts (client component).
+// Design:
+//   - X-axis shows period end date only (simplified from full range)
+//   - CI shaded band when per-period CI available; fallback to current-period-only
+//   - Custom tooltip shows value, cases, interval estimate, CMS comparison
+//   - Segmented lines break at methodology changes (Rule 11)
+//   - Rule 12: < 3 periods → dots only, no connecting line
+//   - Suppressed/not-reported periods create natural gaps
+//   - O/E reference line at 1.0 for infection/ratio measures
+//   - No directional color encoding (DEC-030)
 
 import { useMemo } from "react";
 import {
   ResponsiveContainer,
-  LineChart,
+  ComposedChart,
   Line,
+  Area,
   XAxis,
   YAxis,
   ReferenceLine,
@@ -41,69 +31,93 @@ import {
   METHODOLOGY_CHANGE_FOOTNOTE_TEXT,
 } from "@/lib/constants";
 
-// --- Constants ---
-
-// Data line color: neutral blue. Does not encode direction or quality judgment.
-// Visually distinct from the gray reference lines and chart furniture.
-const DATA_COLOR = "#2563eb"; // blue-600
-const DATA_COLOR_LIGHT = "#93c5fd"; // blue-300 — active dot ring
-const NATIONAL_AVG_COLOR = "#9ca3af"; // gray-400
-const STATE_AVG_COLOR = "#d1d5db"; // gray-300
-
-// --- Types ---
+const DATA_COLOR = "#2563eb";
+const DATA_COLOR_LIGHT = "#93c5fd";
+const NATIONAL_AVG_COLOR = "#9ca3af";
+const STATE_AVG_COLOR = "#d1d5db";
+const CI_BAND_COLOR = "#dbeafe";
 
 interface TrendChartProps {
   trend: TrendPeriod[] | null;
-  trendValid: boolean; // true when 3+ periods (Rule 12)
+  trendValid: boolean;
   trendPeriodCount: number;
   unit: string;
   nationalAvg: number | null;
   stateAvg: number | null;
+  showOEReference?: boolean;
+  /** Show a custom reference line at a specific value (e.g. 0 for EDAC, 1.0 for ratios) */
+  referenceValue?: number | null;
+  referenceLabel?: string;
+  ciLower?: number | null;
+  ciUpper?: number | null;
+  /** Label for sample count in tooltip (e.g. "Patients", "Procedures") */
+  sampleLabelText?: string;
+  /** CMS direction for the visual arrow indicator */
+  direction?: "LOWER_IS_BETTER" | "HIGHER_IS_BETTER" | null;
+  /** Y-axis label for the chart */
+  yAxisLabel?: string;
 }
 
 interface ChartPoint {
   period: string;
+  periodShort: string;
   value: number | null;
+  ciLow: number | null;
+  ciHigh: number | null;
+  cases: number | null;
+  cmsComparison: string | null;
   suppressed: boolean;
   notReported: boolean;
   methodologyChange: boolean;
 }
 
-// --- Data preparation ---
+const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function shortenPeriod(label: string): string {
+  const match = label.match(/to\s+(\d{4})-(\d{2})/);
+  if (match) {
+    const [, y, m] = match;
+    return `${MONTH_ABBR[parseInt(m, 10) - 1]} ${y}`;
+  }
+  const parts = label.split(" to ");
+  return parts[parts.length - 1] ?? label;
+}
 
-// Assigns each point to a methodology segment. A new segment starts at every
-// point where methodology_change_flag is true. Each segment becomes its own
-// <Line> so Recharts naturally breaks the visual connection at boundaries.
+const CMS_COMPARISON_SHORT: Record<string, string> = {
+  BETTER: "Better than national",
+  NO_DIFFERENT: "No different from national",
+  WORSE: "Worse than national",
+  TOO_FEW_CASES: "Too few cases to compare",
+  NOT_AVAILABLE: "Comparison not available",
+};
+
 function buildSegmentedData(points: ChartPoint[]): {
   data: Record<string, unknown>[];
   segmentKeys: string[];
 } {
-  // Determine segment index for each point.
   const segmentIndex: number[] = [];
   let seg = 0;
   for (let i = 0; i < points.length; i++) {
-    if (i > 0 && points[i].methodologyChange) {
-      seg++;
-    }
+    if (i > 0 && points[i].methodologyChange) seg++;
     segmentIndex.push(seg);
   }
-
   const segmentCount = seg + 1;
-  const segmentKeys = Array.from(
-    { length: segmentCount },
-    (_, i) => `seg_${i}`
-  );
+  const segmentKeys = Array.from({ length: segmentCount }, (_, i) => `seg_${i}`);
 
-  // Build unified data array. Each point carries its value under its segment's
-  // key and null under all other segment keys. Recharts with connectNulls=false
-  // renders each segment as an independent line.
   const data = points.map((p, i) => {
     const row: Record<string, unknown> = {
       period: p.period,
+      periodShort: p.periodShort,
       _suppressed: p.suppressed,
       _notReported: p.notReported,
       _methodologyChange: p.methodologyChange,
       _hasValue: p.value !== null,
+      _cases: p.cases,
+      _ciLow: p.ciLow,
+      _ciHigh: p.ciHigh,
+      _cmsComparison: p.cmsComparison,
+      ciBand: (p.ciLow !== null && p.ciHigh !== null && p.value !== null)
+        ? [p.ciLow, p.ciHigh]
+        : null,
     };
     for (let s = 0; s < segmentCount; s++) {
       row[segmentKeys[s]] = segmentIndex[i] === s ? p.value : null;
@@ -114,7 +128,84 @@ function buildSegmentedData(points: ChartPoint[]): {
   return { data, segmentKeys };
 }
 
-// --- Component ---
+function CustomTooltip({
+  active,
+  payload,
+  unit,
+  sampleLabelText = "Cases",
+}: {
+  active?: boolean;
+  payload?: Array<{ payload?: Record<string, unknown> }>;
+  unit: string;
+  label?: string;
+  sampleLabelText?: string;
+}): React.JSX.Element | null {
+  if (!active || !payload || payload.length === 0) return null;
+  const point = payload[0]?.payload;
+  if (!point) return null;
+
+  const period = point.period as string;
+  const suppressed = point._suppressed as boolean;
+  const notReported = point._notReported as boolean;
+  const cases = point._cases as number | null;
+  const ciLow = point._ciLow as number | null;
+  const ciHigh = point._ciHigh as number | null;
+  const cmsComp = point._cmsComparison as string | null;
+
+  let value: number | null = null;
+  for (const [k, v] of Object.entries(point)) {
+    if (k.startsWith("seg_") && v !== null && typeof v === "number") {
+      value = v;
+      break;
+    }
+  }
+
+  if (suppressed) {
+    return (
+      <div className="rounded border border-gray-200 bg-white px-3 py-2 text-xs shadow-sm">
+        <p className="font-medium">{period}</p>
+        <p className="text-gray-500">Suppressed by CMS</p>
+      </div>
+    );
+  }
+  if (notReported) {
+    return (
+      <div className="rounded border border-gray-200 bg-white px-3 py-2 text-xs shadow-sm">
+        <p className="font-medium">{period}</p>
+        <p className="text-gray-500">Not reported</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded border border-gray-200 bg-white px-3 py-2 text-xs shadow-sm">
+      <p className="mb-1 font-medium">{period}</p>
+      {value !== null && (
+        <p>
+          <span className="text-gray-500">Value:</span>{" "}
+          <span className="font-semibold">{formatValue(value, unit)}</span>
+        </p>
+      )}
+      {ciLow !== null && ciHigh !== null && (
+        <p>
+          <span className="text-gray-500">Interval:</span>{" "}
+          {formatValue(ciLow, unit)} to {formatValue(ciHigh, unit)}
+        </p>
+      )}
+      {cases !== null && (
+        <p>
+          <span className="text-gray-500">{sampleLabelText}:</span>{" "}
+          {cases.toLocaleString("en-US")}
+        </p>
+      )}
+      {cmsComp !== null && (
+        <p className="mt-1 text-gray-400">
+          CMS assessment: {CMS_COMPARISON_SHORT[cmsComp] ?? cmsComp}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export function TrendChart({
   trend,
@@ -123,18 +214,33 @@ export function TrendChart({
   unit,
   nationalAvg,
   stateAvg,
-}: TrendChartProps): JSX.Element | null {
-  // All hooks must run unconditionally (React rules of hooks).
+  showOEReference = false,
+  ciLower = null,
+  ciUpper = null,
+  sampleLabelText = "Cases",
+  direction = null,
+  yAxisLabel,
+  referenceValue = null,
+  referenceLabel,
+}: TrendChartProps): React.JSX.Element | null {
   const chartData: ChartPoint[] = useMemo(
     () =>
-      (trend ?? []).map((t) => ({
-        period: t.period_label,
-        value: t.numeric_value,
-        suppressed: t.suppressed,
-        notReported: t.not_reported,
-        methodologyChange: t.methodology_change_flag,
-      })),
-    [trend]
+      (trend ?? []).map((t, i, arr) => {
+        const isLast = i === arr.length - 1;
+        return {
+          period: t.period_label,
+          periodShort: shortenPeriod(t.period_label),
+          value: t.numeric_value,
+          ciLow: t.ci_lower ?? (isLast ? ciLower ?? null : null),
+          ciHigh: t.ci_upper ?? (isLast ? ciUpper ?? null : null),
+          cases: t.sample_size ?? null,
+          cmsComparison: t.compared_to_national ?? null,
+          suppressed: t.suppressed,
+          notReported: t.not_reported,
+          methodologyChange: t.methodology_change_flag,
+        };
+      }),
+    [trend, ciLower, ciUpper]
   );
 
   const { data, segmentKeys } = useMemo(
@@ -142,7 +248,6 @@ export function TrendChart({
     [chartData]
   );
 
-  // Guards — after all hooks.
   if (!trend || trend.length === 0) return null;
 
   const hasNumericData = chartData.some((p) => p.value !== null);
@@ -154,63 +259,85 @@ export function TrendChart({
     );
   }
 
-  // Collect annotations for rendering below the chart.
   const gapAnnotations = chartData.filter((p) => p.suppressed || p.notReported);
   const methodologyChanges = chartData.filter((p) => p.methodologyChange);
-
-  // >= 3 periods: connected line. < 3: dots only (Rule 12).
   const showLine = trendValid && trendPeriodCount >= 3;
-  // Larger dots when showing individual observations (< 3 periods).
   const dotRadius = showLine ? 3 : 4;
+  const hasAnyCIData = chartData.some((p) => p.ciLow !== null && p.ciHigh !== null);
 
   return (
     <div className="mt-3">
       <ResponsiveContainer width="100%" height={180}>
-        <LineChart
+        <ComposedChart
           data={data}
-          margin={{ top: 8, right: 12, bottom: 4, left: 4 }}
+          margin={{ top: 8, right: 12, bottom: 4, left: yAxisLabel ? 12 : 4 }}
         >
-          {/* Subtle horizontal grid only — no vertical lines, no chart border */}
-          <CartesianGrid
-            strokeDasharray="3 3"
-            stroke="#f3f4f6"
-            vertical={false}
-          />
+          <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false} />
 
           <XAxis
-            dataKey="period"
+            dataKey="periodShort"
             tick={{ fontSize: 10, fill: "#6b7280" }}
             tickLine={false}
             axisLine={{ stroke: "#e5e7eb" }}
+            interval="preserveStartEnd"
           />
           <YAxis
             tick={{ fontSize: 10, fill: "#6b7280" }}
             tickLine={false}
             axisLine={false}
-            width={48}
+            width={yAxisLabel ? 70 : 48}
             tickFormatter={(v: number) => formatValue(v, unit)}
+            label={yAxisLabel ? {
+              value: yAxisLabel,
+              angle: -90,
+              position: "insideLeft",
+              offset: 10,
+              style: { fontSize: 9, fill: "#2563eb", fontWeight: 600, textAnchor: "middle" },
+            } : undefined}
           />
 
-          {/* Tooltip — clean, minimal, matches card styling */}
-          <Tooltip
-            contentStyle={{
-              fontSize: 12,
-              border: "1px solid #e5e7eb",
-              borderRadius: 6,
-              boxShadow: "none",
-              padding: "6px 10px",
-            }}
-            formatter={(value: number | null, _name: string, props: Record<string, unknown>) => {
-              const point = props.payload as Record<string, unknown>;
-              if (point._suppressed) return ["Suppressed by CMS", "Status"];
-              if (point._notReported) return ["Not reported", "Status"];
-              if (value === null || value === undefined) return ["-", "Value"];
-              return [formatValue(value as number, unit), "Value"];
-            }}
-            labelFormatter={(label: string) => label}
-          />
+          <Tooltip content={<CustomTooltip unit={unit} sampleLabelText={sampleLabelText} />} />
 
-          {/* National average — dashed reference line, darker gray */}
+          {hasAnyCIData && (
+            <Area
+              dataKey="ciBand"
+              type="monotone"
+              fill={CI_BAND_COLOR}
+              stroke="none"
+              fillOpacity={0.5}
+              isAnimationActive={false}
+              connectNulls={false}
+            />
+          )}
+
+          {/* Reference line: O/E 1.0, or custom value (0 for EDAC, 1.0 for ratios) */}
+          {showOEReference && (
+            <ReferenceLine
+              y={1.0}
+              stroke={NATIONAL_AVG_COLOR}
+              strokeDasharray="6 3"
+              label={{
+                value: "1.0 = expected",
+                position: "insideTopRight",
+                fontSize: 10,
+                fill: NATIONAL_AVG_COLOR,
+              }}
+            />
+          )}
+          {!showOEReference && referenceValue !== null && (
+            <ReferenceLine
+              y={referenceValue}
+              stroke={NATIONAL_AVG_COLOR}
+              strokeDasharray="6 3"
+              label={{
+                value: referenceLabel ?? `${referenceValue}`,
+                position: "insideTopRight",
+                fontSize: 10,
+                fill: NATIONAL_AVG_COLOR,
+              }}
+            />
+          )}
+
           {nationalAvg !== null && (
             <ReferenceLine
               y={nationalAvg}
@@ -225,7 +352,6 @@ export function TrendChart({
             />
           )}
 
-          {/* State average — dotted reference line, lighter gray */}
           {stateAvg !== null && (
             <ReferenceLine
               y={stateAvg}
@@ -240,8 +366,6 @@ export function TrendChart({
             />
           )}
 
-          {/* Data — one Line per methodology segment. connectNulls=false creates
-              natural gaps at suppressed/not-reported periods. */}
           {segmentKeys.map((key) => (
             <Line
               key={key}
@@ -249,48 +373,55 @@ export function TrendChart({
               type="monotone"
               stroke={showLine ? DATA_COLOR : "none"}
               strokeWidth={showLine ? 1.5 : 0}
-              dot={{
-                r: dotRadius,
-                fill: DATA_COLOR,
-                stroke: DATA_COLOR,
-                strokeWidth: 1,
-              }}
-              activeDot={{
-                r: dotRadius + 2,
-                fill: DATA_COLOR,
-                stroke: DATA_COLOR_LIGHT,
-                strokeWidth: 2,
-              }}
+              dot={{ r: dotRadius, fill: DATA_COLOR, stroke: DATA_COLOR, strokeWidth: 1 }}
+              activeDot={{ r: dotRadius + 2, fill: DATA_COLOR, stroke: DATA_COLOR_LIGHT, strokeWidth: 2 }}
               connectNulls={false}
               isAnimationActive={false}
             />
           ))}
-        </LineChart>
+        </ComposedChart>
       </ResponsiveContainer>
 
-      {/* Annotations below chart — clean text, not cluttering the chart area */}
+      <p className="mt-0.5 text-center text-xs font-semibold text-blue-600">Period end date</p>
+
       <div className="mt-1 space-y-1">
-        {/* Rule 12: trend minimum periods notice */}
         {!trendValid && (
-          <p className="text-xs text-gray-500">
-            {TREND_MINIMUM_PERIODS_TEXT(trendPeriodCount)}
-          </p>
+          <p className="text-xs text-gray-500">{TREND_MINIMUM_PERIODS_TEXT(trendPeriodCount)}</p>
         )}
 
-        {/* Gap annotations: suppressed and not-reported periods */}
-        {gapAnnotations.map((gap) => (
-          <p key={gap.period} className="text-xs text-gray-500">
-            <span className="font-medium">{gap.period}:</span>{" "}
-            {gap.suppressed
-              ? "Value suppressed by CMS."
-              : "Data not reported for this period."}
-          </p>
-        ))}
+        {/* Collapse multiple suppressed/not-reported into summary lines */}
+        {(() => {
+          const suppressed = gapAnnotations.filter((g) => g.suppressed);
+          const notReported = gapAnnotations.filter((g) => !g.suppressed);
+          return (
+            <>
+              {suppressed.length === 1 && (
+                <p className="text-xs text-gray-500">
+                  <span className="font-medium">{suppressed[0].periodShort}:</span> Value suppressed by CMS.
+                </p>
+              )}
+              {suppressed.length > 1 && (
+                <p className="text-xs text-gray-500">
+                  {suppressed.length} periods suppressed by CMS ({suppressed[0].periodShort} – {suppressed[suppressed.length - 1].periodShort}).
+                </p>
+              )}
+              {notReported.length === 1 && (
+                <p className="text-xs text-gray-500">
+                  <span className="font-medium">{notReported[0].periodShort}:</span> Data not reported for this period.
+                </p>
+              )}
+              {notReported.length > 1 && (
+                <p className="text-xs text-gray-500">
+                  {notReported.length} periods not reported ({notReported[0].periodShort} – {notReported[notReported.length - 1].periodShort}).
+                </p>
+              )}
+            </>
+          );
+        })()}
 
-        {/* Methodology change annotations (Rule 11) */}
         {methodologyChanges.map((mc) => (
           <p key={mc.period} className="text-xs text-gray-500">
-            <span className="font-medium">{mc.period}:</span>{" "}
+            <span className="font-medium">{mc.periodShort}:</span>{" "}
             {METHODOLOGY_CHANGE_FOOTNOTE_TEXT}
           </p>
         ))}

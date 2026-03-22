@@ -52,7 +52,7 @@ export function MeasureGroup({
   groupName,
   measures,
   providerLastUpdated,
-}: MeasureGroupProps): JSX.Element {
+}: MeasureGroupProps): React.JSX.Element {
   const showSES = hasSESSensitivity(measures);
   const grouped = groupByMeasureId(measures);
   const attributions = uniqueAttributions(measures);

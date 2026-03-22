@@ -24,7 +24,7 @@ export function SuppressionIndicator({
   suppression_reason,
   footnote_codes,
   footnote_text,
-}: SuppressionIndicatorProps): JSX.Element {
+}: SuppressionIndicatorProps): React.JSX.Element {
   return (
     <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2">
       <p className="text-sm text-gray-700">

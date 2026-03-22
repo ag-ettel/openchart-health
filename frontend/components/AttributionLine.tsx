@@ -15,7 +15,7 @@ export function AttributionLine({
   sourceDatasetName,
   periodLabel,
   providerLastUpdated,
-}: AttributionLineProps): JSX.Element {
+}: AttributionLineProps): React.JSX.Element {
   return (
     <p className="mt-3 text-xs text-gray-500">
       {formatAttribution(sourceDatasetName, periodLabel, providerLastUpdated)}

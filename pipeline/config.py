@@ -281,6 +281,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
     MeasureEntry(
         measure_id="MORT_30_CABG",
@@ -295,6 +312,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
     MeasureEntry(
         measure_id="MORT_30_COPD",
@@ -309,6 +343,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
     MeasureEntry(
         measure_id="MORT_30_HF",
@@ -323,6 +374,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
     MeasureEntry(
         measure_id="MORT_30_PN",
@@ -337,6 +405,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
     MeasureEntry(
         measure_id="MORT_30_STK",
@@ -351,6 +436,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
     MeasureEntry(
         measure_id="Hybrid_HWM",
@@ -366,6 +468,23 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The 30-day death measures are estimates of deaths within 30 days of the start "
+            "of a hospital admission from any cause related to medical conditions, "
+            "including heart attack (AMI), heart failure (HF), pneumonia (PN), chronic "
+            "obstructive pulmonary disease (COPD), and stroke; as well as surgical "
+            "procedures, including coronary artery bypass graft (CABG); additionally, "
+            "hospital wide mortality (HWM) is also reported. Hospitals' rates are compared "
+            "to the national rate to determine if hospitals' performance on these measures "
+            "is better than the national rate (lower), no different than the national rate, "
+            "or worse than the national rate (higher). For some hospitals, the number of "
+            "cases is too small to reliably compare their results to the national average "
+            "rate. CMS chose to measure death within 30 days instead of inpatient deaths to "
+            "use a more consistent measurement time window because length of hospital stay "
+            "varies across patients and hospitals. Rates are provided in the downloadable "
+            "databases and presented on the Care Compare on Medicare.gov website as "
+            "percentages. Lower rates for mortality are better."
+        ),
     ),
 
     # -- Complications (1) --
@@ -384,6 +503,34 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "The Centers for Medicare & Medicaid Services' (CMS's) publicly reported "
+            "risk-standardized complication measure for elective primary total hip "
+            "arthroplasty (THA) and/or total knee arthroplasty (TKA) assesses a broad set "
+            "of healthcare activities that affect patients' well-being. The hip/knee "
+            "complication rate is an estimate of complications within an applicable time "
+            "period, for patients electively admitted for primary total hip and/or knee "
+            "replacement. CMS measures the likelihood that at least 1 of 8 complications "
+            "occurs within a specified time period: heart attack, (acute myocardial "
+            "infarction [AMI]), pneumonia, or sepsis/septicemia/shock during the index "
+            "admission or within 7 days of admission, surgical site bleeding, pulmonary "
+            "embolism, or death during the index admission or within 30 days of admission, "
+            "or mechanical complications or periprosthetic joint infection/wound infection "
+            "during the index admission or within 90 days of admission. Hospitals' rates of "
+            "hip/knee complications are compared to the national rate to determine if "
+            "hospitals' performance on this measure is better than the national rate "
+            "(lower), no different than the national rate, or worse than the national rate "
+            "(higher). For some hospitals, the number of cases is too small to reliably "
+            "compare their results to the national average rate. Rates are provided in the "
+            "downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for surgical complications are better. CMS "
+            "chose to measure these complications within the specified times because "
+            "complications over a longer period may be impacted by factors outside the "
+            "hospitals' control like other complicating illnesses, patients' own behavior, "
+            "or care provided to patients after discharge. This measure is separate from "
+            "the serious complications measure (also reported on Care Compare on "
+            "Medicare.gov)."
+        ),
     ),
 
     # -- Patient Safety Indicators (12) --
@@ -401,6 +548,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_04",
@@ -416,6 +589,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_06",
@@ -431,6 +630,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_08",
@@ -445,6 +670,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_09",
@@ -459,6 +710,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_10",
@@ -474,6 +751,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_11",
@@ -489,6 +792,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_12",
@@ -504,6 +833,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_13",
@@ -519,6 +874,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_14",
@@ -533,6 +914,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_15",
@@ -548,6 +955,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
     MeasureEntry(
         measure_id="PSI_90",
@@ -563,6 +996,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="ynj2-r877",
+        cms_measure_definition=(
+            "Measures of serious complications are drawn from the Agency for Healthcare "
+            "Research and Quality (AHRQ) Patient Safety Indicators (PSIs). The overall "
+            "score for serious complications is based on how often adult patients had "
+            "certain serious, but potentially preventable, complications related to medical "
+            "or surgical inpatient hospital care. The CMS PSIs reflect quality of care for "
+            "hospitalized adults and focus on potentially avoidable complications and "
+            "iatrogenic events. CMS PSIs only apply to Medicare beneficiaries who were "
+            "discharged from a hospital paid through the IPPS. These indicators are risk "
+            "adjusted to account for differences in hospital patients' characteristics. CMS "
+            "calculates rates for CMS PSIs using Medicare claims data and a statistical "
+            "model that determines the interval estimates for the PSIs. CMS publicly "
+            "reports data on two PSIs—PSI-4 (death rate among surgical patients with "
+            "serious treatable complications) and the composite measure PSI-90. PSI-90 is "
+            "composed of 11 NQF-endorsed measures, including PSI-3 (pressure ulcer rate), "
+            "PSI-6 (iatrogenic pneumothorax rate), PSI-8 (postoperative hip fracture rate), "
+            "PSI-9 (postoperative hemorrhage or hematoma rate), PSI-10 (postoperative "
+            "physiologic and metabolic derangement rate), PSI-11 (postoperative respiratory "
+            "failure rate), PSI-12 (postoperative pulmonary embolism or deep vein "
+            "thrombosis rate), PSI-13 (postoperative sepsis rate), PSI-14 (postoperative "
+            "wound dehiscence rate), and PSI-15 (accidental puncture or laceration rate). "
+            "PSI-90's composite rate is the weighted average of its component indicators. "
+            "Hospitals' PSI rates are compared to the national rate to determine if "
+            "hospitals' performance on PSIs is better than the national rate (lower), no "
+            "different than the national rate, or worse than the national rate (higher)."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -588,6 +1047,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="77hc-ibv8",
+        cms_measure_definition=(
+            "To receive payment from CMS, hospitals are required to report data about some "
+            "infections to the Centers for Disease Control and Prevention's (CDC's) "
+            "National Healthcare Safety Network (NHSN). The HAI measures show how often "
+            "patients in a particular hospital contract certain infections during the "
+            "course of their medical treatment, when compared to like hospitals. HAI "
+            "measures provide information on infections that occur while the patient is in "
+            "the hospital and include: central line-associated bloodstream infections "
+            "(CLABSI), catheter-associated urinary tract infections (CAUTI), surgical site "
+            "infection (SSI) from colon surgery or abdominal hysterectomy, "
+            "methicillin-resistant Staphylococcus Aureus (MRSA) blood laboratory-identified "
+            "events (bloodstream infections), and Clostridium difficile (C.diff.) "
+            "laboratory-identified events (intestinal infections). The HAI measures show "
+            "how often patients in a particular hospital contract certain infections during "
+            "the course of their medical treatment, when compared to like hospitals. The "
+            "CDC calculates a Standardized Infection Ratio (SIR) which may take into "
+            "account the type of patient care location, number of patients with an existing "
+            "infection, laboratory methods, hospital affiliation with a medical school, bed "
+            "size of the hospital, patient age, and classification of patient health. SIRs "
+            "are calculated for the hospital, the state, and the nation. Hospitals' SIRs "
+            "are compared to the national benchmark to determine if hospitals' performance "
+            "on these measures is better than the national benchmark (lower), no different "
+            "than the national benchmark, or worse than the national benchmark (higher). "
+            "The HAI measures apply to all patients treated in acute care hospitals, "
+            "including adult, pediatric, neonatal, Medicare, and non-Medicare patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HAI_2_SIR",
@@ -603,6 +1088,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="77hc-ibv8",
+        cms_measure_definition=(
+            "To receive payment from CMS, hospitals are required to report data about some "
+            "infections to the Centers for Disease Control and Prevention's (CDC's) "
+            "National Healthcare Safety Network (NHSN). The HAI measures show how often "
+            "patients in a particular hospital contract certain infections during the "
+            "course of their medical treatment, when compared to like hospitals. HAI "
+            "measures provide information on infections that occur while the patient is in "
+            "the hospital and include: central line-associated bloodstream infections "
+            "(CLABSI), catheter-associated urinary tract infections (CAUTI), surgical site "
+            "infection (SSI) from colon surgery or abdominal hysterectomy, "
+            "methicillin-resistant Staphylococcus Aureus (MRSA) blood laboratory-identified "
+            "events (bloodstream infections), and Clostridium difficile (C.diff.) "
+            "laboratory-identified events (intestinal infections). The HAI measures show "
+            "how often patients in a particular hospital contract certain infections during "
+            "the course of their medical treatment, when compared to like hospitals. The "
+            "CDC calculates a Standardized Infection Ratio (SIR) which may take into "
+            "account the type of patient care location, number of patients with an existing "
+            "infection, laboratory methods, hospital affiliation with a medical school, bed "
+            "size of the hospital, patient age, and classification of patient health. SIRs "
+            "are calculated for the hospital, the state, and the nation. Hospitals' SIRs "
+            "are compared to the national benchmark to determine if hospitals' performance "
+            "on these measures is better than the national benchmark (lower), no different "
+            "than the national benchmark, or worse than the national benchmark (higher). "
+            "The HAI measures apply to all patients treated in acute care hospitals, "
+            "including adult, pediatric, neonatal, Medicare, and non-Medicare patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HAI_3_SIR",
@@ -618,6 +1129,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="77hc-ibv8",
+        cms_measure_definition=(
+            "To receive payment from CMS, hospitals are required to report data about some "
+            "infections to the Centers for Disease Control and Prevention's (CDC's) "
+            "National Healthcare Safety Network (NHSN). The HAI measures show how often "
+            "patients in a particular hospital contract certain infections during the "
+            "course of their medical treatment, when compared to like hospitals. HAI "
+            "measures provide information on infections that occur while the patient is in "
+            "the hospital and include: central line-associated bloodstream infections "
+            "(CLABSI), catheter-associated urinary tract infections (CAUTI), surgical site "
+            "infection (SSI) from colon surgery or abdominal hysterectomy, "
+            "methicillin-resistant Staphylococcus Aureus (MRSA) blood laboratory-identified "
+            "events (bloodstream infections), and Clostridium difficile (C.diff.) "
+            "laboratory-identified events (intestinal infections). The HAI measures show "
+            "how often patients in a particular hospital contract certain infections during "
+            "the course of their medical treatment, when compared to like hospitals. The "
+            "CDC calculates a Standardized Infection Ratio (SIR) which may take into "
+            "account the type of patient care location, number of patients with an existing "
+            "infection, laboratory methods, hospital affiliation with a medical school, bed "
+            "size of the hospital, patient age, and classification of patient health. SIRs "
+            "are calculated for the hospital, the state, and the nation. Hospitals' SIRs "
+            "are compared to the national benchmark to determine if hospitals' performance "
+            "on these measures is better than the national benchmark (lower), no different "
+            "than the national benchmark, or worse than the national benchmark (higher). "
+            "The HAI measures apply to all patients treated in acute care hospitals, "
+            "including adult, pediatric, neonatal, Medicare, and non-Medicare patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HAI_4_SIR",
@@ -633,6 +1170,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="77hc-ibv8",
+        cms_measure_definition=(
+            "To receive payment from CMS, hospitals are required to report data about some "
+            "infections to the Centers for Disease Control and Prevention's (CDC's) "
+            "National Healthcare Safety Network (NHSN). The HAI measures show how often "
+            "patients in a particular hospital contract certain infections during the "
+            "course of their medical treatment, when compared to like hospitals. HAI "
+            "measures provide information on infections that occur while the patient is in "
+            "the hospital and include: central line-associated bloodstream infections "
+            "(CLABSI), catheter-associated urinary tract infections (CAUTI), surgical site "
+            "infection (SSI) from colon surgery or abdominal hysterectomy, "
+            "methicillin-resistant Staphylococcus Aureus (MRSA) blood laboratory-identified "
+            "events (bloodstream infections), and Clostridium difficile (C.diff.) "
+            "laboratory-identified events (intestinal infections). The HAI measures show "
+            "how often patients in a particular hospital contract certain infections during "
+            "the course of their medical treatment, when compared to like hospitals. The "
+            "CDC calculates a Standardized Infection Ratio (SIR) which may take into "
+            "account the type of patient care location, number of patients with an existing "
+            "infection, laboratory methods, hospital affiliation with a medical school, bed "
+            "size of the hospital, patient age, and classification of patient health. SIRs "
+            "are calculated for the hospital, the state, and the nation. Hospitals' SIRs "
+            "are compared to the national benchmark to determine if hospitals' performance "
+            "on these measures is better than the national benchmark (lower), no different "
+            "than the national benchmark, or worse than the national benchmark (higher). "
+            "The HAI measures apply to all patients treated in acute care hospitals, "
+            "including adult, pediatric, neonatal, Medicare, and non-Medicare patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HAI_5_SIR",
@@ -648,6 +1211,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="77hc-ibv8",
+        cms_measure_definition=(
+            "To receive payment from CMS, hospitals are required to report data about some "
+            "infections to the Centers for Disease Control and Prevention's (CDC's) "
+            "National Healthcare Safety Network (NHSN). The HAI measures show how often "
+            "patients in a particular hospital contract certain infections during the "
+            "course of their medical treatment, when compared to like hospitals. HAI "
+            "measures provide information on infections that occur while the patient is in "
+            "the hospital and include: central line-associated bloodstream infections "
+            "(CLABSI), catheter-associated urinary tract infections (CAUTI), surgical site "
+            "infection (SSI) from colon surgery or abdominal hysterectomy, "
+            "methicillin-resistant Staphylococcus Aureus (MRSA) blood laboratory-identified "
+            "events (bloodstream infections), and Clostridium difficile (C.diff.) "
+            "laboratory-identified events (intestinal infections). The HAI measures show "
+            "how often patients in a particular hospital contract certain infections during "
+            "the course of their medical treatment, when compared to like hospitals. The "
+            "CDC calculates a Standardized Infection Ratio (SIR) which may take into "
+            "account the type of patient care location, number of patients with an existing "
+            "infection, laboratory methods, hospital affiliation with a medical school, bed "
+            "size of the hospital, patient age, and classification of patient health. SIRs "
+            "are calculated for the hospital, the state, and the nation. Hospitals' SIRs "
+            "are compared to the national benchmark to determine if hospitals' performance "
+            "on these measures is better than the national benchmark (lower), no different "
+            "than the national benchmark, or worse than the national benchmark (higher). "
+            "The HAI measures apply to all patients treated in acute care hospitals, "
+            "including adult, pediatric, neonatal, Medicare, and non-Medicare patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HAI_6_SIR",
@@ -663,6 +1252,32 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="77hc-ibv8",
+        cms_measure_definition=(
+            "To receive payment from CMS, hospitals are required to report data about some "
+            "infections to the Centers for Disease Control and Prevention's (CDC's) "
+            "National Healthcare Safety Network (NHSN). The HAI measures show how often "
+            "patients in a particular hospital contract certain infections during the "
+            "course of their medical treatment, when compared to like hospitals. HAI "
+            "measures provide information on infections that occur while the patient is in "
+            "the hospital and include: central line-associated bloodstream infections "
+            "(CLABSI), catheter-associated urinary tract infections (CAUTI), surgical site "
+            "infection (SSI) from colon surgery or abdominal hysterectomy, "
+            "methicillin-resistant Staphylococcus Aureus (MRSA) blood laboratory-identified "
+            "events (bloodstream infections), and Clostridium difficile (C.diff.) "
+            "laboratory-identified events (intestinal infections). The HAI measures show "
+            "how often patients in a particular hospital contract certain infections during "
+            "the course of their medical treatment, when compared to like hospitals. The "
+            "CDC calculates a Standardized Infection Ratio (SIR) which may take into "
+            "account the type of patient care location, number of patients with an existing "
+            "infection, laboratory methods, hospital affiliation with a medical school, bed "
+            "size of the hospital, patient age, and classification of patient health. SIRs "
+            "are calculated for the hospital, the state, and the nation. Hospitals' SIRs "
+            "are compared to the national benchmark to determine if hospitals' performance "
+            "on these measures is better than the national benchmark (lower), no different "
+            "than the national benchmark, or worse than the national benchmark (higher). "
+            "The HAI measures apply to all patients treated in acute care hospitals, "
+            "including adult, pediatric, neonatal, Medicare, and non-Medicare patients."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -685,6 +1300,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
     MeasureEntry(
         measure_id="READM_30_CABG",
@@ -700,6 +1342,27 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "Measures of unplanned hospital visits show how often patients visit the "
+            "hospital (in the emergency department, under observation, or in an inpatient "
+            "hospital unit) after a procedure like coronary artery bypass graft (CABG) "
+            "surgery, hip/knee replacement, colonoscopy, chemotherapy, and surgical "
+            "procedures. The CABG surgery and hip/knee replacement readmission measures are "
+            "estimates of unplanned readmission to any acute care hospital within 30 days "
+            "after discharge from a hospitalization. The outpatient colonoscopy, "
+            "chemotherapy and surgery measures are the risk-standardized hospital visit "
+            "rates (ratio for surgery) after outpatient colonoscopy (per 1000 "
+            "colonoscopies), chemotherapy (per 100 chemotherapy patients), and surgery "
+            "procedures respectively. Hospitals' rates for the colonoscopy, chemotherapy, "
+            "CABG surgery, and hip/knee replacement measures are compared to the national "
+            "rate to determine if hospitals' performance is better than the national rate "
+            "(lower), no different than the national rate (the same), or worse than the "
+            "national rate (higher). Performance on the surgery measure is categorized as "
+            "better, no different, or worse than expected by comparing against a ratio of "
+            "one. Results are provided in the downloadable databases as decimals and "
+            "typically indicate information that is presented on the Care Compare website. "
+            "Lower percentages or ratios are better."
+        ),
     ),
     MeasureEntry(
         measure_id="READM_30_COPD",
@@ -714,6 +1377,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
     MeasureEntry(
         measure_id="READM_30_HF",
@@ -728,6 +1418,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
     MeasureEntry(
         measure_id="READM_30_HIP_KNEE",
@@ -743,6 +1460,27 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "Measures of unplanned hospital visits show how often patients visit the "
+            "hospital (in the emergency department, under observation, or in an inpatient "
+            "hospital unit) after a procedure like coronary artery bypass graft (CABG) "
+            "surgery, hip/knee replacement, colonoscopy, chemotherapy, and surgical "
+            "procedures. The CABG surgery and hip/knee replacement readmission measures are "
+            "estimates of unplanned readmission to any acute care hospital within 30 days "
+            "after discharge from a hospitalization. The outpatient colonoscopy, "
+            "chemotherapy and surgery measures are the risk-standardized hospital visit "
+            "rates (ratio for surgery) after outpatient colonoscopy (per 1000 "
+            "colonoscopies), chemotherapy (per 100 chemotherapy patients), and surgery "
+            "procedures respectively. Hospitals' rates for the colonoscopy, chemotherapy, "
+            "CABG surgery, and hip/knee replacement measures are compared to the national "
+            "rate to determine if hospitals' performance is better than the national rate "
+            "(lower), no different than the national rate (the same), or worse than the "
+            "national rate (higher). Performance on the surgery measure is categorized as "
+            "better, no different, or worse than expected by comparing against a ratio of "
+            "one. Results are provided in the downloadable databases as decimals and "
+            "typically indicate information that is presented on the Care Compare website. "
+            "Lower percentages or ratios are better."
+        ),
     ),
     MeasureEntry(
         measure_id="READM_30_PN",
@@ -757,6 +1495,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
 
     # -- Excess Days in Acute Care (3) --
@@ -775,6 +1540,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
     MeasureEntry(
         measure_id="EDAC_30_HF",
@@ -790,6 +1582,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
     MeasureEntry(
         measure_id="EDAC_30_PN",
@@ -805,6 +1624,33 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned readmission measures are estimates of unplanned "
+            "readmission to any acute care hospital within 30 days of discharge from a "
+            "hospitalization for any cause related to medical conditions, including heart "
+            "attack (AMI), heart failure (HF), pneumonia (PN), and chronic obstructive "
+            "pulmonary disease (COPD). Hospitals' rates are compared to the national rate "
+            "to determine if hospitals' performance on these measures is better than the "
+            "national rate (lower), no different than the national rate (the same), or "
+            "worse than the national rate (higher). For some hospitals, the number of cases "
+            "is too small to reliably compare their results to the national average rate. "
+            "The hospital return days measures (excess days in acute care or EDAC measures) "
+            "add up the number of days patients spent back in the hospital (in the "
+            "emergency department, under observation, or in an inpatient unit) within 30 "
+            "days after they were first treated and released for AMI, HF, and pneumonia. "
+            "The measures compare each hospital's return days to zero, which reflects the "
+            "expectation that the hospital's \"days\" will be no different than an average "
+            "performing hospital with a similar case mix. Readmission rates are provided in "
+            "the downloadable databases and presented on the Care Compare on Medicare.gov "
+            "website as percentages. Lower rates for readmission are better. Hospital "
+            "return (EDAC) results are also provided in the downloadable databases but are "
+            "presented in days per 100 discharges and can be negative, zero, or positive. A "
+            "negative EDAC result is better and indicates that a hospital's patients spent "
+            "fewer days in acute care than would be expected if admitted to an average "
+            "performing hospital with the same case mix. A positive EDAC indicates a "
+            "hospital's patients spent more days in acute care than would be expected, and "
+            "an EDAC of zero indicates a hospital is performing exactly as expected."
+        ),
     ),
 
     # -- Hospital-Wide Readmission (1) --
@@ -823,6 +1669,20 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="HIGH",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "The 30-day unplanned hospital-wide readmission measure is an estimate of "
+            "unplanned readmission to any acute care hospital within 30 days of discharge "
+            "from a hospitalization for any cause. The hospital-wide readmission measure "
+            "includes all eligible medical, surgical and gynecological, neurological, "
+            "cardiovascular, and cardiorespiratory admissions. Hospitals' rates are "
+            "compared to the national rate to determine if hospitals' performance on this "
+            "measure is better than the national rate (lower), no different than the "
+            "national rate (the same), or worse than the national rate (higher). For some "
+            "hospitals, the number of cases is too small to reliably compare their results "
+            "to the national average rate. Rates are provided in the downloadable databases "
+            "and presented on the Care Compare website as percentages. Lower rates are "
+            "better."
+        ),
     ),
 
     # -- Outpatient Unplanned Visit Measures (4) --
@@ -841,6 +1701,27 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "Measures of unplanned hospital visits show how often patients visit the "
+            "hospital (in the emergency department, under observation, or in an inpatient "
+            "hospital unit) after a procedure like coronary artery bypass graft (CABG) "
+            "surgery, hip/knee replacement, colonoscopy, chemotherapy, and surgical "
+            "procedures. The CABG surgery and hip/knee replacement readmission measures are "
+            "estimates of unplanned readmission to any acute care hospital within 30 days "
+            "after discharge from a hospitalization. The outpatient colonoscopy, "
+            "chemotherapy and surgery measures are the risk-standardized hospital visit "
+            "rates (ratio for surgery) after outpatient colonoscopy (per 1000 "
+            "colonoscopies), chemotherapy (per 100 chemotherapy patients), and surgery "
+            "procedures respectively. Hospitals' rates for the colonoscopy, chemotherapy, "
+            "CABG surgery, and hip/knee replacement measures are compared to the national "
+            "rate to determine if hospitals' performance is better than the national rate "
+            "(lower), no different than the national rate (the same), or worse than the "
+            "national rate (higher). Performance on the surgery measure is categorized as "
+            "better, no different, or worse than expected by comparing against a ratio of "
+            "one. Results are provided in the downloadable databases as decimals and "
+            "typically indicate information that is presented on the Care Compare website. "
+            "Lower percentages or ratios are better."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_35_ADM",
@@ -856,6 +1737,27 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "Measures of unplanned hospital visits show how often patients visit the "
+            "hospital (in the emergency department, under observation, or in an inpatient "
+            "hospital unit) after a procedure like coronary artery bypass graft (CABG) "
+            "surgery, hip/knee replacement, colonoscopy, chemotherapy, and surgical "
+            "procedures. The CABG surgery and hip/knee replacement readmission measures are "
+            "estimates of unplanned readmission to any acute care hospital within 30 days "
+            "after discharge from a hospitalization. The outpatient colonoscopy, "
+            "chemotherapy and surgery measures are the risk-standardized hospital visit "
+            "rates (ratio for surgery) after outpatient colonoscopy (per 1000 "
+            "colonoscopies), chemotherapy (per 100 chemotherapy patients), and surgery "
+            "procedures respectively. Hospitals' rates for the colonoscopy, chemotherapy, "
+            "CABG surgery, and hip/knee replacement measures are compared to the national "
+            "rate to determine if hospitals' performance is better than the national rate "
+            "(lower), no different than the national rate (the same), or worse than the "
+            "national rate (higher). Performance on the surgery measure is categorized as "
+            "better, no different, or worse than expected by comparing against a ratio of "
+            "one. Results are provided in the downloadable databases as decimals and "
+            "typically indicate information that is presented on the Care Compare website. "
+            "Lower percentages or ratios are better."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_35_ED",
@@ -870,6 +1772,27 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "Measures of unplanned hospital visits show how often patients visit the "
+            "hospital (in the emergency department, under observation, or in an inpatient "
+            "hospital unit) after a procedure like coronary artery bypass graft (CABG) "
+            "surgery, hip/knee replacement, colonoscopy, chemotherapy, and surgical "
+            "procedures. The CABG surgery and hip/knee replacement readmission measures are "
+            "estimates of unplanned readmission to any acute care hospital within 30 days "
+            "after discharge from a hospitalization. The outpatient colonoscopy, "
+            "chemotherapy and surgery measures are the risk-standardized hospital visit "
+            "rates (ratio for surgery) after outpatient colonoscopy (per 1000 "
+            "colonoscopies), chemotherapy (per 100 chemotherapy patients), and surgery "
+            "procedures respectively. Hospitals' rates for the colonoscopy, chemotherapy, "
+            "CABG surgery, and hip/knee replacement measures are compared to the national "
+            "rate to determine if hospitals' performance is better than the national rate "
+            "(lower), no different than the national rate (the same), or worse than the "
+            "national rate (higher). Performance on the surgery measure is categorized as "
+            "better, no different, or worse than expected by comparing against a ratio of "
+            "one. Results are provided in the downloadable databases as decimals and "
+            "typically indicate information that is presented on the Care Compare website. "
+            "Lower percentages or ratios are better."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_36",
@@ -885,6 +1808,27 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="632h-zaca",
+        cms_measure_definition=(
+            "Measures of unplanned hospital visits show how often patients visit the "
+            "hospital (in the emergency department, under observation, or in an inpatient "
+            "hospital unit) after a procedure like coronary artery bypass graft (CABG) "
+            "surgery, hip/knee replacement, colonoscopy, chemotherapy, and surgical "
+            "procedures. The CABG surgery and hip/knee replacement readmission measures are "
+            "estimates of unplanned readmission to any acute care hospital within 30 days "
+            "after discharge from a hospitalization. The outpatient colonoscopy, "
+            "chemotherapy and surgery measures are the risk-standardized hospital visit "
+            "rates (ratio for surgery) after outpatient colonoscopy (per 1000 "
+            "colonoscopies), chemotherapy (per 100 chemotherapy patients), and surgery "
+            "procedures respectively. Hospitals' rates for the colonoscopy, chemotherapy, "
+            "CABG surgery, and hip/knee replacement measures are compared to the national "
+            "rate to determine if hospitals' performance is better than the national rate "
+            "(lower), no different than the national rate (the same), or worse than the "
+            "national rate (higher). Performance on the surgery measure is categorized as "
+            "better, no different, or worse than expected by comparing against a ratio of "
+            "one. Results are provided in the downloadable databases as decimals and "
+            "typically indicate information that is presented on the Care Compare website. "
+            "Lower percentages or ratios are better."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -907,6 +1851,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- ED Wait Time Measures (4) --
@@ -924,6 +1887,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_18b",
@@ -938,6 +1920,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_18c",
@@ -952,6 +1953,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_18d",
@@ -967,6 +1987,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- ED Process Measures (2) --
@@ -984,6 +2023,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_23",
@@ -999,6 +2057,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Hospital Harm Measures (3) --
@@ -1016,6 +2093,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="HH_HYPO",
@@ -1030,6 +2126,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="HH_ORAE",
@@ -1045,6 +2160,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Safe Use of Opioids (1) --
@@ -1063,6 +2197,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Sepsis Treatment Measures (5) --
@@ -1081,6 +2234,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="SEP_SH_3HR",
@@ -1096,6 +2268,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="SEP_SH_6HR",
@@ -1111,6 +2302,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="SEV_SEP_3HR",
@@ -1125,6 +2335,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="SEV_SEP_6HR",
@@ -1140,6 +2369,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Stroke Treatment Measures (3) --
@@ -1157,6 +2405,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="STK_03",
@@ -1172,6 +2439,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="STK_05",
@@ -1187,6 +2473,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- VTE Prophylaxis Measures (2) --
@@ -1204,6 +2509,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="VTE_2",
@@ -1218,6 +2542,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- STEMI Treatment (1) --
@@ -1236,6 +2579,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=True,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Vaccination (1) --
@@ -1253,6 +2615,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Outpatient Procedure Measures (2) --
@@ -1271,6 +2652,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="OP_31",
@@ -1285,6 +2685,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # -- Global Malnutrition Composite Score (5) --
@@ -1303,6 +2722,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="GMCS_Malnutrition_Screening",
@@ -1317,6 +2755,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="GMCS_Nutrition_Assessment",
@@ -1332,6 +2789,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="GMCS_Malnutrition_Diagnosis_Documented",
@@ -1347,6 +2823,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
     MeasureEntry(
         measure_id="GMCS_Nutritional_Care_Plan",
@@ -1361,6 +2856,25 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="yv7e-xc69",
+        cms_measure_definition=(
+            "The measures of timely and effective care (also known as \"process of care\" "
+            "measures) show the percentage of hospital patients who got treatments known to "
+            "get the best results for certain common, serious medical conditions or "
+            "surgical procedures; how quickly hospitals treat patients who come to the "
+            "hospital with certain medical emergencies; and how well hospitals provide "
+            "preventive services. These measures only apply to patients for whom the "
+            "recommended treatment would be appropriate. The measures of timely and "
+            "effective care apply to adults and children treated at hospitals paid under "
+            "the Inpatient Prospective Payment System (IPPS) or the Outpatient Prospective "
+            "Payment System (OPPS), as well as those that voluntarily report data on "
+            "measures for whom the recommended treatments would be appropriate including: "
+            "Medicare patients, Medicare managed care patients, and non-Medicare patients. "
+            "Timely and effective care measures include severe sepsis and septic shock, "
+            "COVID-19 Vaccination, cataract care follow-up, colonoscopy follow-up, heart "
+            "attack care, preventive care, cancer care measures, stroke, venous "
+            "thromboembolism, hospital harm, and ST-Segment Elevation Myocardial "
+            "Infarction."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -1380,6 +2894,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses always communicated well at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_1_U_P",
@@ -1387,6 +2914,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their nurses usually communicated well at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_1_SN_P",
@@ -1394,6 +2934,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses sometimes or never communicated well at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_1_LINEAR_SCORE",
@@ -1401,6 +2954,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how well nurses communicated with patients at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_1_STAR_RATING",
@@ -1408,6 +2974,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how well nurses communicated with patients at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Doctor Communication (H_COMP_2) ===
@@ -1418,6 +2997,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors always communicated well at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_2_U_P",
@@ -1425,6 +3017,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their doctors usually communicated well at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_2_SN_P",
@@ -1432,6 +3037,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors sometimes or never communicated well at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_2_LINEAR_SCORE",
@@ -1439,6 +3057,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how well doctors communicated with patients at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_2_STAR_RATING",
@@ -1446,6 +3077,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how well doctors communicated with patients at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Communication about Medicines (H_COMP_5) ===
@@ -1456,6 +3100,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff always explained their medications before giving them at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_5_U_P",
@@ -1463,6 +3120,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said staff usually explained their medications before giving them at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_5_SN_P",
@@ -1470,6 +3140,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff sometimes or never explained their medications before giving them at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_5_LINEAR_SCORE",
@@ -1477,6 +3160,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how well staff communicated about medications at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_5_STAR_RATING",
@@ -1484,6 +3180,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how well staff communicated about medications at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Discharge Information (H_COMP_6) ===
@@ -1494,6 +3203,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said they were given information about what to do during their recovery at home.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_6_N_P",
@@ -1501,6 +3223,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said they were not given information about what to do during their recovery at home.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_6_LINEAR_SCORE",
@@ -1508,6 +3243,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how well this hospital provided discharge information to patients.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_COMP_6_STAR_RATING",
@@ -1515,6 +3263,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how well this hospital provided discharge information to patients.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Discharge Help (H_DISCH_HELP) ===
@@ -1525,6 +3286,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff discussed whether they would need help after leaving this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DISCH_HELP_N_P",
@@ -1532,6 +3306,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff did not discuss whether they would need help after leaving this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Symptoms Information (H_SYMPTOMS) ===
@@ -1542,6 +3329,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said they received written information about symptoms to watch for after leaving this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_SYMPTOMS_N_P",
@@ -1549,6 +3349,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said they did not receive written information about symptoms to watch for after leaving this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Cleanliness (H_CLEAN) ===
@@ -1559,6 +3372,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their room and bathroom were always clean at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_CLEAN_HSP_U_P",
@@ -1566,6 +3392,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their room and bathroom were usually clean at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_CLEAN_HSP_SN_P",
@@ -1573,6 +3412,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their room and bathroom were sometimes or never clean at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_CLEAN_LINEAR_SCORE",
@@ -1580,6 +3432,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for the cleanliness of rooms and bathrooms at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_CLEAN_STAR_RATING",
@@ -1587,6 +3452,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for the cleanliness of rooms and bathrooms at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Quietness (H_QUIET) ===
@@ -1597,6 +3475,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said the area around their room was always quiet at night at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_QUIET_HSP_U_P",
@@ -1604,6 +3495,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said the area around their room was usually quiet at night at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_QUIET_HSP_SN_P",
@@ -1611,6 +3515,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said the area around their room was sometimes or never quiet at night at this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_QUIET_LINEAR_SCORE",
@@ -1618,6 +3535,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how quiet the hospital was at night.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_QUIET_STAR_RATING",
@@ -1625,6 +3555,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how quiet the hospital was at night.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Overall Hospital Rating (H_HSP_RATING) ===
@@ -1635,6 +3578,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who gave this hospital a rating of 9 or 10 out of 10.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_7_8",
@@ -1642,6 +3598,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who gave this hospital a rating of 7 or 8 out of 10.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_0_6",
@@ -1649,6 +3618,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who gave this hospital a rating of 6 or lower out of 10.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_LINEAR_SCORE",
@@ -1656,6 +3638,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how patients rated this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_STAR_RATING",
@@ -1663,6 +3658,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how patients rated this hospital overall.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Recommend Hospital (H_RECMND) ===
@@ -1673,6 +3681,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said they would definitely recommend this hospital to friends and family.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_RECMND_PY",
@@ -1680,6 +3701,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said they would probably recommend this hospital to friends and family.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_RECMND_DN",
@@ -1687,6 +3721,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said they would probably not or definitely not recommend this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_RECMND_LINEAR_SCORE",
@@ -1694,6 +3741,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="An overall score for how likely patients would be to recommend this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_RECMND_STAR_RATING",
@@ -1701,6 +3761,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The star rating (1-5) for how likely patients would be to recommend this hospital.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Doctor Sub-Questions (H_DOCTOR_EXPLAIN, LISTEN, RESPECT) ===
@@ -1711,6 +3784,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors always explained things in a way they could understand.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_EXPLAIN_U_P",
@@ -1718,6 +3804,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their doctors usually explained things in a way they could understand.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_EXPLAIN_SN_P",
@@ -1725,6 +3824,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors sometimes or never explained things in a way they could understand.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_LISTEN_A_P",
@@ -1732,6 +3844,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors always listened carefully to them.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_LISTEN_U_P",
@@ -1739,6 +3864,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their doctors usually listened carefully to them.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_LISTEN_SN_P",
@@ -1746,6 +3884,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors sometimes or never listened carefully to them.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_RESPECT_A_P",
@@ -1753,6 +3904,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors always treated them with courtesy and respect.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_RESPECT_U_P",
@@ -1760,6 +3924,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their doctors usually treated them with courtesy and respect.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_RESPECT_SN_P",
@@ -1767,6 +3944,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their doctors sometimes or never treated them with courtesy and respect.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Nurse Sub-Questions (H_NURSE_EXPLAIN, LISTEN, RESPECT) ===
@@ -1777,6 +3967,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses always explained things in a way they could understand.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_EXPLAIN_U_P",
@@ -1784,6 +3987,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their nurses usually explained things in a way they could understand.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_EXPLAIN_SN_P",
@@ -1791,6 +4007,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses sometimes or never explained things in a way they could understand.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_LISTEN_A_P",
@@ -1798,6 +4027,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses always listened carefully to them.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_LISTEN_U_P",
@@ -1805,6 +4047,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their nurses usually listened carefully to them.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_LISTEN_SN_P",
@@ -1812,6 +4067,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses sometimes or never listened carefully to them.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_RESPECT_A_P",
@@ -1819,6 +4087,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses always treated them with courtesy and respect.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_RESPECT_U_P",
@@ -1826,6 +4107,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said their nurses usually treated them with courtesy and respect.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_NURSE_RESPECT_SN_P",
@@ -1833,6 +4127,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said their nurses sometimes or never treated them with courtesy and respect.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Medication Communication Sub-Questions (H_MED_FOR, H_SIDE_EFFECTS) ===
@@ -1843,6 +4150,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff always told them what new medications were for.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_MED_FOR_U_P",
@@ -1850,6 +4170,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said staff usually told them what new medications were for.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_MED_FOR_SN_P",
@@ -1857,6 +4190,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff sometimes or never told them what new medications were for.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_SIDE_EFFECTS_A_P",
@@ -1864,6 +4210,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff always told them about possible side effects of new medications.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_SIDE_EFFECTS_U_P",
@@ -1871,6 +4230,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction=None, unit="percent",
         plain_language="The percentage of patients who said staff usually told them about possible side effects of new medications.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
     MeasureEntry(
         measure_id="H_SIDE_EFFECTS_SN_P",
@@ -1878,6 +4250,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="LOWER_IS_BETTER", unit="percent",
         plain_language="The percentage of patients who said staff sometimes or never told them about possible side effects of new medications.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # === Summary Star Rating (H_STAR_RATING) ===
@@ -1888,6 +4273,19 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         group="PATIENT_EXPERIENCE", direction="HIGHER_IS_BETTER", unit="score",
         plain_language="The overall patient experience star rating (1-5) for this hospital based on all HCAHPS survey responses.",
         tail_risk_flag=False, ses_sensitivity="MODERATE", dataset_id="dgck-syfz",
+        cms_measure_definition=(
+            "The HCAHPS Patient Survey, also known as the CAHPS Hospital Survey or Hospital "
+            "CAHPS, is a survey instrument and data collection methodology for measuring "
+            "patients' perceptions of their hospital experience. The survey is administered "
+            "to a random sample of adult inpatients after discharge. The HCAHPS survey "
+            "contains patient perspectives on care and patient rating items that encompass "
+            "key topics: communication with hospital staff, responsiveness of hospital "
+            "staff, communication about medicines, discharge information, cleanliness of "
+            "hospital environment, quietness of hospital environment, and transition of "
+            "care. The survey also includes screening questions and demographic items, "
+            "which are used for adjusting the mix of patients across hospitals and for "
+            "analytic purposes."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -1910,6 +4308,22 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="wkfw-kthe",
+        cms_measure_definition=(
+            "CMS has adopted three measures which capture the quality of outpatient care in "
+            "the area of imaging. CMS notes that the purpose of these measures is to "
+            "promote high-quality efficient care. Each of the measures currently utilize "
+            "both the Hospital OPPS claims and Physician Part B claims in the calculations. "
+            "These calculations are based on the administrative claims of the Medicare "
+            "fee-for-service population. Hospitals do not submit additional data for these "
+            "measures. The measures on the use of medical imaging show how often a hospital "
+            "provides specific imaging tests for Medicare beneficiaries under circumstances "
+            "where they may not be medically appropriate. Lower percentages suggest more "
+            "efficient use of medical imaging. The purpose of reporting these measures is "
+            "to reduce unnecessary exposure to contrast materials and/or radiation, to "
+            "ensure adherence to evidence-based medicine and practice guidelines, and to "
+            "prevent wasteful use of Medicare resources. The measures only apply to "
+            "Medicare patients treated in hospital outpatient departments."
+        ),
     ),
     MeasureEntry(
         measure_id="OP-10",
@@ -1925,6 +4339,22 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="wkfw-kthe",
+        cms_measure_definition=(
+            "CMS has adopted three measures which capture the quality of outpatient care in "
+            "the area of imaging. CMS notes that the purpose of these measures is to "
+            "promote high-quality efficient care. Each of the measures currently utilize "
+            "both the Hospital OPPS claims and Physician Part B claims in the calculations. "
+            "These calculations are based on the administrative claims of the Medicare "
+            "fee-for-service population. Hospitals do not submit additional data for these "
+            "measures. The measures on the use of medical imaging show how often a hospital "
+            "provides specific imaging tests for Medicare beneficiaries under circumstances "
+            "where they may not be medically appropriate. Lower percentages suggest more "
+            "efficient use of medical imaging. The purpose of reporting these measures is "
+            "to reduce unnecessary exposure to contrast materials and/or radiation, to "
+            "ensure adherence to evidence-based medicine and practice guidelines, and to "
+            "prevent wasteful use of Medicare resources. The measures only apply to "
+            "Medicare patients treated in hospital outpatient departments."
+        ),
     ),
     MeasureEntry(
         measure_id="OP-13",
@@ -1940,6 +4370,22 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="wkfw-kthe",
+        cms_measure_definition=(
+            "CMS has adopted three measures which capture the quality of outpatient care in "
+            "the area of imaging. CMS notes that the purpose of these measures is to "
+            "promote high-quality efficient care. Each of the measures currently utilize "
+            "both the Hospital OPPS claims and Physician Part B claims in the calculations. "
+            "These calculations are based on the administrative claims of the Medicare "
+            "fee-for-service population. Hospitals do not submit additional data for these "
+            "measures. The measures on the use of medical imaging show how often a hospital "
+            "provides specific imaging tests for Medicare beneficiaries under circumstances "
+            "where they may not be medically appropriate. Lower percentages suggest more "
+            "efficient use of medical imaging. The purpose of reporting these measures is "
+            "to reduce unnecessary exposure to contrast materials and/or radiation, to "
+            "ensure adherence to evidence-based medicine and practice guidelines, and to "
+            "prevent wasteful use of Medicare resources. The measures only apply to "
+            "Medicare patients treated in hospital outpatient departments."
+        ),
     ),
     MeasureEntry(
         measure_id="OP-39",
@@ -1955,6 +4401,22 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="LOW",
         dataset_id="wkfw-kthe",
+        cms_measure_definition=(
+            "CMS has adopted three measures which capture the quality of outpatient care in "
+            "the area of imaging. CMS notes that the purpose of these measures is to "
+            "promote high-quality efficient care. Each of the measures currently utilize "
+            "both the Hospital OPPS claims and Physician Part B claims in the calculations. "
+            "These calculations are based on the administrative claims of the Medicare "
+            "fee-for-service population. Hospitals do not submit additional data for these "
+            "measures. The measures on the use of medical imaging show how often a hospital "
+            "provides specific imaging tests for Medicare beneficiaries under circumstances "
+            "where they may not be medically appropriate. Lower percentages suggest more "
+            "efficient use of medical imaging. The purpose of reporting these measures is "
+            "to reduce unnecessary exposure to contrast materials and/or radiation, to "
+            "ensure adherence to evidence-based medicine and practice guidelines, and to "
+            "prevent wasteful use of Medicare resources. The measures only apply to "
+            "Medicare patients treated in hospital outpatient departments."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -1977,6 +4439,13 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="MODERATE",
         dataset_id="rrqw-56er",
+        cms_measure_definition=(
+            "The Medicare Spending Per Beneficiary (MSPB-1) Measure assesses Medicare Part "
+            "A and Part B payments for services provided to a Medicare beneficiary during a "
+            "spending-per-beneficiary episode that spans from three days prior to an "
+            "inpatient hospital admission through 30 days after discharge. The payments "
+            "included in this measure are price-standardized and risk-adjusted."
+        ),
     ),
 
     # ───────────────────────────────────────────────────────────────────
@@ -2000,6 +4469,15 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="HIGH",
         dataset_id="9n3s-kdb3",
+        cms_measure_definition=(
+            "In October 2012, CMS began reducing Medicare payments for subsection(d) "
+            "hospitals with excess readmissions. Excess readmissions are measured by a "
+            "ratio, calculated by dividing a hospital's predicted rate of readmission for "
+            "heart attack (AMI), heart failure (HF), pneumonia, chronic obstructive "
+            "pulmonary disease (COPD), hip/knee replacement (THA/TKA), and coronary artery "
+            "bypass graft (CABG) surgery by the expected rate of readmission, based on an "
+            "average hospital with similar patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HRRP_CABG",
@@ -2014,6 +4492,15 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="HIGH",
         dataset_id="9n3s-kdb3",
+        cms_measure_definition=(
+            "In October 2012, CMS began reducing Medicare payments for subsection(d) "
+            "hospitals with excess readmissions. Excess readmissions are measured by a "
+            "ratio, calculated by dividing a hospital's predicted rate of readmission for "
+            "heart attack (AMI), heart failure (HF), pneumonia, chronic obstructive "
+            "pulmonary disease (COPD), hip/knee replacement (THA/TKA), and coronary artery "
+            "bypass graft (CABG) surgery by the expected rate of readmission, based on an "
+            "average hospital with similar patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HRRP_COPD",
@@ -2028,6 +4515,15 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="HIGH",
         dataset_id="9n3s-kdb3",
+        cms_measure_definition=(
+            "In October 2012, CMS began reducing Medicare payments for subsection(d) "
+            "hospitals with excess readmissions. Excess readmissions are measured by a "
+            "ratio, calculated by dividing a hospital's predicted rate of readmission for "
+            "heart attack (AMI), heart failure (HF), pneumonia, chronic obstructive "
+            "pulmonary disease (COPD), hip/knee replacement (THA/TKA), and coronary artery "
+            "bypass graft (CABG) surgery by the expected rate of readmission, based on an "
+            "average hospital with similar patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HRRP_HF",
@@ -2042,6 +4538,15 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="HIGH",
         dataset_id="9n3s-kdb3",
+        cms_measure_definition=(
+            "In October 2012, CMS began reducing Medicare payments for subsection(d) "
+            "hospitals with excess readmissions. Excess readmissions are measured by a "
+            "ratio, calculated by dividing a hospital's predicted rate of readmission for "
+            "heart attack (AMI), heart failure (HF), pneumonia, chronic obstructive "
+            "pulmonary disease (COPD), hip/knee replacement (THA/TKA), and coronary artery "
+            "bypass graft (CABG) surgery by the expected rate of readmission, based on an "
+            "average hospital with similar patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HRRP_HIP_KNEE",
@@ -2056,6 +4561,15 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="HIGH",
         dataset_id="9n3s-kdb3",
+        cms_measure_definition=(
+            "In October 2012, CMS began reducing Medicare payments for subsection(d) "
+            "hospitals with excess readmissions. Excess readmissions are measured by a "
+            "ratio, calculated by dividing a hospital's predicted rate of readmission for "
+            "heart attack (AMI), heart failure (HF), pneumonia, chronic obstructive "
+            "pulmonary disease (COPD), hip/knee replacement (THA/TKA), and coronary artery "
+            "bypass graft (CABG) surgery by the expected rate of readmission, based on an "
+            "average hospital with similar patients."
+        ),
     ),
     MeasureEntry(
         measure_id="HRRP_PN",
@@ -2070,6 +4584,15 @@ _REGISTRY_LIST: list[MeasureEntry] = [
         tail_risk_flag=False,
         ses_sensitivity="HIGH",
         dataset_id="9n3s-kdb3",
+        cms_measure_definition=(
+            "In October 2012, CMS began reducing Medicare payments for subsection(d) "
+            "hospitals with excess readmissions. Excess readmissions are measured by a "
+            "ratio, calculated by dividing a hospital's predicted rate of readmission for "
+            "heart attack (AMI), heart failure (HF), pneumonia, chronic obstructive "
+            "pulmonary disease (COPD), hip/knee replacement (THA/TKA), and coronary artery "
+            "bypass graft (CABG) surgery by the expected rate of readmission, based on an "
+            "average hospital with similar patients."
+        ),
     ),
 
     # ═══════════════════════════════════════════════════════════════════════

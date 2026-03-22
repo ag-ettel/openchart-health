@@ -34,7 +34,7 @@ export function BenchmarkBar({
   unit,
   ciLower,
   ciUpper,
-}: BenchmarkBarProps): JSX.Element {
+}: BenchmarkBarProps): React.JSX.Element {
   // Determine axis range: encompass value, national avg, state avg, and CI bounds.
   const points = [value, nationalAvg];
   if (stateAvg !== null) points.push(stateAvg);

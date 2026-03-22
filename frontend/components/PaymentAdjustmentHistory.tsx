@@ -45,7 +45,7 @@ function formatPenaltyFlag(flag: boolean | null): string {
 export function PaymentAdjustmentHistory({
   adjustments,
   providerType,
-}: PaymentAdjustmentHistoryProps): JSX.Element {
+}: PaymentAdjustmentHistoryProps): React.JSX.Element {
   const programs =
     providerType === "HOSPITAL" ? HOSPITAL_PROGRAMS : NH_PROGRAMS;
 

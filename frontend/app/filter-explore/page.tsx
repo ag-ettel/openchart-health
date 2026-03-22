@@ -20,6 +20,6 @@
 //   - Each hospital name links to /hospital/[ccn], not to an inline expand.
 //   - Data source is build/data/filterexplore_index.json (pipeline output).
 
-export default function FilterExplorePage(): JSX.Element {
+export default function FilterExplorePage(): React.JSX.Element {
   return <div data-page="filter-explore-deferred" />;
 }

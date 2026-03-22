@@ -20,7 +20,7 @@ const CMS_COMPARISON_LABELS: Record<string, string> = {
 
 export function ComparisonBadge({
   comparedToNational,
-}: ComparisonBadgeProps): JSX.Element | null {
+}: ComparisonBadgeProps): React.JSX.Element | null {
   if (comparedToNational === null) {
     return null;
   }

@@ -22,6 +22,11 @@ export interface TrendPeriod {
   suppressed:              boolean;
   not_reported:            boolean;
   methodology_change_flag: boolean;  // footnote 29 detected (Rule 11)
+  sample_size:             number | null;
+  ci_lower:                number | null;
+  ci_upper:                number | null;
+  compared_to_national:    string | null;
+  footnote_codes:          number[] | null;
 }
 
 export interface Measure {

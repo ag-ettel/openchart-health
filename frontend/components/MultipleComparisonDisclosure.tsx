@@ -5,7 +5,7 @@
 
 import { MULTIPLE_COMPARISON_TEXT } from "@/lib/constants";
 
-export function MultipleComparisonDisclosure(): JSX.Element {
+export function MultipleComparisonDisclosure(): React.JSX.Element {
   return (
     <div className="rounded border border-gray-200 bg-gray-50 px-4 py-3 text-sm leading-relaxed text-gray-700">
       <p>{MULTIPLE_COMPARISON_TEXT}</p>
