@@ -94,6 +94,13 @@ docs/decisions.md
 # Local PostgreSQL data directory
 .pgdata/
 
+# Frontend build artifacts and dependencies
+frontend/.next/
+frontend/node_modules/
+frontend/public/distributions.json
+frontend/tsconfig.tsbuildinfo
+frontend/next-env.d.ts
+
 # CMS data files (bulk CSV downloads, archives, pipeline output)
 data/
 build/data/
