@@ -482,6 +482,7 @@ export function MeasureCard({
                 direction={measure.direction}
                 unit={unit}
                 showSmallSampleLink={showSmallSample}
+                comparedToNational={measure.compared_to_national}
               />
             )}
           </div>
@@ -622,6 +623,9 @@ export function MeasureCard({
             sampleLabelText={sampleLabel(measure)}
             direction={measure.direction}
             yAxisLabel={metric.label}
+            zoomToData
+            distributionMin={distribution?.bin_edges[0] ?? null}
+            distributionMax={distribution?.bin_edges[distribution?.bin_edges.length - 1] ?? null}
           />
         </div>
       )}

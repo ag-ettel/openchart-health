@@ -191,12 +191,18 @@ export const HCAHPS_GROUPS: Record<string, string> = {
   H_SIDE_EFFECTS:   "Medication Side Effects",
   H_DISCH_HELP:     "Post-Discharge Help",
   H_SYMPTOMS:       "Symptom Information",
-  H_BATH_HELP:      "Bathing Help",
-  H_CALL_BUTTON:    "Call Button Responsiveness",
-  H_CT_MED:         "Care Transition: Medications",
-  H_CT_PREFER:      "Care Transition: Preferences",
-  H_CT_UNDER:       "Care Transition: Understanding",
 };
+
+// Retired HCAHPS groups — hidden from consumer display
+const RETIRED_HCAHPS_BASES = new Set([
+  "H_BATH_HELP",
+  "H_CALL_BUTTON",
+  "H_COMP_3",
+  "H_COMP_7",
+  "H_CT_MED",
+  "H_CT_PREFER",
+  "H_CT_UNDER",
+]);
 
 export interface HCAHPSGroup {
   groupBase: string;
@@ -219,12 +225,20 @@ function hcahpsBase(id: string): string | null {
   return null;
 }
 
-/** Returns true if this measure is part of an HCAHPS question group. */
+/** Returns true if this measure is part of an active HCAHPS question group. */
 export function isHCAHPS(m: Measure): boolean {
-  return m.measure_id.startsWith("H_") && m.measure_id !== "H_STAR_RATING";
+  if (!m.measure_id.startsWith("H_") || m.measure_id === "H_STAR_RATING") return false;
+  return true;
 }
 
-/** Group HCAHPS measures into collapsed question groups. */
+/** Returns true if this is a retired HCAHPS measure that should be hidden. */
+export function isRetiredHCAHPS(m: Measure): boolean {
+  if (!m.measure_id.startsWith("H_")) return false;
+  const base = hcahpsBase(m.measure_id);
+  return base !== null && RETIRED_HCAHPS_BASES.has(base);
+}
+
+/** Group HCAHPS measures into collapsed question groups, excluding retired. */
 export function groupHCAHPS(measures: Measure[]): HCAHPSGroup[] {
   const hcahps = measures.filter(isHCAHPS);
   const groupMap = new Map<string, HCAHPSGroup>();
@@ -232,6 +246,7 @@ export function groupHCAHPS(measures: Measure[]): HCAHPSGroup[] {
   for (const m of hcahps) {
     const base = hcahpsBase(m.measure_id);
     if (!base) continue;
+    if (RETIRED_HCAHPS_BASES.has(base)) continue;
 
     if (!groupMap.has(base)) {
       groupMap.set(base, {

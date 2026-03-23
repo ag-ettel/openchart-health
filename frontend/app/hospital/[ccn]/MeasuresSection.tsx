@@ -7,7 +7,7 @@
 import { useState, useMemo } from "react";
 import type { Measure, PaymentAdjustment } from "@/types/provider";
 import { measureHasData, hasSESSensitivity } from "@/lib/utils";
-import { getTagsForMeasure, isHCAHPS, groupHCAHPS } from "@/lib/measure-tags";
+import { getTagsForMeasure, isHCAHPS, isRetiredHCAHPS, groupHCAHPS } from "@/lib/measure-tags";
 import { CategoryNav } from "./CategoryNav";
 import { MeasureCard } from "@/components/MeasureCard";
 import { NotReportedCard } from "@/components/NotReportedCard";
@@ -86,12 +86,12 @@ export function MeasuresSection({
   }, [primaryMeasures, activeTag, measureTags]);
 
   const withData = useMemo(
-    () => sortMeasures(filteredMeasures.filter((m) => measureHasData(m) && !isHCAHPS(m))),
+    () => sortMeasures(filteredMeasures.filter((m) => measureHasData(m) && !isHCAHPS(m) && !isRetiredHCAHPS(m))),
     [filteredMeasures]
   );
 
   const notReported = useMemo(
-    () => sortMeasures(filteredMeasures.filter((m) => !measureHasData(m))),
+    () => sortMeasures(filteredMeasures.filter((m) => !measureHasData(m) && !isRetiredHCAHPS(m))),
     [filteredMeasures]
   );
 

@@ -29,6 +29,8 @@ interface DistributionHistogramProps {
   direction: MeasureDirection | null;
   unit: string;
   showSmallSampleLink?: boolean;
+  /** CMS's own assessment — used first when available */
+  comparedToNational?: string | null;
 }
 
 export function DistributionHistogram({
@@ -40,6 +42,7 @@ export function DistributionHistogram({
   direction,
   unit,
   showSmallSampleLink = false,
+  comparedToNational = null,
 }: DistributionHistogramProps): React.JSX.Element {
   const { counts, bin_edges } = distribution;
   const maxCount = Math.max(...counts);
@@ -157,14 +160,35 @@ export function DistributionHistogram({
         </div>
       )}
 
-      {/* Footer: count + legend */}
+      {/* Footer: count + legend + overlap interpretation */}
       <div className="mt-1.5 space-y-1">
         <p className="text-center text-xs text-gray-400">
           Distribution across {distribution.total.toLocaleString("en-US")} hospitals
         </p>
         <p className="text-xs text-gray-400">
           <span className="mr-1 inline-block h-2.5 w-4 rounded-sm bg-blue-300 align-middle" />
-          Blue shading shows the plausible range for this hospital&apos;s result. A wider blue zone reflects greater uncertainty, often due to fewer cases.
+          Blue shading shows the plausible range for this hospital&apos;s result.
+          {(() => {
+            // Use CMS assessment first when available
+            if (comparedToNational === "NO_DIFFERENT" || comparedToNational === "TOO_FEW_CASES") {
+              return " CMS assesses this hospital as no different from the national rate. The plausible range overlaps with the national average.";
+            }
+            if (comparedToNational === "BETTER") {
+              return " CMS assesses this hospital as better than the national rate.";
+            }
+            if (comparedToNational === "WORSE") {
+              return " CMS assesses this hospital as worse than the national rate.";
+            }
+            // Fall back to interval/average overlap when CMS doesn't provide assessment
+            if (ciLower !== null && ciUpper !== null) {
+              const avgInCI = ciLower <= effectiveAvg && ciUpper >= effectiveAvg;
+              if (avgInCI) {
+                return " The national average falls within this range, meaning the difference may not be statistically meaningful.";
+              }
+              return " The national average falls outside this range, suggesting a meaningful difference from average.";
+            }
+            return " A wider blue zone reflects greater uncertainty, often due to fewer cases.";
+          })()}
           {showSmallSampleLink && (
             <span className="ml-1 font-medium text-amber-700">
               With a small number of cases, the true rate could fall anywhere within the shaded range.

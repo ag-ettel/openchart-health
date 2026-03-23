@@ -52,6 +52,13 @@ interface TrendChartProps {
   ciUpper?: number | null;
   /** Label for sample count in tooltip (e.g. "Patients", "Procedures") */
   sampleLabelText?: string;
+  /** Zoom y-axis to data range instead of starting from 0. Better for trends where
+   *  data lives in a narrow band (e.g. 70-80%). Uses distribution range as baseline,
+   *  expanded if hospital history exceeds it. */
+  zoomToData?: boolean;
+  /** Distribution min/max for anchoring the zoomed y-axis to national context */
+  distributionMin?: number | null;
+  distributionMax?: number | null;
   /** CMS direction for the visual arrow indicator */
   direction?: "LOWER_IS_BETTER" | "HIGHER_IS_BETTER" | null;
   /** Y-axis label for the chart */
@@ -222,6 +229,9 @@ export function TrendChart({
   yAxisLabel,
   referenceValue = null,
   referenceLabel,
+  zoomToData = false,
+  distributionMin = null,
+  distributionMax = null,
 }: TrendChartProps): React.JSX.Element | null {
   const chartData: ChartPoint[] = useMemo(
     () =>
@@ -265,12 +275,54 @@ export function TrendChart({
   const dotRadius = showLine ? 3 : 4;
   const hasAnyCIData = chartData.some((p) => p.ciLow !== null && p.ciHigh !== null);
 
+  // Compute y-axis domain when zooming to data.
+  // For bounded measures (percent): use distribution range as baseline.
+  // For unbounded measures: use hospital's own history — the histogram
+  // already shows national context, the trend chart shows trajectory.
+  const yDomain: [number, number] | undefined = (() => {
+    if (!zoomToData) return undefined;
+    const values = chartData
+      .filter((p) => p.value !== null)
+      .map((p) => p.value!);
+    if (values.length === 0) return undefined;
+
+    const histMin = Math.min(...values);
+    const histMax = Math.max(...values);
+
+    let min: number;
+    let max: number;
+
+    if (unit === "percent" && distributionMin !== null && distributionMax !== null) {
+      // Bounded: use distribution range, expand if hospital exceeds it
+      min = Math.min(distributionMin, histMin);
+      max = Math.max(distributionMax, histMax);
+      // Round to nearest 5%
+      min = Math.max(0, Math.floor(min / 5) * 5 - 5);
+      max = Math.min(100, Math.ceil(max / 5) * 5 + 5);
+    } else {
+      // Unbounded: use the full extent of values AND CI bands from trend data
+      const ciLows = chartData.filter(p => p.ciLow !== null).map(p => p.ciLow!);
+      const ciHighs = chartData.filter(p => p.ciHigh !== null).map(p => p.ciHigh!);
+      min = Math.min(histMin, ...ciLows);
+      max = Math.max(histMax, ...ciHighs);
+      const span = max - min;
+      const padding = Math.max(span * 0.1, 2);
+      min -= padding;
+      max += padding;
+      // Round to clean multiples of 5
+      min = Math.floor(min / 5) * 5;
+      max = Math.ceil(max / 5) * 5;
+    }
+
+    return [min, max];
+  })();
+
   return (
     <div className="mt-3">
       <ResponsiveContainer width="100%" height={180}>
         <ComposedChart
           data={data}
-          margin={{ top: 8, right: 12, bottom: 4, left: yAxisLabel ? 12 : 4 }}
+          margin={{ top: 8, right: 40, bottom: 4, left: yAxisLabel ? 12 : 4 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false} />
 
@@ -286,6 +338,7 @@ export function TrendChart({
             tickLine={false}
             axisLine={false}
             width={yAxisLabel ? 70 : 48}
+            domain={yDomain}
             tickFormatter={(v: number) => formatValue(v, unit)}
             label={yAxisLabel ? {
               value: yAxisLabel,
