@@ -125,14 +125,33 @@ function valueInterpretation(m: Measure): string | null {
     if (val > 1.0) return withInterval(m, `${((val - 1.0) * 100).toFixed(0)}% more readmissions than expected`);
     return null;
   }
+  // Condition-specific punchline phrasing
+  const CONDITIONS: Record<string, string> = {
+    MORT_30_AMI: "admitted for a heart attack",
+    MORT_30_HF: "admitted for heart failure",
+    MORT_30_PN: "admitted for pneumonia",
+    MORT_30_COPD: "admitted for COPD",
+    MORT_30_STK: "admitted for stroke",
+    MORT_30_CABG: "who underwent CABG surgery",
+    Hybrid_HWM: "across all conditions",
+    READM_30_AMI: "after a heart attack",
+    READM_30_HF: "after heart failure treatment",
+    READM_30_PN: "after pneumonia treatment",
+    READM_30_COPD: "after COPD treatment",
+    READM_30_HIP_KNEE: "after hip or knee replacement",
+    READM_30_CABG: "after CABG surgery",
+    COMP_HIP_KNEE: "who underwent hip or knee replacement",
+  };
+  const condition = CONDITIONS[id] ?? "";
+
   if (m.measure_group === "MORTALITY" || id.startsWith("MORT_")) {
-    return withInterval(m, `${formatValue(val, unit)} of Medicare patients died within 30 days of admission`);
+    return withInterval(m, `${formatValue(val, unit)} of Medicare patients ${condition} died within 30 days`.replace(/  +/g, " ").trim());
   }
   if (id.startsWith("READM_")) {
-    return withInterval(m, `${formatValue(val, unit)} of Medicare patients were readmitted within 30 days`);
+    return withInterval(m, `${formatValue(val, unit)} of Medicare patients were readmitted within 30 days ${condition}`.replace(/  +/g, " ").trim());
   }
   if (id.startsWith("COMP_")) {
-    return withInterval(m, `${formatValue(val, unit)} of patients experienced a serious complication`);
+    return withInterval(m, `${formatValue(val, unit)} of patients ${condition} experienced a serious complication`.replace(/  +/g, " ").trim());
   }
   if (id.startsWith("PSI_") && id !== "PSI_90") {
     return withInterval(m, `${formatValue(val, unit)} of eligible patients experienced this safety event`);
@@ -473,6 +492,10 @@ export function MeasureCard({
 
             {/* Distribution histogram */}
             {distribution && measure.numeric_value !== null && (
+              <>
+              <p className="mt-3 mb-1 text-xs text-gray-500">
+                How this hospital compares to all hospitals nationally:
+              </p>
               <DistributionHistogram
                 distribution={distribution}
                 value={measure.numeric_value}
@@ -484,6 +507,7 @@ export function MeasureCard({
                 showSmallSampleLink={showSmallSample}
                 comparedToNational={measure.compared_to_national}
               />
+              </>
             )}
           </div>
         ) : (
@@ -576,7 +600,7 @@ export function MeasureCard({
         return (
           <div className="mb-3">
             {punchline && (
-              <p className="text-sm font-semibold text-gray-800">
+              <p className="text-base font-bold leading-snug text-gray-900">
                 {punchline}
               </p>
             )}
@@ -594,10 +618,13 @@ export function MeasureCard({
         );
       })()}
 
-      {/* Inline trend chart */}
+      {/* Trend chart — collapsed by default */}
       {hasTrend && (
-        <div className="mt-4 border-t border-gray-100 pt-3">
-          <p className="mb-1 text-xs font-semibold text-blue-600">
+        <details className="mt-4 border-t border-gray-100 pt-3">
+          <summary className="cursor-pointer text-xs font-semibold text-blue-600 hover:text-blue-800">
+            Show trend over time
+          </summary>
+          <p className="mt-1 mb-1 text-xs font-semibold text-blue-600">
             {shortName} — Trend Over Time
           </p>
           <TrendChart
@@ -627,7 +654,7 @@ export function MeasureCard({
             distributionMin={distribution?.bin_edges[0] ?? null}
             distributionMax={distribution?.bin_edges[distribution?.bin_edges.length - 1] ?? null}
           />
-        </div>
+        </details>
       )}
 
 

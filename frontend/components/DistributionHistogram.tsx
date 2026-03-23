@@ -140,8 +140,8 @@ export function DistributionHistogram({
         </span>
       </div>
 
-      {/* Legend — fixed layout, no positioning issues */}
-      <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-0.5 text-xs">
+      {/* Legend — centered */}
+      <div className="mt-1.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-0.5 text-xs">
         <span className="flex items-center gap-1.5 font-medium text-blue-600">
           <span className="inline-block h-3 w-0 border-l-2 border-dashed border-blue-600" />
           {formatValue(value, unit)} · This hospital

@@ -200,7 +200,7 @@ export function HCAHPSGroupCard({
 
       {/* Bold punchline */}
       {primaryValue !== null && surveyCount !== null && (
-        <p className="mb-3 text-sm font-semibold text-gray-800">
+        <p className="mb-3 text-base font-bold leading-snug text-gray-900">
           {primaryValue}% of {surveyCount.toLocaleString("en-US")} surveyed patients
           gave the highest response for {group.label.toLowerCase()}.
         </p>
@@ -231,10 +231,13 @@ export function HCAHPSGroupCard({
         </details>
       )}
 
-      {/* Trend chart for primary response */}
+      {/* Trend chart — collapsed by default */}
       {primaryMeasure && primaryMeasure.trend && primaryMeasure.trend.length > 0 && (
-        <div className="mt-4 border-t border-gray-100 pt-3">
-          <p className="mb-1 text-xs font-semibold text-blue-600">
+        <details className="mt-4 border-t border-gray-100 pt-3">
+          <summary className="cursor-pointer text-xs font-semibold text-blue-600 hover:text-blue-800">
+            Show trend over time
+          </summary>
+          <p className="mt-1 mb-1 text-xs font-semibold text-blue-600">
             {group.label}: &quot;{primaryLabel}&quot; Response — Trend Over Time
           </p>
           <TrendChart
@@ -250,7 +253,7 @@ export function HCAHPSGroupCard({
             distributionMin={distribution?.bin_edges[0] ?? null}
             distributionMax={distribution?.bin_edges[distribution.bin_edges.length - 1] ?? null}
           />
-        </div>
+        </details>
       )}
 
       {/* Source */}

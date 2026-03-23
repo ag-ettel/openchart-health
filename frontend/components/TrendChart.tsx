@@ -300,18 +300,27 @@ export function TrendChart({
       min = Math.max(0, Math.floor(min / 5) * 5 - 5);
       max = Math.min(100, Math.ceil(max / 5) * 5 + 5);
     } else {
-      // Unbounded: use the full extent of values AND CI bands from trend data
+      // Unbounded: include point values AND CI bounds — uncertainty is visible
       const ciLows = chartData.filter(p => p.ciLow !== null).map(p => p.ciLow!);
       const ciHighs = chartData.filter(p => p.ciHigh !== null).map(p => p.ciHigh!);
       min = Math.min(histMin, ...ciLows);
       max = Math.max(histMax, ...ciHighs);
       const span = max - min;
-      const padding = Math.max(span * 0.1, 2);
+      const padding = Math.max(span * 0.1, 0.5);
       min -= padding;
       max += padding;
-      // Round to clean multiples of 5
-      min = Math.floor(min / 5) * 5;
-      max = Math.ceil(max / 5) * 5;
+      // Floor at 0 for rates, ratios, counts, scores — anything that can't be negative
+      // Only EDAC (excess days) and similar difference measures can legitimately go negative
+      if (unit === "percent" || unit === "ratio" || unit === "count" || unit === "score" || unit === "minutes") {
+        min = Math.max(0, min);
+      } else if (histMin >= 0) {
+        // Even for untyped measures, floor at 0 if all historical values are non-negative
+        min = Math.max(0, min);
+      }
+      // Round to clean values based on range size
+      const step = (max - min) > 10 ? 5 : (max - min) > 2 ? 1 : 0.5;
+      min = Math.floor(min / step) * step;
+      max = Math.ceil(max / step) * step;
     }
 
     return [min, max];
