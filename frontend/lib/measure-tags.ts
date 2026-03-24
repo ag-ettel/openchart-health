@@ -37,10 +37,10 @@ export const MEASURE_TAGS: MeasureTag[] = [
   { id: "sepsis",             label: "Sepsis",                     order: 17 },
   { id: "vte",                label: "Blood Clots (VTE)",          order: 18 },
   { id: "opioid",             label: "Opioid Safety",              order: 19 },
-  // Process & experience measures
-  { id: "timely_emergency",   label: "Timely & Emergency Care",    order: 20 },
-  { id: "surgical",           label: "Surgical & Procedural",      order: 21 },
-  { id: "patient_experience", label: "Patient Experience",         order: 22 },
+  // Experience & process measures — patient experience leads
+  { id: "patient_experience", label: "Patient Experience",         order: 20 },
+  { id: "timely_emergency",   label: "Timely & Emergency Care",    order: 21 },
+  { id: "surgical",           label: "Surgical & Procedural",      order: 22 },
   // Utilization & cost
   { id: "imaging",            label: "Imaging Efficiency",         order: 30 },
   { id: "spending",           label: "Spending",                   order: 31 },

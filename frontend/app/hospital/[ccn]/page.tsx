@@ -2,10 +2,9 @@ import fs from "fs";
 import path from "path";
 import type { Provider } from "@/types/provider";
 import { titleCase } from "@/lib/utils";
-import { ProviderContextPanel } from "@/components/ProviderContextPanel";
-import { PatientSafetyRecord } from "@/components/PatientSafetyRecord";
 import { MultipleComparisonDisclosure } from "@/components/MultipleComparisonDisclosure";
 import { PaymentAdjustmentHistory } from "@/components/PaymentAdjustmentHistory";
+import { HospitalSummaryDashboard } from "@/components/HospitalSummaryDashboard";
 import { MeasuresSection } from "./MeasuresSection";
 
 const DATA_DIR = path.join(process.cwd(), "..", "build", "data");
@@ -67,15 +66,19 @@ export default async function HospitalPage({ params }: HospitalPageProps): Promi
         </div>
       </header>
 
-      {/* Hospital context panel */}
-      {provider.hospital_context !== null && (
-        <section className="mb-6">
-          <ProviderContextPanel
-            context={provider.hospital_context}
-            providerName={titleCase(provider.name)}
-          />
-        </section>
-      )}
+      {/* Summary dashboard — replaces the old context panel */}
+      <section className="mb-6">
+        <HospitalSummaryDashboard
+          measures={provider.measures}
+          paymentAdjustments={provider.payment_adjustments}
+          hospitalContext={provider.hospital_context}
+        />
+      </section>
+
+      {/* Grounder + filter hint */}
+      <p className="mb-1 text-sm text-gray-500">
+        All data sourced from CMS. Use the filters to explore by condition or category.
+      </p>
 
       {/* Main content area — sidebar + measures from the start */}
       <MeasuresSection

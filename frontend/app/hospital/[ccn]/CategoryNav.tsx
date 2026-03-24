@@ -147,7 +147,7 @@ export function CategoryNav({
 
           <TagSection label="Safety & Outcomes" tags={SAFETY_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
           <TagSection label="By Condition" tags={CONDITION_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
-          <TagSection label="Process & Experience" tags={PROCESS_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
+          <TagSection label="Experience & Process" tags={PROCESS_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
           <TagSection label="Utilization & Cost" tags={UTILIZATION_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
           <TagSection label="Status" tags={STATUS_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
         </div>
