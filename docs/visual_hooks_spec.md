@@ -119,7 +119,7 @@ All data already in the schema:
 
 ## Implementation Priority
 
-1. **Hospital summary dashboard** — can be built now with existing data
-   (compared_to_national aggregation, sparklines from trend data)
-2. **Nursing home timeline** — requires nursing home display build (Phase 1
-   parallel track), but the data model is ready
+1. **Hospital summary dashboard** — DONE. Committed in project-setup branch.
+   Patient experience narrative leads, CMS quality assessment follows.
+2. **Nursing home timeline** — READY TO BUILD. Pipeline backfill complete,
+   JSON export running. See the NH frontend build prompt for full spec.
