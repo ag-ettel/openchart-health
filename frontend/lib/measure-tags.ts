@@ -1,0 +1,363 @@
+// Measure tagging system for consumer-facing category navigation.
+//
+// Each measure can have multiple tags. The sidebar filters by tag — selecting
+// a tag shows all measures with that tag. Measures appear once on the page;
+// the filter controls visibility.
+//
+// Tags are derived from measure_id patterns and tail_risk_flag. This keeps
+// the mapping in the frontend (display concern) rather than the pipeline.
+
+import type { Measure } from "@/types/provider";
+
+export interface MeasureTag {
+  id: string;
+  label: string;
+  /** Display order in the sidebar */
+  order: number;
+}
+
+// Canonical tag definitions in display order.
+// Order reflects consumer priority: safety-critical first, conditions grouped,
+// process measures after, utilization/cost last, status at the end.
+export const MEASURE_TAGS: MeasureTag[] = [
+  // Safety & outcomes — what can seriously harm you
+  { id: "critical_safety",    label: "Critical Safety Indicators", order: 0 },
+  { id: "mortality",          label: "Mortality",                   order: 1 },
+  { id: "infections",         label: "Infections",                 order: 2 },
+  { id: "complications",      label: "Complications & Safety",     order: 3 },
+  { id: "readmissions",       label: "Readmissions",               order: 4 },
+  // Conditions — grouped by body system / procedure
+  { id: "heart",              label: "Heart & Cardiac",            order: 10 },
+  { id: "lung",               label: "Lung & Respiratory",         order: 11 },
+  { id: "stroke",             label: "Stroke",                     order: 12 },
+  { id: "orthopedic",         label: "Hip & Knee",                 order: 13 },
+  { id: "colonoscopy",        label: "Colonoscopy & Colon",        order: 14 },
+  { id: "cataract",           label: "Cataract Surgery",           order: 15 },
+  { id: "cancer",             label: "Cancer & Chemotherapy",      order: 16 },
+  { id: "sepsis",             label: "Sepsis",                     order: 17 },
+  { id: "vte",                label: "Blood Clots (VTE)",          order: 18 },
+  { id: "opioid",             label: "Opioid Safety",              order: 19 },
+  // Experience & process measures — patient experience leads
+  { id: "patient_experience", label: "Patient Experience",         order: 20 },
+  { id: "timely_emergency",   label: "Timely & Emergency Care",    order: 21 },
+  { id: "surgical",           label: "Surgical & Procedural",      order: 22 },
+  // Utilization & cost
+  { id: "imaging",            label: "Imaging Efficiency",         order: 30 },
+  { id: "spending",           label: "Spending",                   order: 31 },
+  // Status
+  { id: "not_reported",       label: "Not Reported",               order: 90 },
+];
+
+// Nursing home tag definitions. Separate from hospital tags per frontend-spec.md.
+export const NH_MEASURE_TAGS: MeasureTag[] = [
+  // Safety & inspections — what can seriously harm residents
+  { id: "critical_safety",     label: "Critical Safety Indicators",   order: 0 },
+  { id: "nh_inspections",      label: "Inspection Findings",          order: 1 },
+  { id: "nh_penalties",        label: "Penalties",                    order: 2 },
+  // Quality domains
+  { id: "nh_star_rating",      label: "Five-Star Ratings",            order: 10 },
+  { id: "nh_long_stay",        label: "Long-Stay Quality",            order: 11 },
+  { id: "nh_short_stay",       label: "Short-Stay Quality",           order: 12 },
+  { id: "nh_claims",           label: "Claims-Based Quality",         order: 13 },
+  { id: "nh_staffing",         label: "Staffing",                     order: 14 },
+  { id: "nh_snf_qrp",          label: "SNF Quality Reporting",        order: 15 },
+  // Utilization & cost
+  { id: "spending",            label: "Spending",                     order: 30 },
+  // Status
+  { id: "not_reported",        label: "Not Reported",                 order: 90 },
+];
+
+export const NH_SAFETY_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 0 && t.order < 10);
+export const NH_QUALITY_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 10 && t.order < 30);
+export const NH_UTILIZATION_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 30 && t.order < 90);
+export const NH_STATUS_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 90);
+
+// Tag groups for sidebar sections
+export const SAFETY_TAGS = MEASURE_TAGS.filter((t) => t.order >= 0 && t.order < 10);
+export const CONDITION_TAGS = MEASURE_TAGS.filter((t) => t.order >= 10 && t.order < 20);
+export const PROCESS_TAGS = MEASURE_TAGS.filter((t) => t.order >= 20 && t.order < 30);
+export const UTILIZATION_TAGS = MEASURE_TAGS.filter((t) => t.order >= 30 && t.order < 90);
+export const STATUS_TAGS = MEASURE_TAGS.filter((t) => t.order >= 90);
+
+/** Derive tags for a measure from its properties and ID patterns. */
+export function getTagsForMeasure(m: Measure): string[] {
+  const tags: string[] = [];
+  const id = m.measure_id;
+
+  // Not reported — separate category, not mixed into domain tags
+  if (m.suppressed || m.not_reported) {
+    tags.push("not_reported");
+    // Still tag with domain so filtering by domain includes them if desired,
+    // but they won't appear in Critical Safety Indicators
+  }
+
+  // Critical Safety Indicators — only tail_risk measures WITH data
+  if (m.tail_risk_flag && !m.suppressed && !m.not_reported) {
+    tags.push("critical_safety");
+  }
+
+  // Domain tags from measure_group
+  switch (m.measure_group) {
+    case "INFECTIONS":
+      tags.push("infections");
+      break;
+    case "MORTALITY":
+      tags.push("mortality");
+      break;
+    case "COMPLICATIONS":
+      tags.push("complications");
+      break;
+    case "SAFETY":
+      tags.push("complications"); // PSI measures → Complications & Safety
+      break;
+    case "READMISSIONS":
+      tags.push("readmissions");
+      break;
+    case "IMAGING_EFFICIENCY":
+      tags.push("imaging");
+      break;
+    case "PATIENT_EXPERIENCE":
+      tags.push("patient_experience");
+      break;
+    case "SPENDING":
+      // Fix misclassified HCAHPS measures
+      if (id.startsWith("H_")) {
+        tags.push("patient_experience");
+      } else {
+        tags.push("spending");
+      }
+      break;
+    case "TIMELY_EFFECTIVE_CARE":
+      // Sub-categorize the grab bag
+      if (id.startsWith("SEP_") || id.startsWith("SEV_SEP_")) {
+        tags.push("timely_emergency");
+        tags.push("sepsis");
+      } else if (id.startsWith("OP_18") || id === "OP_22" || id === "OP_40") {
+        tags.push("timely_emergency");
+      } else if (id.startsWith("STK_") || id.startsWith("VTE_")) {
+        tags.push("surgical");
+      } else if (id === "OP_29" || id === "OP_31" || id === "SAFE_USE_OF_OPIOIDS") {
+        tags.push("surgical");
+      } else if (id.startsWith("OP_35")) {
+        tags.push("surgical");
+        tags.push("cancer");
+      } else if (id.startsWith("HH_")) {
+        tags.push("complications"); // Hospital Harm measures
+      } else if (id === "OP_23") {
+        tags.push("timely_emergency"); // Head CT results
+      } else {
+        tags.push("timely_emergency"); // default for T&E
+      }
+      break;
+    default:
+      // Unknown group — no domain tag
+      break;
+  }
+
+  // Condition tags from measure_id patterns
+  if (/AMI|CABG|HF|STEMI|OP_40/.test(id) && !id.startsWith("H_")) {
+    tags.push("heart");
+  }
+  if (/COPD|PN(?!_)|_PN$/.test(id) && !id.startsWith("H_")) {
+    tags.push("lung");
+  }
+  if (/HIP_KNEE/.test(id)) {
+    tags.push("orthopedic");
+  }
+  if (/STK_/.test(id)) {
+    tags.push("stroke");
+  }
+  if (/SEP_|SEV_SEP_/.test(id) || (id === "PSI_13")) {
+    tags.push("sepsis");
+  }
+  if (/OP_35|OP_39/.test(id)) {
+    tags.push("cancer");
+  }
+  if (/OP_29|OP_32/.test(id) || id === "HAI_3_SIR") {
+    tags.push("colonoscopy");
+  }
+  if (id === "OP_31") {
+    tags.push("cataract");
+  }
+  if (/VTE_|PSI_12/.test(id)) {
+    tags.push("vte");
+  }
+  if (/OPIOID|HH_ORAE/.test(id)) {
+    tags.push("opioid");
+  }
+
+  return [...new Set(tags)]; // deduplicate
+}
+
+/** Derive tags for a nursing home measure from its properties and measure_group. */
+export function getTagsForNHMeasure(m: Measure): string[] {
+  const tags: string[] = [];
+
+  if (m.suppressed || m.not_reported) {
+    tags.push("not_reported");
+  }
+
+  if (m.tail_risk_flag && !m.suppressed && !m.not_reported) {
+    tags.push("critical_safety");
+  }
+
+  switch (m.measure_group) {
+    case "NH_STAR_RATING":
+      tags.push("nh_star_rating");
+      break;
+    case "NH_QUALITY_LONG_STAY":
+      tags.push("nh_long_stay");
+      break;
+    case "NH_QUALITY_SHORT_STAY":
+      tags.push("nh_short_stay");
+      break;
+    case "NH_QUALITY_CLAIMS":
+      tags.push("nh_claims");
+      break;
+    case "NH_STAFFING":
+      tags.push("nh_staffing");
+      break;
+    case "NH_SNF_QRP":
+      tags.push("nh_snf_qrp");
+      break;
+    case "NH_INSPECTION":
+      tags.push("nh_inspections");
+      break;
+    case "NH_PENALTIES":
+      tags.push("nh_penalties");
+      break;
+    case "SPENDING":
+      tags.push("spending");
+      break;
+    default:
+      break;
+  }
+
+  return [...new Set(tags)];
+}
+
+// --- HCAHPS Collapse ---
+
+/** HCAHPS question groups. Key = group base, value = consumer label. */
+export const HCAHPS_GROUPS: Record<string, string> = {
+  H_COMP_1:         "Nurse Communication",
+  H_COMP_2:         "Doctor Communication",
+  H_COMP_3:         "Staff Responsiveness",
+  H_COMP_5:         "Communication About Medicines",
+  H_COMP_6:         "Discharge Information",
+  H_COMP_7:         "Care Transition",
+  H_CLEAN:          "Cleanliness",
+  H_CLEAN_HSP:      "Room Cleanliness",
+  H_QUIET:          "Quietness",
+  H_QUIET_HSP:      "Quietness at Night",
+  H_HSP_RATING:     "Overall Hospital Rating",
+  H_RECMND:         "Would Recommend",
+  H_NURSE_EXPLAIN:  "Nurse Explanations",
+  H_NURSE_LISTEN:   "Nurse Listening",
+  H_NURSE_RESPECT:  "Nurse Courtesy & Respect",
+  H_DOCTOR_EXPLAIN: "Doctor Explanations",
+  H_DOCTOR_LISTEN:  "Doctor Listening",
+  H_DOCTOR_RESPECT: "Doctor Courtesy & Respect",
+  H_MED_FOR:        "New Medication Purpose",
+  H_SIDE_EFFECTS:   "Medication Side Effects",
+  H_DISCH_HELP:     "Post-Discharge Help",
+  H_SYMPTOMS:       "Symptom Information",
+};
+
+// Retired HCAHPS groups — hidden from consumer display
+const RETIRED_HCAHPS_BASES = new Set([
+  "H_BATH_HELP",
+  "H_CALL_BUTTON",
+  "H_COMP_3",
+  "H_COMP_7",
+  "H_CT_MED",
+  "H_CT_PREFER",
+  "H_CT_UNDER",
+]);
+
+export interface HCAHPSGroup {
+  groupBase: string;
+  label: string;
+  /** The star rating measure, if present */
+  starRating: Measure | null;
+  /** The linear score measure, if present */
+  linearScore: Measure | null;
+  /** Always/Usually/Sometimes-Never or Yes/No response breakdown */
+  responses: Measure[];
+}
+
+/** Extract the HCAHPS group base from a measure ID. */
+export function hcahpsBase(id: string): string | null {
+  // Try longest match first
+  const sorted = Object.keys(HCAHPS_GROUPS).sort((a, b) => b.length - a.length);
+  for (const base of sorted) {
+    if (id.startsWith(base + "_") || id === base) return base;
+  }
+  return null;
+}
+
+/** Returns true if this measure is part of an active HCAHPS question group. */
+export function isHCAHPS(m: Measure): boolean {
+  if (!m.measure_id.startsWith("H_") || m.measure_id === "H_STAR_RATING") return false;
+  return true;
+}
+
+/** Returns true if this is a retired HCAHPS measure that should be hidden. */
+export function isRetiredHCAHPS(m: Measure): boolean {
+  if (!m.measure_id.startsWith("H_")) return false;
+  const base = hcahpsBase(m.measure_id);
+  return base !== null && RETIRED_HCAHPS_BASES.has(base);
+}
+
+/** Group HCAHPS measures into collapsed question groups, excluding retired. */
+export function groupHCAHPS(measures: Measure[]): HCAHPSGroup[] {
+  const hcahps = measures.filter(isHCAHPS);
+  const groupMap = new Map<string, HCAHPSGroup>();
+
+  for (const m of hcahps) {
+    const base = hcahpsBase(m.measure_id);
+    if (!base) continue;
+    if (RETIRED_HCAHPS_BASES.has(base)) continue;
+
+    if (!groupMap.has(base)) {
+      groupMap.set(base, {
+        groupBase: base,
+        label: HCAHPS_GROUPS[base] ?? base,
+        starRating: null,
+        linearScore: null,
+        responses: [],
+      });
+    }
+    const group = groupMap.get(base)!;
+
+    if (m.measure_id.endsWith("_STAR_RATING")) {
+      group.starRating = m;
+    } else if (m.measure_id.endsWith("_LINEAR_SCORE")) {
+      group.linearScore = m;
+    } else {
+      group.responses.push(m);
+    }
+  }
+
+  // Curated display order: overall first, then communication grouped, then environment
+  const ORDER: string[] = [
+    // Overall — leads the section
+    "H_HSP_RATING", "H_RECMND",
+    // Nurse communication
+    "H_COMP_1", "H_NURSE_LISTEN", "H_NURSE_RESPECT", "H_NURSE_EXPLAIN",
+    // Doctor communication
+    "H_COMP_2", "H_DOCTOR_LISTEN", "H_DOCTOR_RESPECT", "H_DOCTOR_EXPLAIN",
+    // Medication communication
+    "H_COMP_5", "H_MED_FOR", "H_SIDE_EFFECTS",
+    // Discharge & follow-up
+    "H_COMP_6", "H_DISCH_HELP", "H_SYMPTOMS",
+    // Environment
+    "H_CLEAN_HSP", "H_CLEAN", "H_QUIET_HSP", "H_QUIET",
+  ];
+
+  return Array.from(groupMap.values()).sort((a, b) => {
+    const aIdx = ORDER.indexOf(a.groupBase);
+    const bIdx = ORDER.indexOf(b.groupBase);
+    return (aIdx >= 0 ? aIdx : 999) - (bIdx >= 0 ? bIdx : 999);
+  });
+}

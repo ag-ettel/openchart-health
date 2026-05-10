@@ -1,0 +1,29 @@
+{
+  "dataset_id": "ypbt-wvdk",
+  "dataset_name": "Hospital Value-Based Purchasing Program (VBP)",
+  "sample_size": 1000,
+  "reported": {
+    "fiscal_year": "2026",
+    "facility_id": "100030",
+    "facility_name": "ORLANDO HEALTH-HEALTH CENTRAL HOSPITAL",
+    "address": "10000 W COLONIAL DR",
+    "citytown": "OCOEE",
+    "state": "FL",
+    "zip_code": "34761",
+    "countyparish": "ORANGE",
+    "unweighted_normalized_clinical_outcomes_domain_score": "42.000000000000",
+    "weighted_normalized_clinical_outcomes_domain_score": "10.500000000000",
+    "unweighted_person_and_community_engagement_domain_score": "35.000000000000",
+    "weighted_person_and_community_engagement_domain_score": "8.750000000000",
+    "unweighted_normalized_safety_domain_score": "26.666666666667",
+    "weighted_safety_domain_score": "6.666666666667",
+    "unweighted_normalized_efficiency_and_cost_reduction_domain_score": "10.000000000000",
+    "weighted_efficiency_and_cost_reduction_domain_score": "2.500000000000",
+    "total_performance_score": "28.416666666667"
+  },
+  "suppressed": null,
+  "not_reported": null,
+  "footnote": null,
+  "null_denominator": null,
+  "count_suppressed": null
+}

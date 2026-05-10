@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# CSV files
+*.csv
+
 # C extensions
 *.so
 
@@ -81,6 +84,40 @@ target/
 # IPython
 profile_default/
 ipython_config.py
+
+# Private strategic documents - not for public repo
+CLAUDE.md
+.claude/rules/
+docs/product_philosophy.md
+docs/decisions.md
+
+# Local PostgreSQL data directory
+.pgdata/
+
+# Scheduled refresh runtime artifacts
+.pipeline_refresh.lock
+logs/
+
+# Frontend build artifacts and dependencies
+frontend/.next/
+frontend/node_modules/
+frontend/public/distributions.json
+frontend/tsconfig.tsbuildinfo
+frontend/next-env.d.ts
+
+# CMS data files (bulk CSV downloads, archives, pipeline output)
+data/
+build/data/
+build/data_staging/
+docs/pipeline_decisions.md
+docs/HOSPITAL_Data_Dictionary.pdf
+docs/HOSPITAL_Data_Dictionary.txt
+docs/NH_Data_Dictionary.pdf
+docs/NH_Data_Dictionary.txt
+docs/nh-five-star-users-guide-january-2026.pdf
+docs/nh-five-star-users-guide-january-2026.txt
+docs/snf-qm-calculations-and-reporting-users-manual-v7.0.pdf
+docs/snf-qm-calculations-and-reporting-users-manual-v7.0.txt
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
@@ -205,3 +242,16 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# PDFs
+*.pdf
+
+# txt files in docs
+docs/HOSPITAL_Data_Dictionary.txt
+docs/NH_Data_Dictionary.txt
+docs/nh-five-star-users-guide-january-2026.txt
+docs/snf-qm-calculations-and-reporting-users-manual-v7.0.txt
+docs/psi90-Factsheet.txt
+docs/HWR_Methodology.txt
+docs/Hybrid_HWM_Methodology.txt
+docs/nh-faq.txt
