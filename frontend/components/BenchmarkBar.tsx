@@ -54,10 +54,19 @@ export function BenchmarkBar({
   const ciUpperPct = ciUpper !== null ? toPercent(ciUpper, axisMin, axisMax) : null;
   const hasCI = ciLowerPct !== null && ciUpperPct !== null;
 
+  // Plain-language summary for screen readers — exposes the same comparison
+  // sighted users see (value, national avg, state avg, CI bounds when present).
+  const stateClause = stateAvg !== null ? `, state average ${formatValue(stateAvg, unit)}` : "";
+  const ciClause = hasCI
+    ? `; credible interval from ${formatValue(ciLower!, unit)} to ${formatValue(ciUpper!, unit)}`
+    : "";
+  const ariaSummary = `Value ${formatValue(value, unit)} compared to national average ${formatValue(nationalAvg, unit)}${stateClause}${ciClause}.`;
+
   return (
-    <div className="my-2">
+    <figure className="my-2" aria-label={ariaSummary}>
+      <figcaption className="sr-only">{ariaSummary}</figcaption>
       {/* Bar track */}
-      <div className="relative h-4 w-full rounded bg-gray-100">
+      <div className="relative h-4 w-full rounded bg-gray-100" role="presentation">
         {/* CI span — translucent neutral overlay */}
         {hasCI && (
           <div
@@ -101,6 +110,6 @@ export function BenchmarkBar({
           <span>State avg: {formatValue(stateAvg, unit)}</span>
         )}
       </div>
-    </div>
+    </figure>
   );
 }

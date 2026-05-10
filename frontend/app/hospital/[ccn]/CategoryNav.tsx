@@ -4,7 +4,7 @@
 // Desktop: sticky left sidebar. Mobile: horizontal scrollable filter bar.
 
 import { useState } from "react";
-import { SAFETY_TAGS, CONDITION_TAGS, PROCESS_TAGS, UTILIZATION_TAGS, STATUS_TAGS } from "@/lib/measure-tags";
+import { MEASURE_TAGS } from "@/lib/measure-tags";
 import type { MeasureTag } from "@/lib/measure-tags";
 
 interface CategoryNavProps {
@@ -29,6 +29,7 @@ function TagButton({
   onClick: () => void;
 }): React.JSX.Element | null {
   const [expanded, setExpanded] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   if (count === 0) return null;
 
   return (
@@ -61,14 +62,20 @@ function TagButton({
       </button>
       {expanded && measureNames && measureNames.length > 0 && (
         <ul className="ml-3 border-l border-gray-100 pl-3 py-1">
-          {measureNames.slice(0, 10).map((name) => (
+          {(showAll ? measureNames : measureNames.slice(0, 10)).map((name) => (
             <li key={name} className="py-0.5 text-xs text-gray-400 leading-tight">
               {name}
             </li>
           ))}
-          {measureNames.length > 10 && (
-            <li className="py-0.5 text-xs text-gray-300">
-              +{measureNames.length - 10} more
+          {!showAll && measureNames.length > 10 && (
+            <li className="py-0.5">
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setShowAll(true); }}
+                className="text-xs text-blue-500 hover:text-blue-700"
+              >
+                +{measureNames.length - 10} more
+              </button>
             </li>
           )}
         </ul>
@@ -114,14 +121,59 @@ function TagSection({
   );
 }
 
+// Sidebar sections ordered to match the page layout:
+// 1. Patient Experience (matches the first content section)
+// 2. By Condition (matches the condition-based quality sections)
+// 3. Safety & Outcomes (filters for cross-cutting safety views)
+// 4. Utilization & Cost
+// 5. Status
+const PAGE_ORDER_SECTIONS: { label: string; tagIds: string[] }[] = [
+  {
+    label: "Patient Experience",
+    tagIds: ["patient_experience"],
+  },
+  {
+    label: "By Condition",
+    tagIds: ["heart", "lung", "stroke", "orthopedic", "colonoscopy", "cataract",
+             "cancer", "sepsis", "vte", "opioid"],
+  },
+  {
+    label: "Safety & Outcomes",
+    tagIds: ["mortality", "infections", "complications", "readmissions"],
+  },
+  {
+    label: "Process & Timely Care",
+    tagIds: ["timely_emergency", "surgical"],
+  },
+  {
+    label: "Utilization & Cost",
+    tagIds: ["imaging", "spending"],
+  },
+  {
+    label: "Status",
+    tagIds: ["not_reported"],
+  },
+];
+
 export function CategoryNav({
   activeTag,
   onTagChange,
   tagCounts,
   tagMeasureNames,
 }: CategoryNavProps): React.JSX.Element {
-  // All tags with counts for mobile bar
-  const allTags = [...SAFETY_TAGS, ...CONDITION_TAGS, ...PROCESS_TAGS, ...UTILIZATION_TAGS, ...STATUS_TAGS]
+  // Build tag objects from the ordered section definitions
+  const tagById = new Map(MEASURE_TAGS.map((t) => [t.id, t]));
+
+  const sectionTags = PAGE_ORDER_SECTIONS.map((s) => ({
+    label: s.label,
+    tags: s.tagIds
+      .map((id) => tagById.get(id))
+      .filter((t): t is NonNullable<typeof t> => t !== undefined),
+  }));
+
+  // All tags with counts for mobile bar (in page order)
+  const allTags = sectionTags
+    .flatMap((s) => s.tags)
     .filter((t) => (tagCounts[t.id] ?? 0) > 0);
 
   return (
@@ -145,11 +197,9 @@ export function CategoryNav({
             <span>All Measures</span>
           </button>
 
-          <TagSection label="Safety & Outcomes" tags={SAFETY_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
-          <TagSection label="By Condition" tags={CONDITION_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
-          <TagSection label="Experience & Process" tags={PROCESS_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
-          <TagSection label="Utilization & Cost" tags={UTILIZATION_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
-          <TagSection label="Status" tags={STATUS_TAGS} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
+          {sectionTags.map((s) => (
+            <TagSection key={s.label} label={s.label} tags={s.tags} activeTag={activeTag} tagCounts={tagCounts} tagMeasureNames={tagMeasureNames} onTagChange={onTagChange} />
+          ))}
         </div>
       </nav>
 

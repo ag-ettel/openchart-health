@@ -1,4 +1,5 @@
 {
     "claudeCode.initialPermissionMode": "bypassPermissions",
-    "github.copilot.chat.claudeAgent.enabled": false
+    "github.copilot.chat.claudeAgent.enabled": false,
+    "makefile.configureOnOpen": false
 }

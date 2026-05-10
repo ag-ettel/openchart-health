@@ -94,6 +94,10 @@ docs/decisions.md
 # Local PostgreSQL data directory
 .pgdata/
 
+# Scheduled refresh runtime artifacts
+.pipeline_refresh.lock
+logs/
+
 # Frontend build artifacts and dependencies
 frontend/.next/
 frontend/node_modules/

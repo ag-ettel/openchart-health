@@ -1,11 +1,18 @@
 import fs from "fs";
 import path from "path";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import type { Provider } from "@/types/provider";
-import { titleCase } from "@/lib/utils";
-import { MultipleComparisonDisclosure } from "@/components/MultipleComparisonDisclosure";
-import { PaymentAdjustmentHistory } from "@/components/PaymentAdjustmentHistory";
+import { extractCcnFromSlug, providerSlug, titleCase, formatPhone } from "@/lib/utils";
 import { HospitalSummaryDashboard } from "@/components/HospitalSummaryDashboard";
+import { SetCompareTarget } from "@/components/CompareContext";
+import { buildHospitalMetadata } from "@/lib/seo";
+import { buildHospitalBreadcrumbsJsonLd, buildHospitalJsonLd, jsonLdString } from "@/lib/structured-data";
 import { MeasuresSection } from "./MeasuresSection";
+
+// The `[ccn]` folder name is historical; the dynamic segment now carries the
+// full provider slug ({name}-{city}-{state}-{ccn}). The trailing 6-digit CCN
+// is the canonical key — extractCcnFromSlug pulls it out for data lookup.
 
 const DATA_DIR = path.join(process.cwd(), "..", "build", "data");
 
@@ -15,17 +22,56 @@ function loadProvider(ccn: string): Provider {
   return JSON.parse(raw) as Provider;
 }
 
+interface SearchIndexEntry {
+  provider_id: string;
+  provider_type: string;
+  name: string;
+  city: string | null;
+  state: string | null;
+}
+
 export function generateStaticParams(): { ccn: string }[] {
-  return [{ ccn: "010001" }];
+  // Required by Next.js `output: "export"`: every URL slug we want to render
+  // must be listed here. Read the search index and emit slugs for hospitals.
+  const indexPath = path.join(DATA_DIR, "search_index.json");
+  if (fs.existsSync(indexPath)) {
+    const raw = fs.readFileSync(indexPath, "utf-8");
+    const entries = JSON.parse(raw) as SearchIndexEntry[];
+    return entries
+      .filter((e) => e.provider_type === "HOSPITAL")
+      .map((e) => ({
+        ccn: providerSlug(e.name, e.city, e.state, e.provider_id),
+      }));
+  }
+  // Fallback before the search index is built: enumerate raw CCNs. Slugs won't
+  // be discoverable until the index exists, but the data files are still
+  // resolvable since extractCcnFromSlug accepts a bare 6-digit value too.
+  return fs
+    .readdirSync(DATA_DIR)
+    .filter((f) => f.endsWith(".json") && f !== "search_index.json")
+    .map((f) => f.replace(/\.json$/, ""))
+    .map((ccn) => ({ ccn }));
 }
 
 interface HospitalPageProps {
   params: Promise<{ ccn: string }>;
 }
 
-export default async function HospitalPage({ params }: HospitalPageProps): Promise<React.JSX.Element> {
-  const { ccn } = await params;
+export async function generateMetadata({ params }: HospitalPageProps): Promise<Metadata> {
+  const { ccn: slug } = await params;
+  const ccn = extractCcnFromSlug(slug);
+  if (!ccn) return {};
   const provider = loadProvider(ccn);
+  return buildHospitalMetadata(provider);
+}
+
+export default async function HospitalPage({ params }: HospitalPageProps): Promise<React.JSX.Element> {
+  const { ccn: slug } = await params;
+  const ccn = extractCcnFromSlug(slug);
+  if (!ccn) notFound();
+  const provider = loadProvider(ccn);
+  const ld = jsonLdString(buildHospitalJsonLd(provider));
+  const breadcrumbs = jsonLdString(buildHospitalBreadcrumbsJsonLd(provider));
 
   const addr = provider.address;
   const addressParts = [addr.street, addr.city, addr.state, addr.zip].filter(Boolean);
@@ -33,8 +79,21 @@ export default async function HospitalPage({ params }: HospitalPageProps): Promi
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: ld }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       {/* Provider header */}
       <header className="mb-6">
+        <SetCompareTarget
+          ccn={provider.provider_id}
+          name={provider.name}
+          providerType={provider.provider_type}
+        />
         <h1 className="text-2xl font-bold text-gray-900">{titleCase(provider.name)}</h1>
         <div className="mt-2 space-y-1">
           {addressLine && (
@@ -46,7 +105,7 @@ export default async function HospitalPage({ params }: HospitalPageProps): Promi
           {provider.phone && (
             <p className="flex items-center gap-2 text-sm text-gray-600">
               <svg className="h-4 w-4 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
-              {provider.phone}
+              {formatPhone(provider.phone)}
             </p>
           )}
         </div>
@@ -87,19 +146,6 @@ export default async function HospitalPage({ params }: HospitalPageProps): Promi
         providerLastUpdated={provider.last_updated}
         providerName={titleCase(provider.name)}
       />
-
-      {/* Payment adjustment history */}
-      {provider.payment_adjustments.length > 0 && (
-        <section className="mt-10 mb-8">
-          <h2 className="mb-3 text-lg font-semibold text-gray-900">
-            Payment and Value Programs
-          </h2>
-          <PaymentAdjustmentHistory
-            adjustments={provider.payment_adjustments}
-            providerType="HOSPITAL"
-          />
-        </section>
-      )}
 
       {/* Footer */}
       <footer className="border-t border-gray-200 pt-4 text-xs text-gray-500">

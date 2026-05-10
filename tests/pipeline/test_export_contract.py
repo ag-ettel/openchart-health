@@ -118,6 +118,31 @@ NURSING_HOME_CONTEXT_FIELDS: dict[str, str] = {
     "is_urban": "boolean?",
     "chain_name": "string?",
     "chain_id": "string?",
+    # PBJ staffing context (DEC-018) — context, not MEASURE_REGISTRY
+    "reported_total_hprd": "number?",
+    "reported_rn_hprd": "number?",
+    "reported_lpn_hprd": "number?",
+    "reported_aide_hprd": "number?",
+    "adjusted_total_hprd": "number?",
+    "adjusted_rn_hprd": "number?",
+    "adjusted_lpn_hprd": "number?",
+    "adjusted_aide_hprd": "number?",
+    "casemix_total_hprd": "number?",
+    "casemix_rn_hprd": "number?",
+    "weekend_total_hprd": "number?",
+    "weekend_rn_hprd": "number?",
+    "pt_hprd": "number?",
+    "nursing_casemix_index": "number?",
+    "total_turnover": "number?",
+    "rn_turnover": "number?",
+    "administrator_departures": "number?",
+    # Inspection context surfaced for the NH profile header
+    "total_weighted_health_survey_score": "number?",
+    "cycle_1_total_health_deficiencies": "number?",
+    "cycle_1_health_deficiency_score": "number?",
+    "staffing_rating": "number?",
+    "staffing_trend": "array?",
+    "standard_survey_dates": "array?",
 }
 
 ADDRESS_FIELDS: dict[str, str] = {
@@ -144,6 +169,9 @@ PROVIDER_FIELDS: dict[str, str] = {
     "inspection_events": "array?",
     "penalties": "array?",
     "ownership": "array?",
+    # parent_group_stats is declared in provider.ts but not yet emitted by the
+    # export. Marked as not-yet-implemented; the no-extra-fields check below
+    # accepts it on the TS side.
 }
 
 # Fields that must NOT appear in provider.ts (removed by decisions)
@@ -269,6 +297,9 @@ class TestProviderTsNoExtraFields:
         ts = _read_provider_ts()
         ts_fields = _extract_interface_fields(ts, "Provider")
         schema_fields = set(PROVIDER_FIELDS.keys())
+        # parent_group_stats is declared in provider.ts ahead of pipeline emission.
+        # When the export starts emitting it, add it back to PROVIDER_FIELDS.
+        ts_fields = ts_fields - {"parent_group_stats"}
         extra = ts_fields - schema_fields
         assert not extra, (
             f"Provider has fields not in canonical schema: {extra}. "

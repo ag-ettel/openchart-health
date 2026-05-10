@@ -94,6 +94,16 @@ export interface HospitalContext {
   hospital_overall_rating_footnote: string | null;
 }
 
+// Quarterly staffing snapshot from PBJ (Payroll-Based Journal) via Provider Information.
+// Deduplicated to one row per quarter (CMS publishes same values for 3 consecutive months).
+export interface StaffingTrendPeriod {
+  quarter_label:        string;         // e.g. "Q1 2024"
+  reported_total_hprd:  number | null;  // Reported total nurse hours per resident per day
+  reported_rn_hprd:     number | null;  // Reported RN hours per resident per day
+  adjusted_total_hprd:  number | null;  // Case-mix adjusted total nurse hours
+  total_turnover:       number | null;  // Total nursing staff turnover rate (%)
+}
+
 // Non-null when provider_type is "NURSING_HOME". Null for all other provider types.
 export interface NursingHomeContext {
   certified_beds:                          number | null;
@@ -106,6 +116,33 @@ export interface NursingHomeContext {
   is_urban:                                boolean | null;
   chain_name:                              string | null;
   chain_id:                                string | null;
+  // Current staffing snapshot (DEC-018)
+  reported_total_hprd:                     number | null;
+  reported_rn_hprd:                        number | null;
+  reported_aide_hprd:                      number | null;
+  reported_lpn_hprd:                       number | null;
+  adjusted_total_hprd:                     number | null;
+  adjusted_rn_hprd:                        number | null;
+  adjusted_aide_hprd:                      number | null;
+  adjusted_lpn_hprd:                       number | null;
+  casemix_total_hprd:                      number | null;
+  casemix_rn_hprd:                         number | null;
+  weekend_rn_hprd:                         number | null;
+  weekend_total_hprd:                      number | null;
+  pt_hprd:                                 number | null;
+  nursing_casemix_index:                   number | null;
+  total_turnover:                          number | null;
+  rn_turnover:                             number | null;
+  administrator_departures:                number | null;
+  staffing_rating:                         number | null;  // 1-5 star
+  // Inspection scoring
+  total_weighted_health_survey_score:      number | null;  // CMS composite deficiency score (higher = worse)
+  cycle_1_total_health_deficiencies:       number | null;
+  cycle_1_health_deficiency_score:         number | null;
+  // Quarterly staffing trend from PBJ archives
+  staffing_trend:                          StaffingTrendPeriod[] | null;
+  // Standard survey dates from Provider Info (Rating Cycle fields).
+  standard_survey_dates:                   string[] | null;
 }
 
 // DEC-028: inspection events with contested citation transparency
@@ -151,6 +188,10 @@ export interface OwnershipEntry {
   ownership_percentage:             number | null;
   ownership_percentage_not_provided: boolean;
   association_date:                 string | null;  // ISO8601
+  parent_group_id:                  string | null;  // Entity resolution: slug of parent corporate group
+  parent_group_name:                string | null;  // Entity resolution: display name of parent group
+  entity_facility_count:            number | null;  // Total facilities this entity appears in (for viz sizing)
+  parent_group_facility_count:      number | null;  // Total facilities in the parent corporate group (deduplicated)
 }
 
 export interface Address {
@@ -158,6 +199,48 @@ export interface Address {
   city:   string | null;
   state:  string | null;
   zip:    string | null;
+}
+
+export interface ParentGroupStats {
+  parent_group_name:                string;
+  facility_count:                   number;
+  // Inspection event aggregates (120-day clustering, most recent event per facility)
+  avg_citations_per_event:          number | null;
+  avg_jkl_per_event:                number | null;
+  avg_ghi_per_event:                number | null;
+  avg_df_per_event:                 number | null;
+  avg_ac_per_event:                 number | null;
+  facilities_with_recent_ij:        number | null;
+  pct_facilities_with_recent_ij:    number | null;
+  nat_pct_facilities_with_recent_ij: number | null;
+  nat_avg_citations_per_event:      number;
+  nat_avg_jkl_per_event:            number;
+  nat_avg_ghi_per_event:            number;
+  nat_avg_df_per_event:             number;
+  nat_avg_ac_per_event:             number;
+  // Provider-level aggregates
+  avg_fines:                        number | null;
+  nat_avg_fines:                    number | null;
+  avg_penalties:                    number | null;
+  nat_avg_penalties:                number | null;
+  sff_count:                        number;
+  abuse_icon_count:                 number;
+  nat_pct_sff:                      number | null;
+  nat_pct_abuse:                    number | null;
+  avg_beds:                         number | null;
+  // Staffing threshold rollups: share of group facilities (with a reported
+  // value) below the CMS minimum HPRD. Numerator/denominator carried alongside
+  // the percentage so the UI can show "N of M facilities" honestly.
+  facilities_with_reported_total_hprd?:    number;
+  facilities_below_total_nurse_threshold?: number;
+  pct_below_total_nurse_threshold?:        number | null;
+  facilities_with_reported_rn_hprd?:       number;
+  facilities_below_rn_threshold?:          number;
+  pct_below_rn_threshold?:                 number | null;
+  nat_pct_below_total_nurse_threshold?:    number | null;
+  nat_pct_below_rn_threshold?:             number | null;
+  min_total_nurse_hprd_threshold?:         number;
+  min_rn_hprd_threshold?:                  number;
 }
 
 export interface Provider {
@@ -177,4 +260,5 @@ export interface Provider {
   inspection_events:    InspectionEvent[] | null;      // non-null for NURSING_HOME only
   penalties:            Penalty[] | null;              // non-null for NURSING_HOME only
   ownership:            OwnershipEntry[] | null;       // non-null for NURSING_HOME only
+  parent_group_stats:   ParentGroupStats | null;       // non-null when parent group resolved
 }

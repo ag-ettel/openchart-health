@@ -256,6 +256,14 @@ Same architecture as hospitals, plus:
 - Ownership entity display with legal disclaimers (legal-compliance.md)
 - Five-Star sub-rating display
 
+### Ownership entity resolution (researcher tier feature)
+
+See `docs/ownership_entity_resolution.md` for full specification. Semi-automated
+clustering of 81K Organization-type ownership records into parent corporate groups,
+enabling cross-facility operator analysis. Human-curated reference table. Ownership
+change detection from 82 monthly snapshots. This is the anchor feature for the
+researcher subscription model.
+
 ### Performance optimization (when needed)
 
 **7. Batch upserts for pipeline speed.**

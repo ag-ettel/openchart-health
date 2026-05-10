@@ -48,6 +48,30 @@ export const MEASURE_TAGS: MeasureTag[] = [
   { id: "not_reported",       label: "Not Reported",               order: 90 },
 ];
 
+// Nursing home tag definitions. Separate from hospital tags per frontend-spec.md.
+export const NH_MEASURE_TAGS: MeasureTag[] = [
+  // Safety & inspections — what can seriously harm residents
+  { id: "critical_safety",     label: "Critical Safety Indicators",   order: 0 },
+  { id: "nh_inspections",      label: "Inspection Findings",          order: 1 },
+  { id: "nh_penalties",        label: "Penalties",                    order: 2 },
+  // Quality domains
+  { id: "nh_star_rating",      label: "Five-Star Ratings",            order: 10 },
+  { id: "nh_long_stay",        label: "Long-Stay Quality",            order: 11 },
+  { id: "nh_short_stay",       label: "Short-Stay Quality",           order: 12 },
+  { id: "nh_claims",           label: "Claims-Based Quality",         order: 13 },
+  { id: "nh_staffing",         label: "Staffing",                     order: 14 },
+  { id: "nh_snf_qrp",          label: "SNF Quality Reporting",        order: 15 },
+  // Utilization & cost
+  { id: "spending",            label: "Spending",                     order: 30 },
+  // Status
+  { id: "not_reported",        label: "Not Reported",                 order: 90 },
+];
+
+export const NH_SAFETY_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 0 && t.order < 10);
+export const NH_QUALITY_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 10 && t.order < 30);
+export const NH_UTILIZATION_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 30 && t.order < 90);
+export const NH_STATUS_TAGS = NH_MEASURE_TAGS.filter((t) => t.order >= 90);
+
 // Tag groups for sidebar sections
 export const SAFETY_TAGS = MEASURE_TAGS.filter((t) => t.order >= 0 && t.order < 10);
 export const CONDITION_TAGS = MEASURE_TAGS.filter((t) => t.order >= 10 && t.order < 20);
@@ -165,6 +189,53 @@ export function getTagsForMeasure(m: Measure): string[] {
   return [...new Set(tags)]; // deduplicate
 }
 
+/** Derive tags for a nursing home measure from its properties and measure_group. */
+export function getTagsForNHMeasure(m: Measure): string[] {
+  const tags: string[] = [];
+
+  if (m.suppressed || m.not_reported) {
+    tags.push("not_reported");
+  }
+
+  if (m.tail_risk_flag && !m.suppressed && !m.not_reported) {
+    tags.push("critical_safety");
+  }
+
+  switch (m.measure_group) {
+    case "NH_STAR_RATING":
+      tags.push("nh_star_rating");
+      break;
+    case "NH_QUALITY_LONG_STAY":
+      tags.push("nh_long_stay");
+      break;
+    case "NH_QUALITY_SHORT_STAY":
+      tags.push("nh_short_stay");
+      break;
+    case "NH_QUALITY_CLAIMS":
+      tags.push("nh_claims");
+      break;
+    case "NH_STAFFING":
+      tags.push("nh_staffing");
+      break;
+    case "NH_SNF_QRP":
+      tags.push("nh_snf_qrp");
+      break;
+    case "NH_INSPECTION":
+      tags.push("nh_inspections");
+      break;
+    case "NH_PENALTIES":
+      tags.push("nh_penalties");
+      break;
+    case "SPENDING":
+      tags.push("spending");
+      break;
+    default:
+      break;
+  }
+
+  return [...new Set(tags)];
+}
+
 // --- HCAHPS Collapse ---
 
 /** HCAHPS question groups. Key = group base, value = consumer label. */
@@ -216,7 +287,7 @@ export interface HCAHPSGroup {
 }
 
 /** Extract the HCAHPS group base from a measure ID. */
-function hcahpsBase(id: string): string | null {
+export function hcahpsBase(id: string): string | null {
   // Try longest match first
   const sorted = Object.keys(HCAHPS_GROUPS).sort((a, b) => b.length - a.length);
   for (const base of sorted) {
@@ -268,7 +339,25 @@ export function groupHCAHPS(measures: Measure[]): HCAHPSGroup[] {
     }
   }
 
-  return Array.from(groupMap.values()).sort((a, b) =>
-    a.label.localeCompare(b.label)
-  );
+  // Curated display order: overall first, then communication grouped, then environment
+  const ORDER: string[] = [
+    // Overall — leads the section
+    "H_HSP_RATING", "H_RECMND",
+    // Nurse communication
+    "H_COMP_1", "H_NURSE_LISTEN", "H_NURSE_RESPECT", "H_NURSE_EXPLAIN",
+    // Doctor communication
+    "H_COMP_2", "H_DOCTOR_LISTEN", "H_DOCTOR_RESPECT", "H_DOCTOR_EXPLAIN",
+    // Medication communication
+    "H_COMP_5", "H_MED_FOR", "H_SIDE_EFFECTS",
+    // Discharge & follow-up
+    "H_COMP_6", "H_DISCH_HELP", "H_SYMPTOMS",
+    // Environment
+    "H_CLEAN_HSP", "H_CLEAN", "H_QUIET_HSP", "H_QUIET",
+  ];
+
+  return Array.from(groupMap.values()).sort((a, b) => {
+    const aIdx = ORDER.indexOf(a.groupBase);
+    const bIdx = ORDER.indexOf(b.groupBase);
+    return (aIdx >= 0 ? aIdx : 999) - (bIdx >= 0 ? bIdx : 999);
+  });
 }

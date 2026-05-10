@@ -18,6 +18,7 @@ interface PatientSafetyRecordProps {
   paymentAdjustments: PaymentAdjustment[];
   providerLastUpdated: string;
   providerName?: string;
+  providerType?: string;
 }
 
 function sortTailRisk(measures: Measure[]): Measure[] {
@@ -39,6 +40,7 @@ export function PatientSafetyRecord({
   paymentAdjustments,
   providerLastUpdated,
   providerName = "This hospital",
+  providerType,
 }: PatientSafetyRecordProps): React.JSX.Element {
   const [showAll, setShowAll] = useState(false);
 
@@ -82,7 +84,7 @@ export function PatientSafetyRecord({
                 measure={m}
                 providerLastUpdated={providerLastUpdated}
                 providerName={providerName}
-                inlineTrend
+                providerType={providerType}
               />
             ))}
           </div>

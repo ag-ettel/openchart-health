@@ -17,6 +17,7 @@ interface MeasureGroupProps {
   groupName: string; // measure_group value; used as section heading
   measures: Measure[]; // all measures for this group, pre-filtered
   providerLastUpdated: string;
+  providerType?: string;
 }
 
 // Deduplicate attribution lines by source_dataset_name. Different measures in
@@ -52,6 +53,7 @@ export function MeasureGroup({
   groupName,
   measures,
   providerLastUpdated,
+  providerType,
 }: MeasureGroupProps): React.JSX.Element {
   const showSES = hasSESSensitivity(measures);
   const grouped = groupByMeasureId(measures);
@@ -104,6 +106,7 @@ export function MeasureGroup({
             key={`${m.measure_id}-${m.period_label}-${m.stratification ?? ""}`}
             measure={m}
             providerLastUpdated={providerLastUpdated}
+            providerType={providerType}
           />
         ))}
       </div>

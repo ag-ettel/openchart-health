@@ -33,7 +33,8 @@
       "Bash(python -c \"import fitz; print\\(''pymupdf available''\\)\")",
       "Bash(python -c \"import pdfminer; print\\(''pdfminer available''\\)\")",
       "Bash(python -c \"import PyPDF2; print\\(''PyPDF2 available''\\)\")",
-      "Bash(curl -s \"https://data.cms.gov/provider-data/api/1/datastore/query/y2hd-n93e/0?offset=0&count=true&results=true&schema=true&keys=true&format=json&rowIds=false&limit=100\" -o \"e:/openchart-health/tests/pipeline/fixtures/nursing_home/y2hd-n93e.json\")"
+      "Bash(curl -s \"https://data.cms.gov/provider-data/api/1/datastore/query/y2hd-n93e/0?offset=0&count=true&results=true&schema=true&keys=true&format=json&rowIds=false&limit=100\" -o \"e:/openchart-health/tests/pipeline/fixtures/nursing_home/y2hd-n93e.json\")",
+      "Bash(python scripts/compute_hcahps_ci.py)"
     ],
     "additionalDirectories": [
       "e:\\openchart-health"

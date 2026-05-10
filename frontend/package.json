@@ -7,9 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:search-index": "tsx scripts/build-search-index.ts"
+    "build:search-index": "tsx scripts/build-search-index.ts",
+    "build:measure-index": "tsx scripts/build-measure-indexes.ts",
+    "build:og-image": "tsx scripts/build-og-image.ts",
+    "build:icons": "tsx scripts/build-icons.ts",
+    "seo-check": "tsx scripts/check-seo.ts"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@sentry/nextjs": "^10.52.0",
     "next": "^15.5.14",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

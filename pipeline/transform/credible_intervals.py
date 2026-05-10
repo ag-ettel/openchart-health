@@ -3,7 +3,7 @@ Bayesian credible interval calculation for measures where CMS does not
 publish interval bounds.
 
 Applies to measures where:
-  - risk_adjustment_model == "NONE"
+  - risk_adjustment_model in ("NONE", "PATIENT_MIX_ADJUSTMENT")
   - numerator_denominator_published == True
 
 Uses a Beta-Binomial conjugate model with a tiered informative prior:
@@ -13,6 +13,13 @@ Uses a Beta-Binomial conjugate model with a tiered informative prior:
 
 See DEC-029 in docs/pipeline_decisions.md and docs/data_dictionary.md
 § Interval Estimation Methodology for full specification.
+
+PATIENT_MIX_ADJUSTMENT measures (HCAHPS): CMS adjusts the published
+percentages for patient mix but does not publish interval bounds. The
+sampling uncertainty from finite survey counts is real and material. We
+treat the adjusted top-box percentage as a binomial proportion with
+n = completed surveys. The numerator is derived: round(percentage * n / 100).
+See DEC-039 in docs/pipeline_decisions.md.
 
 This module is called by the transform layer after normalization has
 populated numeric_value, denominator, state_avg, and national_avg.
@@ -188,6 +195,9 @@ def calculate_credible_interval(
     )
 
 
+_CI_ELIGIBLE_MODELS = {"NONE", "PATIENT_MIX_ADJUSTMENT"}
+
+
 def is_ci_calculable(
     risk_adjustment_model: Optional[str],
     cms_ci_published: Optional[bool],
@@ -197,13 +207,17 @@ def is_ci_calculable(
 
     Returns True only when:
       - CMS does NOT already publish interval bounds
-      - The measure uses no risk adjustment (raw rate)
-      - Numerator and denominator are available in the CMS data
+      - The measure uses a CI-eligible risk adjustment model
+      - Numerator and denominator are available (or derivable) from CMS data
 
     Parameters
     ----------
     risk_adjustment_model : str or None
-        From MEASURE_REGISTRY. Must be "NONE" for calculation to apply.
+        From MEASURE_REGISTRY. Must be in _CI_ELIGIBLE_MODELS.
+        "NONE" = unadjusted raw rate.
+        "PATIENT_MIX_ADJUSTMENT" = HCAHPS patient-mix adjusted percentage
+        (DEC-039: sampling uncertainty from finite surveys is real; numerator
+        derived from adjusted percentage × survey count).
     cms_ci_published : bool or None
         True if CMS publishes interval bounds. None = REVIEW_NEEDED.
     numerator_denominator_published : bool or None
@@ -217,9 +231,8 @@ def is_ci_calculable(
     if cms_ci_published is None or numerator_denominator_published is None:
         return False
 
-    # Only calculate for unadjusted raw rates with published counts.
     return (
-        risk_adjustment_model == "NONE"
+        risk_adjustment_model in _CI_ELIGIBLE_MODELS
         and numerator_denominator_published is True
     )
 

@@ -51,6 +51,23 @@ class TestImaging:
         r = imaging_row(self._make_row())
         assert r["compared_to_national"] is None
 
+    def test_unknown_measure_id_logs_but_normalizes(self) -> None:
+        # An unknown measure_id is logged but not rejected (antifragile pattern)
+        r = imaging_row(self._make_row(measure_id="OP-XYZ"))
+        assert r is not None
+        assert r["measure_id"] == "OP-XYZ"
+
+    def test_normalize_dataset_filters_retired(self) -> None:
+        rows = [
+            self._make_row(measure_id="OP-8"),
+            self._make_row(measure_id="OP-9"),  # retired, dropped
+            self._make_row(measure_id="OP-10"),
+            self._make_row(measure_id="OP-14"),  # retired, dropped
+        ]
+        results = imaging_normalize(rows)
+        ids = [r["measure_id"] for r in results]
+        assert ids == ["OP-8", "OP-10"]
+
 
 # =========================================================================
 # MSPB
@@ -146,6 +163,66 @@ class TestHospitalInfo:
     def test_zero_padding(self) -> None:
         r = info_row(self._make_row(facility_id="1001"))
         assert r["provider_id"] == "001001"
+
+    def test_emergency_services_no(self) -> None:
+        r = info_row(self._make_row(emergency_services="No"))
+        assert r["is_emergency_services"] is False
+
+    def test_emergency_services_unparseable_returns_none(self) -> None:
+        r = info_row(self._make_row(emergency_services="maybe"))
+        assert r["is_emergency_services"] is None
+
+    def test_birthing_friendly_n(self) -> None:
+        r = info_row(self._make_row(meets_criteria_for_birthing_friendly_designation="N"))
+        assert r["birthing_friendly_designation"] is False
+
+    def test_footnote_short_code_pass_through(self) -> None:
+        # "16" passes straight through (already short)
+        r = info_row(self._make_row(hospital_overall_rating_footnote="16"))
+        assert r["hospital_overall_rating_footnote"] == "16"
+
+    def test_footnote_extracts_leading_number(self) -> None:
+        # "16 - There are too few measures..." → "16"
+        r = info_row(self._make_row(
+            hospital_overall_rating_footnote="16 - There are too few measures to calculate"
+        ))
+        assert r["hospital_overall_rating_footnote"] == "16"
+
+    def test_footnote_text_only_too_few_measures(self) -> None:
+        # 2019-style full text with no leading code → mapped to "16"
+        r = info_row(self._make_row(
+            hospital_overall_rating_footnote="There are too few measures to calculate a rating"
+        ))
+        assert r["hospital_overall_rating_footnote"] == "16"
+
+    def test_footnote_text_only_results_cannot_be_calculated(self) -> None:
+        r = info_row(self._make_row(
+            hospital_overall_rating_footnote="Results cannot be calculated for this hospital"
+        ))
+        assert r["hospital_overall_rating_footnote"] == "13"
+
+    def test_footnote_text_only_dod(self) -> None:
+        r = info_row(self._make_row(
+            hospital_overall_rating_footnote="Not calculated for DoD hospitals"
+        ))
+        assert r["hospital_overall_rating_footnote"] == "22"
+
+    def test_footnote_text_only_iqr(self) -> None:
+        r = info_row(self._make_row(
+            hospital_overall_rating_footnote="Hospital chose not to participate in IQR program"
+        ))
+        assert r["hospital_overall_rating_footnote"] == "19"
+
+    def test_footnote_unparseable_truncated(self) -> None:
+        # Unknown long text gets truncated to 8 chars (with anomaly logged)
+        r = info_row(self._make_row(
+            hospital_overall_rating_footnote="Some completely unknown footnote string here"
+        ))
+        assert r["hospital_overall_rating_footnote"] == "Some com"
+
+    def test_footnote_empty_returns_none(self) -> None:
+        r = info_row(self._make_row(hospital_overall_rating_footnote=""))
+        assert r["hospital_overall_rating_footnote"] is None
 
 
 # =========================================================================

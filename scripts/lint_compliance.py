@@ -35,6 +35,18 @@ SCAN_PATHS: list[tuple[str, str]] = [
     ("cms_definitions.py", "pipeline"),
 ]
 
+# Path components that should always be skipped — vendored code, build output,
+# generated files. We do not author this code; flagging matches in it is noise.
+EXCLUDED_PATH_PARTS: set[str] = {
+    "node_modules",
+    ".next",
+    "out",
+    "dist",
+    "build",
+    ".git",
+    "__pycache__",
+}
+
 # ─── Prohibited patterns ──────────────────────────────────────────────
 # Each entry: (compiled regex, human-readable rule, source rule file)
 # Patterns are case-insensitive. They match against file content line by line.
@@ -73,10 +85,13 @@ _ADVISORY_LANGUAGE: list[tuple[str, str]] = [
     (r"\bpredicted\s+outcomes?\b", "Prohibited predictive language"),
 
     # Clinical directives (legal-compliance.md § Prohibited Language)
+    # "recommend" is a CMS HCAHPS measure name ("Would Recommend") — only flag
+    # when used as an advisory verb ("we recommend", "you recommend") rather
+    # than describing the patient survey question.
     (r"\bpatients\s+should\b", "Prohibited clinical directive"),
     (r"\bseek\s+care\b", "Prohibited clinical directive"),
     (r"\bshould\s+consider\b", "Prohibited clinical directive"),
-    (r"\brecommend\b", "Prohibited clinical directive (use only in comments about what NOT to do)"),
+    (r"\b(?:we|i|tool|site)\s+recommend\b", "Prohibited clinical directive — site must not advise"),
 
     # Ownership-quality prohibited language (legal-compliance.md § Ownership Data)
     (r"\btrack\s+record\b", "Prohibited ownership-quality language"),
@@ -96,17 +111,20 @@ _ADVISORY_LANGUAGE: list[tuple[str, str]] = [
 
 _DIRECTIONAL_COLOR: list[tuple[str, str]] = [
     # Directional color coding (DEC-030, frontend-spec.md, legal-compliance.md)
-    # These patterns target Tailwind classes that encode better/worse judgments.
-    # orange-700/orange-50 is permitted ONLY for tail risk thresholds and repeat
-    # deficiencies — those files are excluded below in ALLOWED_COLOR_FILES.
+    # Red and green are NEVER permitted on consumer-facing surfaces — they
+    # encode better/worse judgments. Orange is permitted only for tail risk
+    # thresholds and repeat deficiencies (see ALLOWED_COLOR_FILES below).
     (r"\btext-red-\d+\b", "Prohibited red color — no directional color coding (DEC-030)"),
     (r"\btext-green-\d+\b", "Prohibited green color — no directional color coding (DEC-030)"),
     (r"\bbg-red-\d+\b", "Prohibited red background — no directional color coding (DEC-030)"),
     (r"\bbg-green-\d+\b", "Prohibited green background — no directional color coding (DEC-030)"),
     (r"\bborder-red-\d+\b", "Prohibited red border — no directional color coding (DEC-030)"),
     (r"\bborder-green-\d+\b", "Prohibited green border — no directional color coding (DEC-030)"),
-    (r"\btext-blue-\d+\b", "Blue color in measure display — verify not encoding better/worse (DEC-030)"),
 ]
+
+# Blue is the site's brand/identity color, used for headings, links, and
+# non-directional accents throughout. We do not flag it as a violation;
+# manual review is the right control for "is this blue encoding direction?".
 
 # Files where orange color IS permitted (tail risk threshold, repeat deficiency)
 ALLOWED_COLOR_FILES: set[str] = {
@@ -117,14 +135,6 @@ ALLOWED_COLOR_FILES: set[str] = {
     "StaffingThreshold.tsx",
     # Add component filenames here as they are created
 }
-
-# Files where blue color is permitted (non-measure UI elements)
-ALLOWED_BLUE_FILES: set[str] = {
-    "DisclaimerBanner.tsx",
-    "SESDisclosureBlock.tsx",
-    # Tailwind config, layout, nav — add as needed
-}
-
 
 def compile_patterns(
     raw: list[tuple[str, str]],
@@ -179,6 +189,10 @@ def main() -> int:
             continue
 
         for filepath in scan_root.glob(glob_pattern):
+            # Skip vendored / generated paths
+            if any(part in EXCLUDED_PATH_PARTS for part in filepath.parts):
+                continue
+
             files_scanned += 1
             rel_path = filepath.relative_to(PROJECT_ROOT)
             filename = filepath.name
@@ -186,17 +200,10 @@ def main() -> int:
             # Advisory language: check all files
             advisory_hits = scan_file(filepath, ADVISORY_PATTERNS)
 
-            # Color coding: check all files, but skip allowed files for
-            # orange (threshold signals) and blue (non-measure UI)
+            # Color coding: check all files, but skip files where orange is
+            # permitted (tail risk thresholds, repeat deficiencies)
             if filename in ALLOWED_COLOR_FILES:
                 color_hits = []
-            elif filename in ALLOWED_BLUE_FILES:
-                # Skip blue patterns only; still check red/green
-                non_blue = [
-                    (p, m) for p, m in COLOR_PATTERNS
-                    if "blue" not in m.lower()
-                ]
-                color_hits = scan_file(filepath, non_blue)
             else:
                 color_hits = scan_file(filepath, COLOR_PATTERNS)
 

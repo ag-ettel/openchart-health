@@ -25,7 +25,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { TrendPeriod } from "@/types/provider";
-import { formatValue } from "@/lib/utils";
+import { formatValue, formatPeriodLabel, periodEndKey } from "@/lib/utils";
 import {
   TREND_MINIMUM_PERIODS_TEXT,
   METHODOLOGY_CHANGE_FOOTNOTE_TEXT,
@@ -33,7 +33,7 @@ import {
 
 const DATA_COLOR = "#2563eb";
 const DATA_COLOR_LIGHT = "#93c5fd";
-const NATIONAL_AVG_COLOR = "#9ca3af";
+const NATIONAL_AVG_COLOR = "#ea580c"; // orange-600 — matches site color scheme
 const STATE_AVG_COLOR = "#d1d5db";
 const CI_BAND_COLOR = "#dbeafe";
 
@@ -79,12 +79,35 @@ interface ChartPoint {
 }
 
 const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+/** Extract and format the period end date for x-axis display. */
 function shortenPeriod(label: string): string {
-  const match = label.match(/to\s+(\d{4})-(\d{2})/);
-  if (match) {
-    const [, y, m] = match;
+  // Hospital format: "2021-04 to 2024-03"
+  const hospMatch = label.match(/to\s+(\d{4})-(\d{2})/);
+  if (hospMatch) {
+    const [, y, m] = hospMatch;
     return `${MONTH_ABBR[parseInt(m, 10) - 1]} ${y}`;
   }
+
+  // NH compact date range: "20180401-20190331" (YYYYMMDD-YYYYMMDD)
+  const nhDateMatch = label.match(/^\d{8}-(\d{4})(\d{2})\d{2}$/);
+  if (nhDateMatch) {
+    const [, y, m] = nhDateMatch;
+    return `${MONTH_ABBR[parseInt(m, 10) - 1]} ${y}`;
+  }
+
+  // NH quarterly: "2024Q2-2025Q1" or "2024Q2-2025Q1_Q4"
+  const nhQtrMatch = label.match(/\d{4}Q\d-(\d{4})(Q\d)/);
+  if (nhQtrMatch) {
+    return `${nhQtrMatch[2]} ${nhQtrMatch[1]}`;
+  }
+
+  // Single quarter: "2024Q2" or "2018Q3"
+  const singleQtr = label.match(/^(\d{4})(Q\d)$/);
+  if (singleQtr) {
+    return `${singleQtr[2]} ${singleQtr[1]}`;
+  }
+
+  // Fallback: last segment after " to " or the label itself
   const parts = label.split(" to ");
   return parts[parts.length - 1] ?? label;
 }
@@ -151,7 +174,8 @@ function CustomTooltip({
   const point = payload[0]?.payload;
   if (!point) return null;
 
-  const period = point.period as string;
+  const periodRaw = point.period as string;
+  const period = formatPeriodLabel(periodRaw);
   const suppressed = point._suppressed as boolean;
   const notReported = point._notReported as boolean;
   const cases = point._cases as number | null;
@@ -234,8 +258,15 @@ export function TrendChart({
   distributionMax = null,
 }: TrendChartProps): React.JSX.Element | null {
   const chartData: ChartPoint[] = useMemo(
-    () =>
-      (trend ?? []).map((t, i, arr) => {
+    () => {
+      // Sort trend chronologically using shared periodEndKey utility
+      const sorted = [...(trend ?? [])]
+        .filter((t) => t.period_label !== "unknown")
+        .sort(
+          (a, b) => periodEndKey(a.period_label).localeCompare(periodEndKey(b.period_label))
+        );
+
+      return sorted.map((t, i, arr) => {
         const isLast = i === arr.length - 1;
         return {
           period: t.period_label,
@@ -249,7 +280,8 @@ export function TrendChart({
           notReported: t.not_reported,
           methodologyChange: t.methodology_change_flag,
         };
-      }),
+      });
+    },
     [trend, ciLower, ciUpper]
   );
 
@@ -292,13 +324,18 @@ export function TrendChart({
     let min: number;
     let max: number;
 
-    if (unit === "percent" && distributionMin !== null && distributionMax !== null) {
-      // Bounded: use distribution range, expand if hospital exceeds it
-      min = Math.min(distributionMin, histMin);
-      max = Math.max(distributionMax, histMax);
-      // Round to nearest 5%
-      min = Math.max(0, Math.floor(min / 5) * 5 - 5);
-      max = Math.min(100, Math.ceil(max / 5) * 5 + 5);
+    if (unit === "percent") {
+      // For trend charts: use the data range with generous padding so
+      // the trajectory is visible but changes aren't exaggerated.
+      // Include national average in range if available.
+      const refValues = [histMin, histMax];
+      if (nationalAvg !== null && nationalAvg !== undefined) refValues.push(nationalAvg);
+      min = Math.min(...refValues);
+      max = Math.max(...refValues);
+      const span = max - min;
+      const pad = Math.max(span * 0.25, 2); // at least 2 percentage points of padding
+      min = Math.max(0, Math.floor((min - pad) / 5) * 5);
+      max = Math.min(100, Math.ceil((max + pad) / 5) * 5);
     } else {
       // Unbounded: include point values AND CI bounds — uncertainty is visible
       const ciLows = chartData.filter(p => p.ciLow !== null).map(p => p.ciLow!);
@@ -332,6 +369,7 @@ export function TrendChart({
         <ComposedChart
           data={data}
           margin={{ top: 8, right: 40, bottom: 4, left: yAxisLabel ? 12 : 4 }}
+          accessibilityLayer
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false} />
 
@@ -404,11 +442,13 @@ export function TrendChart({
             <ReferenceLine
               y={nationalAvg}
               stroke={NATIONAL_AVG_COLOR}
+              strokeWidth={1.5}
               strokeDasharray="6 3"
               label={{
-                value: `Natl avg: ${formatValue(nationalAvg, unit)}`,
+                value: `Nat'l avg: ${formatValue(nationalAvg, unit)}`,
                 position: "insideTopRight",
-                fontSize: 10,
+                fontSize: 11,
+                fontWeight: 600,
                 fill: NATIONAL_AVG_COLOR,
               }}
             />

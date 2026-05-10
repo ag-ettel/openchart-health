@@ -326,7 +326,10 @@ def parse_decimal(raw: str | None) -> Decimal | None:
     try:
         return Decimal(cleaned)
     except InvalidOperation:
-        logger.warning("Unparseable decimal: %r", raw)
+        # EDV categorical scores ("very high", "high", "medium", "low") and other
+        # CMS string values flow through here legitimately and are stored as
+        # score_text. Demote to debug so they don't flood the ingest log.
+        logger.debug("Non-numeric value for parse_decimal: %r", raw)
         return None
 
 

@@ -26,6 +26,17 @@ const PROGRAM_LABELS: Record<PaymentProgram, string> = {
   SNF_VBP: "SNF Value-Based Purchasing Program",
 };
 
+const PROGRAM_DESCRIPTIONS: Record<PaymentProgram, string> = {
+  HRRP:
+    "A Medicare program that adjusts payments to hospitals based on their 30-day readmission rates. Hospitals with higher-than-expected readmissions for certain conditions receive payment reductions. The reduction is applied to all Medicare payments to that hospital for the federal fiscal year.",
+  HACRP:
+    "A Medicare program that reduces payments to hospitals in the lowest quartile for hospital-acquired conditions (e.g., infections, falls, pressure ulcers). Penalized hospitals see a 1% reduction in all Medicare inpatient payments for the federal fiscal year.",
+  VBP:
+    "A Medicare program that adjusts hospital payments based on quality performance across clinical outcomes, safety, person and community engagement, and efficiency. Hospitals can receive bonuses or reductions based on their total performance score relative to peers.",
+  SNF_VBP:
+    "A Medicare program that adjusts payments to skilled nursing facilities based on a hospital readmission measure. Facilities with higher-than-expected readmissions among Medicare-discharged residents receive payment reductions; facilities with better performance can receive small bonuses. Affects facility revenue, not what residents or families pay directly.",
+};
+
 // Programs to display per provider type.
 const HOSPITAL_PROGRAMS: PaymentProgram[] = ["HRRP", "HACRP", "VBP"];
 const NH_PROGRAMS: PaymentProgram[] = ["SNF_VBP"];
@@ -68,9 +79,18 @@ export function PaymentAdjustmentHistory({
 
         return (
           <div key={program} className="mb-4">
-            <h3 className="mb-2 text-sm font-semibold text-gray-700">
+            <h3 className="mb-1 text-sm font-semibold text-gray-700">
               {PROGRAM_LABELS[program]}
             </h3>
+            <details className="mb-2 group">
+              <summary className="cursor-pointer text-xs text-blue-500 hover:text-blue-600 select-none list-none">
+                <span className="group-open:hidden">What is this program?</span>
+                <span className="hidden group-open:inline">Hide description</span>
+              </summary>
+              <p className="mt-1 text-xs leading-relaxed text-gray-500">
+                {PROGRAM_DESCRIPTIONS[program]}
+              </p>
+            </details>
 
             {/* Consecutive HACRP penalty — orange threshold signal (DEC-030) */}
             {isHACRPConsecutive && (

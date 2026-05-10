@@ -1,25 +1,25 @@
-"use client";
+// /filter-explore — sort and filter CMS measures across all hospitals.
+//
+// This is a research and exploration tool, not a leaderboard. // compliance-ok
+// Users select a measure, see all hospitals that report it, and sort/filter
+// the list. The user controls sort order — the tool does not editorialize
+// which end matters.
+//
+// See:
+//   .claude/rules/legal-compliance.md § Positioning (sort/filter constraints)
+//   .claude/rules/frontend-spec.md (filter-explore positioning notes)
+//   .claude/rules/data-integrity.md (suppression, footnotes, periods, samples)
+//
+// The page is a thin server-component shell that renders a client component.
+// All filtering, sorting, and data fetching happens client-side because the
+// per-measure index files (one per measure_id) are too large to embed.
 
-// Research tool. Deferred to post-hospital-launch build phase.
-// See .claude/rules/frontend-spec.md before implementing.
-//
-// This page is a filter-and-explore tool, not a leaderboard. // compliance-ok
-// Do not implement until the hospital build is running in production
-// and the pipeline is generating build/data/filterexplore_index.json.
-//
-// When implementing, the following are non-negotiable:
-//   - DisclaimerBanner at the top.
-//   - Page title and description must not use "top," "best," "ranked,"
-//     or superlative language of any kind.
-//   - Sorting on a measure column is permitted. The sorted view must
-//     display the measure's ComparisonResult (national average) alongside
-//     each value so the sort context is statistically grounded.
-//   - Filtering is permitted by: state, urban_rural_classification,
-//     is_critical_access, is_teaching_hospital, provider_subtype.
-//   - No composite or aggregate score column.
-//   - Each hospital name links to /hospital/[ccn], not to an inline expand.
-//   - Data source is build/data/filterexplore_index.json (pipeline output).
+import type { Metadata } from "next";
+import { buildFilterExploreMetadata } from "@/lib/seo";
+import { FilterExploreClient } from "./FilterExploreClient";
+
+export const metadata: Metadata = buildFilterExploreMetadata();
 
 export default function FilterExplorePage(): React.JSX.Element {
-  return <div data-page="filter-explore-deferred" />;
+  return <FilterExploreClient providerType="HOSPITAL" />;
 }

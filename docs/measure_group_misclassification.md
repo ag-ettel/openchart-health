@@ -1,50 +1,27 @@
-# Measure Group Misclassification Fix
+# Measure Group Misclassification — RESOLVED
 
-## Problem
+**Status:** Fixed 2026-03-23.
 
-25 HCAHPS patient experience measures are assigned to the `SPENDING` measure_group
-in the pipeline. They should be in `PATIENT_EXPERIENCE`. Only `MSPB-1` belongs in
-`SPENDING`.
+## What Happened
 
-## Affected Measures
+The `ensure_measure_exists()` function in `pipeline/store/seed_measures.py`
+auto-registers unknown/retired measure IDs encountered during historical CSV
+backfill. It originally used `"SPENDING"` as a blind default `measure_group` for
+all auto-registered measures. This caused 54 retired measures from older CMS
+archives to be assigned the wrong group:
 
-All measures with IDs starting with `H_BATH_HELP_*`, `H_CALL_BUTTON_*`, `H_COMP_3_*`,
-`H_COMP_7_*`, `H_CT_MED_*`, `H_CT_PREFER_*`, `H_CT_UNDER_*` are currently in
-`SPENDING` but are HCAHPS survey measures that belong in `PATIENT_EXPERIENCE`.
+- 25 HCAHPS measures (`H_BATH_HELP_*`, `H_CALL_BUTTON_*`, `H_COMP_3_*`,
+  `H_COMP_7_*`, `H_CT_*`) → should be `PATIENT_EXPERIENCE`
+- 12 NH MDS measures → should be `NH_QUALITY_LONG_STAY`
+- 1 NH Claims measure → should be `NH_QUALITY_CLAIMS`
+- 13 SNF QRP measures → should be `NH_SNF_QRP`
+- 3 PCH measures → should be `COMPLICATIONS`
 
-## How to Verify
+## Fix Applied
 
-```python
-from pipeline.export.build_json import export_all
-import json
-
-with open("build/data/010001.json") as f:
-    data = json.load(f)
-
-spending = [m for m in data["measures"] if m["measure_group"] == "SPENDING"]
-for m in spending:
-    print(m["measure_id"], m["measure_name"])
-```
-
-Expected: only `MSPB-1` in SPENDING. All `H_*` measures should be PATIENT_EXPERIENCE.
-
-## Root Cause
-
-Likely in the normalizer for the Medicare Spending dataset or in MEASURE_REGISTRY
-entries in `pipeline/config.py`. The `H_*` measures probably come from a dataset that
-was bulk-assigned to `SPENDING` when some of its measures are actually HCAHPS items
-that CMS bundles into the same download file.
-
-## Fix
-
-1. Check `pipeline/config.py` MEASURE_REGISTRY — find the entries for these `H_*`
-   measure IDs and change their `group` from `MeasureGroup.SPENDING` to
-   `MeasureGroup.PATIENT_EXPERIENCE`
-2. Run `make check` to verify tests pass
-3. After fix, re-run the export to regenerate JSON files
-4. Use the cross-cutting change checklist if group enum values or display names change
-
-## Scope
-
-This is a data correction in MEASURE_REGISTRY, not a schema change. No migration
-needed. No new enum values. Just reassigning existing measures to the correct group.
+1. **Database corrected** — all 54 measures updated to correct groups via SQL.
+2. **`_infer_measure_group()` added** to `seed_measures.py` — infers the correct
+   group from measure_id prefix patterns (H_ → PATIENT_EXPERIENCE, NH_MDS_ →
+   NH_QUALITY_LONG_STAY, S_ → NH_SNF_QRP, etc.). Falls back to `SPENDING` only
+   for truly unrecognizable IDs.
+3. Future auto-registrations will be correctly classified without manual cleanup.

@@ -13,7 +13,7 @@
 "use client";
 
 import type { Measure } from "@/types/provider";
-import { formatValue, formatPeriodLabel, titleCase } from "@/lib/utils";
+import { formatValue, formatPeriodLabel, effectivePeriodLabel, effectiveNumericValue, titleCase } from "@/lib/utils";
 import { getTagsForMeasure, MEASURE_TAGS } from "@/lib/measure-tags";
 import { useDistribution } from "@/lib/use-distributions";
 import { DistributionHistogram } from "./DistributionHistogram";
@@ -31,7 +31,7 @@ interface MeasureCardProps {
   measure: Measure;
   providerLastUpdated: string;
   providerName?: string;
-  inlineTrend?: boolean;
+  providerType?: string;
   onTagClick?: (tagId: string) => void;
 }
 
@@ -42,13 +42,16 @@ const RELIABILITY_LABELS: Record<string, string> = {
   SUPPRESSED: "Suppressed",
 };
 
-const CMS_COMPARISON_LABELS: Record<string, string> = {
-  BETTER: "CMS rates this hospital as better than the national rate.",
-  NO_DIFFERENT: "CMS rates this hospital as no different from the national rate.",
-  WORSE: "CMS rates this hospital as worse than the national rate.",
-  TOO_FEW_CASES: "Too few cases for CMS to compare to the national rate.",
-  NOT_AVAILABLE: "CMS national comparison not available.",
-};
+function cmsComparisonLabel(key: string, facility: string): string {
+  switch (key) {
+    case "BETTER": return `CMS rates this ${facility} as better than the national rate.`;
+    case "NO_DIFFERENT": return `CMS rates this ${facility} as no different from the national rate.`;
+    case "WORSE": return `CMS rates this ${facility} as worse than the national rate.`;
+    case "TOO_FEW_CASES": return "Too few cases for CMS to compare to the national rate.";
+    case "NOT_AVAILABLE": return "CMS national comparison not available.";
+    default: return "";
+  }
+}
 
 function formatInterval(lower: number, upper: number, unit: string): string {
   return `${formatValue(lower, unit)} to ${formatValue(upper, unit)}`;
@@ -57,10 +60,12 @@ function formatInterval(lower: number, upper: number, unit: string): string {
 /** Append interval context to a punchline when CI data is available. */
 function withInterval(m: Measure, punchline: string): string {
   const unit = m.unit ?? "";
+  // Strip trailing punctuation before appending interval or period
+  const clean = punchline.replace(/[.,;:]+$/, "");
   if (m.confidence_interval_lower !== null && m.confidence_interval_upper !== null) {
-    return `${punchline}, with a plausible range of ${formatValue(m.confidence_interval_lower, unit)} to ${formatValue(m.confidence_interval_upper, unit)} given the available data.`;
+    return `${clean}, with a plausible range of ${formatValue(m.confidence_interval_lower, unit)} to ${formatValue(m.confidence_interval_upper, unit)} given the available data.`;
   }
-  return `${punchline}.`;
+  return `${clean}.`;
 }
 
 /** Check if the interval straddles a neutral point (0 or 1.0). */
@@ -178,9 +183,9 @@ function buildFullTemplate(m: Measure, providerName: string): { body: string; pu
   // Opening sentence — use the punchline interpretation when available,
   // otherwise fall back to the raw value
   if (punchline) {
-    parts.push(`For the reporting period ${formatPeriodLabel(m.period_label)}, ${facilityName} reported a ${name.toLowerCase()} of ${value}.`);
+    parts.push(`For the reporting period ${formatPeriodLabel(effectivePeriodLabel(m))}, ${facilityName} reported a ${name.toLowerCase()} of ${value}.`);
   } else {
-    parts.push(`At ${facilityName}, the ${name.toLowerCase()} was ${value} for the reporting period ${formatPeriodLabel(m.period_label)}.`);
+    parts.push(`At ${facilityName}, the ${name.toLowerCase()} was ${value} for the reporting period ${formatPeriodLabel(effectivePeriodLabel(m))}.`);
   }
 
   if (m.national_avg !== null) {
@@ -208,7 +213,7 @@ function buildFullTemplate(m: Measure, providerName: string): { body: string; pu
     parts.push("The facility value and national average fall within overlapping ranges of statistical uncertainty, meaning the difference may not be meaningful.");
   }
   if (m.compared_to_national && m.national_avg !== null) {
-    const label = CMS_COMPARISON_LABELS[m.compared_to_national];
+    const label = cmsComparisonLabel(m.compared_to_national, facilityName.startsWith("This") ? "facility" : "facility");
     if (label) parts.push(label);
   }
 
@@ -298,6 +303,9 @@ function sampleLabel(m: { measure_group: string; measure_id: string }): string {
   if (id.startsWith("H_")) return "Surveys";
   if (group === "SAFETY" || id.startsWith("PSI_")) return "Discharges";
   if (/HIP_KNEE|CABG|THA|TKA/.test(id)) return "Procedures";
+  // NH long-stay measures use "residents" not "patients"
+  if (group === "NH_QUALITY_LONG_STAY" || id.startsWith("NH_MDS_4")) return "Residents";
+  // NH short-stay / SNF QRP are post-acute — "patients" is appropriate
   return "Patients";
 }
 
@@ -305,9 +313,15 @@ export function MeasureCard({
   measure,
   providerLastUpdated,
   providerName = "This hospital",
-  inlineTrend = false,
+  providerType,
   onTagClick,
 }: MeasureCardProps): React.JSX.Element {
+  const isNH = providerType === "NURSING_HOME";
+  const facilityWord = isNH ? "nursing home" : "hospital";
+  const facilityWordPlural = isNH ? "nursing homes" : "hospitals";
+
+  // Use the latest trend value when the stored period is stale
+  const effValue = effectiveNumericValue(measure);
 
   const shortName = measure.measure_name ?? measure.measure_id;
   const unit = measure.unit ?? "";
@@ -322,7 +336,7 @@ export function MeasureCard({
   const hasNationalAvg = measure.national_avg !== null;
   const hasTrend = measure.trend !== null && measure.trend.length > 0;
   const isValueCard =
-    !measure.suppressed && !measure.not_reported && measure.numeric_value !== null;
+    !measure.suppressed && !measure.not_reported && effValue !== null;
   const hasOE = measure.observed_value !== null && measure.expected_value !== null;
   const oeRatio = hasOE ? measure.observed_value! / measure.expected_value! : null;
 
@@ -333,13 +347,17 @@ export function MeasureCard({
         ? "CMS indicates: Higher is better for this measure."
         : null;
 
-  const metric = metricDisplay(measure);
+  // Use effective value for display (latest trend period when stored period is stale)
+  const displayMeasure = effValue !== measure.numeric_value
+    ? { ...measure, numeric_value: effValue }
+    : measure;
+  const metric = metricDisplay(displayMeasure);
   const cmsComparisonText =
     measure.compared_to_national && hasNationalAvg
-      ? CMS_COMPARISON_LABELS[measure.compared_to_national] ?? null
+      ? cmsComparisonLabel(measure.compared_to_national, facilityWord) || null
       : null;
 
-  const distribution = useDistribution(measure.measure_id, measure.period_label);
+  const distribution = useDistribution(measure.measure_id, effectivePeriodLabel(measure));
 
   const borderAccent = showSmallSample
     ? "border-l-amber-400"
@@ -392,7 +410,7 @@ export function MeasureCard({
       {/* Reporting period */}
       <p className="mb-4 text-xs text-gray-400">
         <span className="font-medium text-gray-500">Reporting Period:</span>{" "}
-        {formatPeriodLabel(measure.period_label)}
+        {formatPeriodLabel(effectivePeriodLabel(measure))}
       </p>
 
       {/* Value display */}
@@ -415,20 +433,18 @@ export function MeasureCard({
             {/* CMS direction + comparison */}
             <div className="mt-3 space-y-1">
               {measure.direction && (
-                <div className="flex items-center gap-1.5">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50">
-                    {measure.direction === "LOWER_IS_BETTER" ? (
-                      <svg className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-                    ) : (
-                      <svg className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
-                    )}
-                  </div>
-                  <span className="text-xs text-gray-400">{cmsDirectionText}</span>
-                </div>
+                <span className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+                  {measure.direction === "LOWER_IS_BETTER" ? (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                  ) : (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+                  )}
+                  CMS: {measure.direction === "LOWER_IS_BETTER" ? "Lower is better" : "Higher is better"}
+                </span>
               )}
             </div>
           </div>
-        ) : measure.numeric_value !== null ? (
+        ) : effValue !== null ? (
           <div className="rounded-md border border-gray-100 border-l-4 border-l-blue-400 bg-gray-50 px-4 py-3">
             {/* CMS comparison — promoted to top */}
             {cmsComparisonText && (
@@ -443,10 +459,10 @@ export function MeasureCard({
                   {metric.displayValue}
                 </div>
                 {/* Inline interpretation for tricky values */}
-                {valueContext(measure) && (
+                {valueContext(displayMeasure) && (
                   <p className="mt-1 text-xs text-gray-500">
-                    <span className="font-semibold text-gray-800">{valueContext(measure)!.bold}</span>{" "}
-                    {valueContext(measure)!.rest}
+                    <span className="font-semibold text-gray-800">{valueContext(displayMeasure)!.bold}</span>{" "}
+                    {valueContext(displayMeasure)!.rest}
                   </p>
                 )}
               </div>
@@ -477,28 +493,52 @@ export function MeasureCard({
             {/* CMS direction + comparison with arrow */}
             <div className="mt-3 space-y-1">
               {measure.direction && (
-                <div className="flex items-center gap-1.5">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50">
-                    {measure.direction === "LOWER_IS_BETTER" ? (
-                      <svg className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-                    ) : (
-                      <svg className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
-                    )}
-                  </div>
-                  <span className="text-xs text-gray-400">{cmsDirectionText}</span>
-                </div>
+                <span className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+                  {measure.direction === "LOWER_IS_BETTER" ? (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                  ) : (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+                  )}
+                  CMS: {measure.direction === "LOWER_IS_BETTER" ? "Lower is better" : "Higher is better"}
+                </span>
               )}
             </div>
 
+            {/* Punchline + full summary — after CMS direction, before histogram */}
+            {(() => {
+              const punchline = valueInterpretation(displayMeasure);
+              const template = buildFullTemplate(displayMeasure, providerName);
+              if (!punchline && !template) return null;
+              return (
+                <div className="mt-3">
+                  {punchline && (
+                    <p className="text-base font-bold leading-snug text-gray-900">
+                      {punchline}
+                    </p>
+                  )}
+                  {template && (
+                    <details className="mt-2">
+                      <summary className="cursor-pointer text-xs font-medium text-gray-500 hover:text-gray-700">
+                        Full summary
+                      </summary>
+                      <p className="mt-2 text-xs leading-relaxed text-gray-600">
+                        {template.body}
+                      </p>
+                    </details>
+                  )}
+                </div>
+              );
+            })()}
+
             {/* Distribution histogram */}
-            {distribution && measure.numeric_value !== null && (
+            {distribution && effValue !== null && (
               <>
               <p className="mt-3 mb-1 text-xs text-gray-500">
-                How this hospital compares to all hospitals nationally:
+                How this {facilityWord} compares to all {facilityWordPlural} nationally:
               </p>
               <DistributionHistogram
                 distribution={distribution}
-                value={measure.numeric_value}
+                value={effValue!}
                 ciLower={measure.confidence_interval_lower}
                 ciUpper={measure.confidence_interval_upper}
                 nationalAvg={measure.national_avg}
@@ -506,6 +546,8 @@ export function MeasureCard({
                 unit={unit}
                 showSmallSampleLink={showSmallSample}
                 comparedToNational={measure.compared_to_national}
+                facilityLabel={isNH ? "This nursing home" : "This hospital"}
+                isRiskAdjusted={hasOE}
               />
               </>
             )}
@@ -522,9 +564,10 @@ export function MeasureCard({
         </p>
       )}
 
-      {/* O/E ratio with interpretation */}
+      {/* O/E ratio with interpretation — NH claims risk adjustment context (NH-1) */}
       {hasOE && oeRatio !== null && (
         <div className="mb-3 rounded border border-gray-100 bg-gray-50 px-4 py-3">
+          <p className="mb-1.5 text-[10px] font-medium text-gray-400">Risk adjustment context</p>
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 text-xs">
             <div>
               <span className="font-medium text-gray-500">Observed events:</span>{" "}
@@ -554,7 +597,7 @@ export function MeasureCard({
       {isValueCard && hasNationalAvg && (
         <div className="mb-3">
           <BenchmarkBar
-            value={measure.numeric_value!}
+            value={effValue!}
             nationalAvg={measure.national_avg!}
             stateAvg={measure.state_avg}
             unit={unit}
@@ -592,37 +635,11 @@ export function MeasureCard({
         />
       )}
 
-      {/* Bold punchline + full summary — above trend chart */}
-      {(() => {
-        const punchline = valueInterpretation(measure);
-        const template = buildFullTemplate(measure, providerName);
-        if (!punchline && !template) return null;
-        return (
-          <div className="mb-3">
-            {punchline && (
-              <p className="text-base font-bold leading-snug text-gray-900">
-                {punchline}
-              </p>
-            )}
-            {template && (
-              <details className="mt-2">
-                <summary className="cursor-pointer text-xs font-medium text-gray-500 hover:text-gray-700">
-                  Full summary
-                </summary>
-                <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  {template.body}
-                </p>
-              </details>
-            )}
-          </div>
-        );
-      })()}
-
-      {/* Trend chart — collapsed by default */}
+      {/* Trend chart — open by default */}
       {hasTrend && (
-        <details className="mt-4 border-t border-gray-100 pt-3">
+        <details className="mt-4 border-t border-gray-100 pt-3" open>
           <summary className="cursor-pointer text-xs font-semibold text-blue-600 hover:text-blue-800">
-            Show trend over time
+            Trend over time
           </summary>
           <p className="mt-1 mb-1 text-xs font-semibold text-blue-600">
             {shortName} — Trend Over Time
@@ -634,7 +651,7 @@ export function MeasureCard({
             unit={unit}
             nationalAvg={measure.national_avg}
             stateAvg={measure.state_avg}
-            showOEReference={hasOE}
+            showOEReference={hasOE && unit === "ratio"}
             referenceValue={
               measure.measure_id.startsWith("EDAC_") ? 0
               : (measure.measure_id.startsWith("HRRP_") || measure.measure_id === "PSI_90") ? 1.0
@@ -665,7 +682,7 @@ export function MeasureCard({
         </summary>
         <p className="mt-1 text-xs text-gray-400">
           Source: CMS {measure.source_dataset_name},{" "}
-          {formatPeriodLabel(measure.period_label)}. Data reflects CMS reporting as of{" "}
+          {formatPeriodLabel(effectivePeriodLabel(measure))}. Data reflects CMS reporting as of{" "}
           {new Date(providerLastUpdated).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",

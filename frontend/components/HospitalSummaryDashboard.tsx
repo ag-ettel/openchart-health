@@ -9,6 +9,7 @@
 import type { Measure, PaymentAdjustment, HospitalContext } from "@/types/provider";
 import { consecutivePenalties, formatValue, measureHasData } from "@/lib/utils";
 import { useDistribution } from "@/lib/use-distributions";
+import { BIRTHING_FRIENDLY_DESCRIPTION } from "@/lib/constants";
 
 interface HospitalSummaryDashboardProps {
   measures: Measure[];
@@ -55,8 +56,11 @@ function Sparkline({ values, width = 72, height = 24 }: { values: (number | null
     return `${x},${y}`;
   }).join(" ");
 
+  // The sparkline visually accompanies a text label that already announces the
+  // current value and trend label — mark the SVG decorative so AT users don't
+  // hear "image" with no semantic payload.
   return (
-    <svg width={width} height={height} className="inline-block">
+    <svg width={width} height={height} className="inline-block" aria-hidden="true" focusable="false">
       <polyline points={points} fill="none" stroke="#2563eb" strokeWidth={1.5} strokeLinejoin="round" />
       {(() => {
         const last = nums[nums.length - 1];
@@ -245,20 +249,32 @@ export function HospitalSummaryDashboard({
 
       {/* Context badges — prominent, decision-relevant */}
       {badges.length > 0 && (
-        <div className="mb-4 flex flex-wrap gap-3">
-          {badges.map((b) => {
-            const icon = b === "Birthing Friendly"
-              ? <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
-              : b === "Emergency Services"
-                ? <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                : <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" /></svg>;
-            return (
-              <span key={b} className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700">
-                {icon}
-                {b}
-              </span>
-            );
-          })}
+        <div className="mb-4 flex flex-col gap-2">
+          <div className="flex flex-wrap gap-3">
+            {badges.map((b) => {
+              const icon = b === "Birthing Friendly"
+                ? <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+                : b === "Emergency Services"
+                  ? <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                  : <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" /></svg>;
+              return (
+                <span key={b} className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700">
+                  {icon}
+                  {b}
+                </span>
+              );
+            })}
+          </div>
+          {badges.includes("Birthing Friendly") && (
+            <details className="ml-0.5">
+              <summary className="cursor-pointer text-xs font-medium text-blue-600 hover:text-blue-800">
+                What does Birthing Friendly mean?
+              </summary>
+              <p className="mt-1 text-xs leading-relaxed text-gray-600">
+                {BIRTHING_FRIENDLY_DESCRIPTION}
+              </p>
+            </details>
+          )}
         </div>
       )}
 

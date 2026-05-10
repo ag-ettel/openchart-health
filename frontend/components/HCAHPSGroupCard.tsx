@@ -12,6 +12,12 @@ import type { HCAHPSGroup } from "@/lib/measure-tags";
 import type { Measure, TrendPeriod } from "@/types/provider";
 import { formatValue, formatPeriodLabel } from "@/lib/utils";
 import { useDistribution } from "@/lib/use-distributions";
+import {
+  HCAHPS_LOW_SURVEY_FOOTNOTE,
+  HCAHPS_VERY_LOW_SURVEY_FOOTNOTE,
+  HCAHPS_LOW_SURVEY_CAUTION,
+  HCAHPS_VERY_LOW_SURVEY_CAUTION,
+} from "@/lib/constants";
 import { DistributionHistogram } from "./DistributionHistogram";
 import { TrendChart } from "./TrendChart";
 
@@ -89,6 +95,19 @@ export function HCAHPSGroupCard({
     primaryMeasure?.sample_size ??
     primaryMeasure?.denominator ??
     null;
+
+  // Check for CAHPS small-sample footnotes across all measures in this group
+  const allGroupMeasures = [
+    ...group.responses,
+    ...(group.starRating ? [group.starRating] : []),
+    ...(group.linearScore ? [group.linearScore] : []),
+  ];
+  const hasVeryLowSurvey = allGroupMeasures.some(
+    (m) => m.footnote_codes?.includes(HCAHPS_VERY_LOW_SURVEY_FOOTNOTE)
+  );
+  const hasLowSurvey = !hasVeryLowSurvey && allGroupMeasures.some(
+    (m) => m.footnote_codes?.includes(HCAHPS_LOW_SURVEY_FOOTNOTE)
+  );
 
   // Distribution for the primary response
   const distribution = useDistribution(
@@ -178,6 +197,50 @@ export function HCAHPSGroupCard({
             </p>
           )}
 
+          {/* CAHPS small-sample caution — CMS footnotes 6 and 10 */}
+          {hasVeryLowSurvey && (
+            <div className="mt-2 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+              {HCAHPS_VERY_LOW_SURVEY_CAUTION}
+            </div>
+          )}
+          {hasLowSurvey && (
+            <div className="mt-2 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+              {HCAHPS_LOW_SURVEY_CAUTION}
+            </div>
+          )}
+
+          {/* Bold punchline — before histogram */}
+          {primaryValue !== null && surveyCount !== null && (
+            <p className="mt-3 text-base font-bold leading-snug text-gray-900">
+              {primaryValue}% of {surveyCount.toLocaleString("en-US")} surveyed patients
+              gave the highest response for {group.label.toLowerCase()}.
+            </p>
+          )}
+
+          {/* Full summary — collapsed */}
+          {primaryValue !== null && (
+            <details className="mt-2 mb-3">
+              <summary className="cursor-pointer text-xs font-medium text-gray-500 hover:text-gray-700">
+                Full summary
+              </summary>
+              <p className="mt-2 text-xs leading-relaxed text-gray-600">
+                In the HCAHPS patient survey for {group.label.toLowerCase()},{" "}
+                {primaryValue}% of patients selected &quot;{primaryLabel}&quot;
+                {slices.filter(s => !s.isPrimary && (s.measure.numeric_value ?? 0) > 0).length > 0 && (
+                  <>, while {slices.filter(s => !s.isPrimary && (s.measure.numeric_value ?? 0) > 0).map(s =>
+                    `${s.measure.numeric_value}% selected "${s.label}"`
+                  ).join(" and ")}</>
+                )}.
+                {surveyCount !== null && (
+                  <> This is based on {surveyCount.toLocaleString("en-US")} completed surveys.</>
+                )}{" "}
+                HCAHPS (Hospital Consumer Assessment of Healthcare Providers and Systems) is a
+                standardized survey administered to a random sample of adult inpatients after
+                discharge. Results are adjusted for patient mix to allow fair comparison across hospitals.
+              </p>
+            </details>
+          )}
+
           {/* Distribution histogram for primary response */}
           {distribution && primaryValue !== null && primaryMeasure && (
             <>
@@ -198,44 +261,11 @@ export function HCAHPSGroupCard({
         </div>
       )}
 
-      {/* Bold punchline */}
-      {primaryValue !== null && surveyCount !== null && (
-        <p className="mb-3 text-base font-bold leading-snug text-gray-900">
-          {primaryValue}% of {surveyCount.toLocaleString("en-US")} surveyed patients
-          gave the highest response for {group.label.toLowerCase()}.
-        </p>
-      )}
-
-      {/* Full summary — collapsed for SEO */}
-      {primaryValue !== null && (
-        <details className="mb-3">
-          <summary className="cursor-pointer text-xs font-medium text-gray-500 hover:text-gray-700">
-            Full summary
-          </summary>
-          <p className="mt-2 text-xs leading-relaxed text-gray-600">
-            In the HCAHPS patient survey for {group.label.toLowerCase()},{" "}
-            {primaryValue}% of patients selected &quot;{primaryLabel}&quot;
-            {slices.filter(s => !s.isPrimary && (s.measure.numeric_value ?? 0) > 0).length > 0 && (
-              <>, while {slices.filter(s => !s.isPrimary && (s.measure.numeric_value ?? 0) > 0).map(s =>
-                `${s.measure.numeric_value}% selected "${s.label}"`
-              ).join(" and ")}</>
-            )}.
-            {surveyCount !== null && (
-              <> This is based on {surveyCount.toLocaleString("en-US")} completed surveys.</>
-            )}{" "}
-            HCAHPS (Hospital Consumer Assessment of Healthcare Providers and Systems) is a
-            standardized survey administered to a random sample of adult inpatients after
-            discharge. Results are adjusted for patient mix to allow fair comparison across hospitals.
-            CMS designates higher patient experience scores as associated with better outcomes.
-          </p>
-        </details>
-      )}
-
-      {/* Trend chart — collapsed by default */}
+      {/* Trend chart — open by default */}
       {primaryMeasure && primaryMeasure.trend && primaryMeasure.trend.length > 0 && (
-        <details className="mt-4 border-t border-gray-100 pt-3">
+        <details className="mt-4 border-t border-gray-100 pt-3" open>
           <summary className="cursor-pointer text-xs font-semibold text-blue-600 hover:text-blue-800">
-            Show trend over time
+            Trend over time
           </summary>
           <p className="mt-1 mb-1 text-xs font-semibold text-blue-600">
             {group.label}: &quot;{primaryLabel}&quot; Response — Trend Over Time

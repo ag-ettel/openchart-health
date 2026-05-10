@@ -55,6 +55,14 @@ export function useDistribution(
   }, []);
 
   if (!cached) return null;
+  // Try exact period match first
   const key = `${measureId}|${periodLabel}`;
-  return cached[key] ?? null;
+  const exact = cached[key];
+  // Fall back to LATEST (full national distribution) when period-specific
+  // is missing or has too few providers for a meaningful histogram
+  if (!exact || exact.total < 100) {
+    const latest = cached[`${measureId}|LATEST`];
+    if (latest && latest.total >= 100) return latest;
+  }
+  return exact ?? null;
 }

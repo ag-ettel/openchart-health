@@ -94,7 +94,12 @@ class TestHospitalNationalBenchmarks:
         assert len(result) == 0
 
     def test_multiple_measures(self) -> None:
-        """Multiple rows produce multiple benchmark rows."""
+        """Multiple rows produce multiple benchmark rows.
+
+        CMS publishes imaging measure IDs with underscores (OP_10), but the
+        registry stores them with hyphens (OP-10). The normalizer applies
+        HOSPITAL_BENCHMARK_MEASURE_ID_REMAP so benchmarks JOIN cleanly.
+        """
         rows = [
             {"measure_id": "OP_10", "score": "5.9", "start_date": "07/01/2023", "end_date": "06/30/2024"},
             {"measure_id": "OP_13", "score": "1.6", "start_date": "07/01/2023", "end_date": "06/30/2024"},
@@ -103,7 +108,21 @@ class TestHospitalNationalBenchmarks:
         result = normalize_hospital_national_benchmarks(rows, config, "2025-11")
         assert len(result) == 2
         ids = {r["measure_id"] for r in result}
-        assert ids == {"OP_10", "OP_13"}
+        assert ids == {"OP-10", "OP-13"}
+
+    def test_imaging_id_remap(self) -> None:
+        """OP_8 / OP_10 / OP_13 / OP_39 / MSPB_1 remap to hyphenated registry form."""
+        rows = [
+            {"measure_id": "OP_8", "score": "10.0",
+             "start_date": "01/01/2024", "end_date": "12/31/2024"},
+            {"measure_id": "MSPB_1", "score": "1.0",
+             "start_date": "01/01/2024", "end_date": "12/31/2024"},
+        ]
+        config = HOSPITAL_NATIONAL_CONFIGS["imaging_national"]
+        result = normalize_hospital_national_benchmarks(rows, config, "2025-11")
+        ids = {r["measure_id"] for r in result}
+        assert "OP-8" in ids
+        assert "MSPB-1" in ids
 
 
 class TestHospitalStateBenchmarks:
@@ -167,7 +186,11 @@ class TestNHStateUSAverages:
     """NH_StateUSAverages wide-to-long normalization."""
 
     def test_nation_row(self) -> None:
-        """NATION row produces geography_type='national', geography_code='US'."""
+        """NATION row produces geography_type='national', geography_code='US'.
+
+        The catheter column in NH_StateUSAverages maps to NH_MDS_406 in the
+        registry (verified against pipeline/config.py).
+        """
         rows = [
             {
                 "state_or_nation": "NATION",
@@ -176,26 +199,30 @@ class TestNHStateUSAverages:
             },
         ]
         result = normalize_nh_state_us_averages(rows, "2023-01")
-        catheter = [r for r in result if r["measure_id"] == "404"]
+        catheter = [r for r in result if r["measure_id"] == "NH_MDS_406"]
         assert len(catheter) == 1
         assert catheter[0]["geography_type"] == "national"
         assert catheter[0]["geography_code"] == "US"
         assert catheter[0]["avg_value"] == Decimal("1.699311")
 
     def test_state_row(self) -> None:
-        """State row produces geography_type='state' with state abbreviation."""
+        """State row produces geography_type='state' with state abbreviation.
+
+        Uses NH_MDS_409 (physical restraints) — verified against the actual
+        measure_id in pipeline/config.py.
+        """
         rows = [
             {
                 "state_or_nation": "TX",
-                "percentage_of_long_stay_residents_who_lose_too_much_weight": "5.5",
+                "percentage_of_long_stay_residents_who_were_physically_restrained": "5.5",
                 "processing_date": "2023-01-01",
             },
         ]
         result = normalize_nh_state_us_averages(rows, "2023-01")
-        weight = [r for r in result if r["measure_id"] == "402"]
-        assert len(weight) == 1
-        assert weight[0]["geography_type"] == "state"
-        assert weight[0]["geography_code"] == "TX"
+        restrained = [r for r in result if r["measure_id"] == "NH_MDS_409"]
+        assert len(restrained) == 1
+        assert restrained[0]["geography_type"] == "state"
+        assert restrained[0]["geography_code"] == "TX"
 
     def test_unmapped_columns_ignored(self) -> None:
         """Columns not in NH_STATE_AVG_COLUMN_MAP are ignored."""
@@ -212,18 +239,21 @@ class TestNHStateUSAverages:
         assert len(result) == 0
 
     def test_multiple_geographies_multiple_measures(self) -> None:
-        """Multiple geographies × multiple measures = cross product."""
+        """Multiple geographies × multiple measures = cross product.
+
+        Uses two measures that are both in the column map.
+        """
         rows = [
             {
                 "state_or_nation": "NATION",
                 "percentage_of_long_stay_residents_with_a_catheter_inserted_and_left_in_their_bladder": "1.7",
-                "percentage_of_long_stay_residents_who_lose_too_much_weight": "6.2",
+                "percentage_of_long_stay_residents_who_were_physically_restrained": "6.2",
                 "processing_date": "2023-01-01",
             },
             {
                 "state_or_nation": "CA",
                 "percentage_of_long_stay_residents_with_a_catheter_inserted_and_left_in_their_bladder": "1.4",
-                "percentage_of_long_stay_residents_who_lose_too_much_weight": "5.8",
+                "percentage_of_long_stay_residents_who_were_physically_restrained": "5.8",
                 "processing_date": "2023-01-01",
             },
         ]
@@ -235,11 +265,17 @@ class TestSNFQRPNationalBenchmarks:
     """SNF QRP National Data normalization."""
 
     def test_nation_row_parsed(self) -> None:
-        """NATION CCN rows produce national benchmarks."""
+        """NATION rows produce national benchmarks.
+
+        DEC-020: SNF QRP measure_codes are compound (e.g., S_004_01_PPR_PD_NAT_UNADJUST_AVG).
+        The normalizer keeps only rows that match an "average" suffix and decomposes
+        to the 3-segment registry measure_id (S_004_01).
+        Modern NH archives use facility_id; older snapshots used cms_certification_number_(ccn).
+        """
         rows = [
             {
-                "cms_certification_number_(ccn)": "NATION",
-                "measure_code": "S_001_03_NATL_RATE",
+                "facility_id": "NATION",
+                "measure_code": "S_004_01_PPR_PD_NAT_UNADJUST_AVG",
                 "score": "98.8",
                 "footnote": "",
                 "start_date": "04/01/2021",
@@ -248,17 +284,46 @@ class TestSNFQRPNationalBenchmarks:
         ]
         result = normalize_snf_qrp_national_benchmarks(rows, "2023-01")
         assert len(result) == 1
-        assert result[0]["measure_id"] == "S_001_03_NATL_RATE"
+        assert result[0]["measure_id"] == "S_004_01"
         assert result[0]["geography_type"] == "national"
         assert result[0]["avg_value"] == Decimal("98.8")
         assert result[0]["source"] == "SNF_QRP_National"
 
-    def test_non_nation_rows_skipped(self) -> None:
-        """Provider-level rows (non-NATION CCN) are skipped."""
+    def test_legacy_ccn_field_supported(self) -> None:
+        """Older snapshots use cms_certification_number_(ccn) instead of facility_id."""
         rows = [
             {
-                "cms_certification_number_(ccn)": "015001",
-                "measure_code": "S_001_03_NATL_RATE",
+                "cms_certification_number_(ccn)": "NATION",
+                "measure_code": "S_006_01_MSPB_SCORE_NATL",
+                "score": "1.05",
+                "start_date": "10/01/2022",
+                "end_date": "09/30/2024",
+            },
+        ]
+        result = normalize_snf_qrp_national_benchmarks(rows, "2025-01")
+        assert len(result) == 1
+        assert result[0]["measure_id"] == "S_006_01"
+
+    def test_count_suffix_rows_skipped(self) -> None:
+        """Compound codes ending in _N_BETTER_NAT etc. are not benchmarks (DEC-020)."""
+        rows = [
+            {
+                "facility_id": "NATION",
+                "measure_code": "S_004_01_PPR_PD_N_BETTER_NAT",
+                "score": "82",
+                "start_date": "10/01/2022",
+                "end_date": "09/30/2024",
+            },
+        ]
+        result = normalize_snf_qrp_national_benchmarks(rows, "2025-01")
+        assert len(result) == 0
+
+    def test_non_nation_rows_skipped(self) -> None:
+        """Provider-level rows (non-NATION) are skipped."""
+        rows = [
+            {
+                "facility_id": "015001",
+                "measure_code": "S_004_01_PPR_PD_NAT_UNADJUST_AVG",
                 "score": "99.0",
                 "start_date": "04/01/2021",
                 "end_date": "03/31/2022",
@@ -271,8 +336,8 @@ class TestSNFQRPNationalBenchmarks:
         """Non-numeric scores are skipped."""
         rows = [
             {
-                "cms_certification_number_(ccn)": "NATION",
-                "measure_code": "S_006_01",
+                "facility_id": "NATION",
+                "measure_code": "S_006_01_MSPB_SCORE_NATL",
                 "score": "N/A",
                 "start_date": "04/01/2021",
                 "end_date": "03/31/2022",

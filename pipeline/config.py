@@ -207,6 +207,22 @@ CREDIBLE_INTERVAL_LEVEL: float = 0.95
 
 
 # ---------------------------------------------------------------------------
+# CMS minimum nursing home staffing thresholds (HPRD)
+# ---------------------------------------------------------------------------
+# Federal minimum staffing standards finalized May 2024 (CMS-3442-F),
+# Minimum Staffing Standards for Long-Term Care Facilities Rule.
+# Phased implementation 2026-2029.
+#
+# Used by scripts/export_parent_group_stats.py to compute the share of group
+# facilities reporting below each threshold (the threshold-based signal is
+# more interpretable than a raw HPRD average — see text-templates.md
+# sub-type 2c). Frontend mirrors these values in lib/constants.ts.
+NH_MIN_TOTAL_NURSE_HPRD: float = 3.48
+NH_MIN_RN_HPRD: float = 0.55
+NH_MIN_NURSE_AIDE_HPRD: float = 2.45
+
+
+# ---------------------------------------------------------------------------
 # MeasureEntry dataclass
 # ---------------------------------------------------------------------------
 
@@ -2907,6 +2923,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_COMP_1_U_P",
@@ -2927,6 +2944,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_1_SN_P",
@@ -2947,6 +2965,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_1_LINEAR_SCORE",
@@ -2967,6 +2986,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_1_STAR_RATING",
@@ -2987,6 +3007,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Doctor Communication (H_COMP_2) ===
@@ -3010,6 +3031,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_COMP_2_U_P",
@@ -3030,6 +3052,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_2_SN_P",
@@ -3050,6 +3073,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_2_LINEAR_SCORE",
@@ -3070,6 +3094,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_2_STAR_RATING",
@@ -3090,6 +3115,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Communication about Medicines (H_COMP_5) ===
@@ -3113,6 +3139,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_COMP_5_U_P",
@@ -3133,6 +3160,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_5_SN_P",
@@ -3153,6 +3181,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_5_LINEAR_SCORE",
@@ -3173,6 +3202,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_5_STAR_RATING",
@@ -3193,6 +3223,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Discharge Information (H_COMP_6) ===
@@ -3216,6 +3247,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_COMP_6_N_P",
@@ -3236,6 +3268,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_6_LINEAR_SCORE",
@@ -3256,6 +3289,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_COMP_6_STAR_RATING",
@@ -3276,6 +3310,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Discharge Help (H_DISCH_HELP) ===
@@ -3299,6 +3334,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_DISCH_HELP_N_P",
@@ -3319,6 +3355,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Symptoms Information (H_SYMPTOMS) ===
@@ -3342,6 +3379,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_SYMPTOMS_N_P",
@@ -3362,6 +3400,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Cleanliness (H_CLEAN) ===
@@ -3385,6 +3424,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_CLEAN_HSP_U_P",
@@ -3405,6 +3445,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_CLEAN_HSP_SN_P",
@@ -3425,6 +3466,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_CLEAN_LINEAR_SCORE",
@@ -3445,6 +3487,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_CLEAN_STAR_RATING",
@@ -3465,6 +3508,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Quietness (H_QUIET) ===
@@ -3488,6 +3532,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_QUIET_HSP_U_P",
@@ -3508,6 +3553,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_QUIET_HSP_SN_P",
@@ -3528,6 +3574,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_QUIET_LINEAR_SCORE",
@@ -3548,6 +3595,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_QUIET_STAR_RATING",
@@ -3568,6 +3616,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Overall Hospital Rating (H_HSP_RATING) ===
@@ -3591,6 +3640,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_7_8",
@@ -3611,6 +3661,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_0_6",
@@ -3631,6 +3682,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_LINEAR_SCORE",
@@ -3651,6 +3703,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_HSP_RATING_STAR_RATING",
@@ -3671,6 +3724,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Recommend Hospital (H_RECMND) ===
@@ -3694,6 +3748,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_RECMND_PY",
@@ -3714,6 +3769,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_RECMND_DN",
@@ -3734,6 +3790,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_RECMND_LINEAR_SCORE",
@@ -3754,6 +3811,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_RECMND_STAR_RATING",
@@ -3774,6 +3832,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Doctor Sub-Questions (H_DOCTOR_EXPLAIN, LISTEN, RESPECT) ===
@@ -3797,6 +3856,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_EXPLAIN_U_P",
@@ -3817,6 +3877,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_EXPLAIN_SN_P",
@@ -3837,6 +3898,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_LISTEN_A_P",
@@ -3857,6 +3919,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_LISTEN_U_P",
@@ -3877,6 +3940,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_LISTEN_SN_P",
@@ -3897,6 +3961,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_RESPECT_A_P",
@@ -3917,6 +3982,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_RESPECT_U_P",
@@ -3937,6 +4003,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_DOCTOR_RESPECT_SN_P",
@@ -3957,6 +4024,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Nurse Sub-Questions (H_NURSE_EXPLAIN, LISTEN, RESPECT) ===
@@ -3980,6 +4048,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_NURSE_EXPLAIN_U_P",
@@ -4000,6 +4069,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_NURSE_EXPLAIN_SN_P",
@@ -4020,6 +4090,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_NURSE_LISTEN_A_P",
@@ -4040,6 +4111,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_NURSE_LISTEN_U_P",
@@ -4060,6 +4132,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_NURSE_LISTEN_SN_P",
@@ -4080,6 +4153,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_NURSE_RESPECT_A_P",
@@ -4100,6 +4174,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_NURSE_RESPECT_U_P",
@@ -4120,6 +4195,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_NURSE_RESPECT_SN_P",
@@ -4140,6 +4216,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Medication Communication Sub-Questions (H_MED_FOR, H_SIDE_EFFECTS) ===
@@ -4163,6 +4240,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_MED_FOR_U_P",
@@ -4183,6 +4261,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_MED_FOR_SN_P",
@@ -4203,6 +4282,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_SIDE_EFFECTS_A_P",
@@ -4223,6 +4303,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=True,
     ),
     MeasureEntry(
         measure_id="H_SIDE_EFFECTS_U_P",
@@ -4243,6 +4324,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
     MeasureEntry(
         measure_id="H_SIDE_EFFECTS_SN_P",
@@ -4263,6 +4345,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # === Summary Star Rating (H_STAR_RATING) ===
@@ -4286,6 +4369,7 @@ _REGISTRY_LIST: list[MeasureEntry] = [
             "which are used for adjusting the mix of patients across hospitals and for "
             "analytic purposes."
         ),
+        risk_adjustment_model="PATIENT_MIX_ADJUSTMENT", cms_ci_published=False, numerator_denominator_published=False,
     ),
 
     # ───────────────────────────────────────────────────────────────────

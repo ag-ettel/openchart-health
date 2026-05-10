@@ -188,22 +188,22 @@ HOSPITAL_FILE_PATTERNS: dict[str, list[str]] = {
         r"Healthcare[ _]Associated[ _]Infections[ _-]+State\.csv$",
     ],
     "timely_effective_national": [
-        r"Timely[ _]and[ _]Effective[ _]Care[ _-]+National\.csv$",
+        r"(?<!REH_)Timely[ _]and[ _]Effective[ _]Care[ _-]+National\.csv$",
     ],
     "timely_effective_state": [
-        r"Timely[ _]and[ _]Effective[ _]Care[ _-]+State\.csv$",
+        r"(?<!REH_)Timely[ _]and[ _]Effective[ _]Care[ _-]+State\.csv$",
     ],
     "readmissions_national": [
-        r"Unplanned[ _]Hospital[ _]Visits[ _-]+National\.csv$",
+        r"(?<!REH_)Unplanned[ _]Hospital[ _]Visits[ _-]+National\.csv$",
     ],
     "readmissions_state": [
-        r"Unplanned[ _]Hospital[ _]Visits[ _-]+State\.csv$",
+        r"(?<!REH_)Unplanned[ _]Hospital[ _]Visits[ _-]+State\.csv$",
     ],
     "imaging_national": [
-        r"Outpatient[ _]Imaging[ _]Efficiency[ _-]+National\.csv$",
+        r"(?<!REH_)Outpatient[ _]Imaging[ _]Efficiency[ _-]+National\.csv$",
     ],
     "imaging_state": [
-        r"Outpatient[ _]Imaging[ _]Efficiency[ _-]+State\.csv$",
+        r"(?<!REH_)Outpatient[ _]Imaging[ _]Efficiency[ _-]+State\.csv$",
     ],
     "mspb_national": [
         r"Medicare[ _]Hospital[ _]Spending.*National\.csv$",

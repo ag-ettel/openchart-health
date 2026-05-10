@@ -34,6 +34,31 @@ _QUARTER_FIELDS = [
 ]
 
 
+def _derive_measure_period(raw: dict[str, str]) -> str:
+    """Reconstruct measure_period when CMS doesn't supply it directly.
+
+    Modern archives (2019-06+) ship `measure_period` like "2024Q4-2025Q3".
+    The 2019-01 archive omits that field but provides per-quarter labels
+    (`q1_quarter` ... `q4_quarter`); we derive the range from the earliest
+    and latest of those.
+    """
+    explicit = (raw.get("measure_period") or "").strip()
+    if explicit:
+        return explicit
+
+    quarters = [
+        (raw.get(f"{q.lower()}_quarter") or "").strip()
+        for q in ("Q1", "Q2", "Q3", "Q4")
+    ]
+    quarters = [q for q in quarters if q]
+    if not quarters:
+        return ""
+    sorted_q = sorted(quarters)
+    if sorted_q[0] == sorted_q[-1]:
+        return sorted_q[0]
+    return f"{sorted_q[0]}-{sorted_q[-1]}"
+
+
 def normalize_row(raw: dict[str, str]) -> list[dict[str, Any]]:
     """Normalize one MDS row into up to 5 provider_measure_values rows (DEC-015).
 
@@ -41,7 +66,7 @@ def normalize_row(raw: dict[str, str]) -> list[dict[str, Any]]:
     """
     provider_id = raw.get("facility_id", "").strip().zfill(6)
     measure_code = raw.get("measure_code", "").strip()
-    measure_period = raw.get("measure_period", "").strip()  # e.g., "2024Q4-2025Q3"
+    measure_period = _derive_measure_period(raw)
 
     if not measure_code:
         return []
@@ -71,15 +96,18 @@ def normalize_row(raw: dict[str, str]) -> list[dict[str, Any]]:
             numeric_value = parse_decimal(score_raw)
 
         # Period label: for individual quarters use "2025Q1" format;
-        # for the average, use the full measure_period
+        # for the average, use the full measure_period range.
+        # Falls back to processing_date when CMS provides nothing parseable.
         if q_label == "AVG":
-            period_label = measure_period or "unknown"
+            period_label = measure_period or (raw.get("processing_date") or "").strip() or "unknown"
         else:
-            # Derive quarter label from measure_period context
-            # measure_period = "2024Q4-2025Q3" means Q1=2025Q1, Q2=2025Q2, Q3=2025Q3, Q4=2024Q4
-            # But we can also use the q1_quarter..q4_quarter fields if available (2019)
             quarter_field = raw.get(f"{q_label.lower()}_quarter", "").strip()
-            period_label = quarter_field if quarter_field else f"{measure_period}_{q_label}"
+            if quarter_field:
+                period_label = quarter_field
+            elif measure_period:
+                period_label = f"{measure_period}_{q_label}"
+            else:
+                period_label = (raw.get("processing_date") or "").strip() or "unknown"
 
         results.append({
             "provider_id": provider_id,
