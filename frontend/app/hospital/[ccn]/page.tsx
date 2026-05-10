@@ -33,6 +33,11 @@ interface SearchIndexEntry {
 export function generateStaticParams(): { ccn: string }[] {
   // Required by Next.js `output: "export"`: every URL slug we want to render
   // must be listed here. Read the search index and emit slugs for hospitals.
+  // When build/data/ is absent (e.g., remote CI build host before data is
+  // wired in via R2/artifact), return [] so the build skips pre-rendering
+  // and the rest of the site still ships. Provider pages need a separate
+  // deployment path.
+  if (!fs.existsSync(DATA_DIR)) return [];
   const indexPath = path.join(DATA_DIR, "search_index.json");
   if (fs.existsSync(indexPath)) {
     const raw = fs.readFileSync(indexPath, "utf-8");
