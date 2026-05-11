@@ -450,30 +450,76 @@ export function FacilityTimeline({
 
   // Compute inspection-event clusters using the same 120-day window as
   // InspectionSummary / CompareInspectionSummary (anchored at the most recent
-  // date in the cluster). Renders as shaded background bands so the visual
-  // grouping matches the count shown in the summary panels.
+  // SURVEY date in the cluster). Renders as shaded background bands so the
+  // visual grouping matches the count shown in the summary panels.
+  //
+  // Penalties (fines, admission denials) within 120 days of a cluster's survey
+  // anchor extend the cluster's VISUAL band but do NOT shift the anchor — that
+  // keeps the window check stable and prevents chains of penalties from
+  // drifting the cluster forward. A penalty with no nearby survey anchor stays
+  // orphaned (correctly signals a regulatory event with no associated survey).
   const CLUSTER_DAYS = 120;
+  const dayMs = 24 * 3600 * 1000;
   const surveyEventsForClustering = events
     .filter((e) => e.type === "inspection" || e.type === "clean_inspection")
     .sort((a, b) => b.date.getTime() - a.date.getTime()); // newest first
   interface SurveyCluster {
+    // Survey-only anchor (most recent survey date in the cluster). Used for
+    // the window check — never extended by penalties.
     latestMs: number;
     earliestMs: number;
+    // Visual extent (may extend beyond survey range to include nearby penalties).
+    visualMinMs: number;
+    visualMaxMs: number;
     eventCount: number;
   }
   const surveyClusters: SurveyCluster[] = [];
   for (const e of surveyEventsForClustering) {
     const last = surveyClusters[surveyClusters.length - 1];
     const ms = e.date.getTime();
-    if (last && (last.latestMs - ms) / (24 * 3600 * 1000) <= CLUSTER_DAYS) {
+    if (last && (last.latestMs - ms) / dayMs <= CLUSTER_DAYS) {
       // Within window of cluster's most recent survey — extend earliest backward
       last.earliestMs = Math.min(last.earliestMs, ms);
+      last.visualMinMs = Math.min(last.visualMinMs, ms);
       last.eventCount += 1;
     } else {
-      surveyClusters.push({ latestMs: ms, earliestMs: ms, eventCount: 1 });
+      surveyClusters.push({
+        latestMs: ms,
+        earliestMs: ms,
+        visualMinMs: ms,
+        visualMaxMs: ms,
+        eventCount: 1,
+      });
     }
   }
-  // Only multi-survey clusters need a visual band
+
+  // Extend cluster visual extent with nearby penalties. Each penalty is
+  // assigned to the cluster whose survey anchor is closest in time, provided
+  // that distance is within CLUSTER_DAYS. Denial duration extends the right
+  // edge to the denial end date when known.
+  for (const e of events) {
+    if (e.type !== "fine" && e.type !== "payment_denial") continue;
+    const ms = e.date.getTime();
+    const endMs = e.type === "payment_denial" && e.denialEndDate
+      ? e.denialEndDate.getTime()
+      : ms;
+    let bestCluster: SurveyCluster | null = null;
+    let bestDist = Infinity;
+    for (const c of surveyClusters) {
+      const dist = Math.abs(c.latestMs - ms);
+      if (dist / dayMs <= CLUSTER_DAYS && dist < bestDist) {
+        bestCluster = c;
+        bestDist = dist;
+      }
+    }
+    if (bestCluster) {
+      if (ms < bestCluster.visualMinMs) bestCluster.visualMinMs = ms;
+      if (endMs > bestCluster.visualMaxMs) bestCluster.visualMaxMs = endMs;
+    }
+  }
+
+  // Only multi-survey clusters need a visual band. Penalties extend an
+  // existing band but do not promote a single-survey event to one.
   const visibleClusters = surveyClusters.filter((c) => c.eventCount >= 2);
 
   // Detect notable gaps between inspection events (>18 months)
@@ -601,8 +647,8 @@ export function FacilityTimeline({
             Shows the same 120-day grouping that drives the count in
             InspectionSummary / CompareInspectionSummary. */}
         {visibleClusters.map((c, ci) => {
-          const xLeft = axis.toX(c.earliestMs) - (BLOCK_W / 2 + 6);
-          const xRight = axis.toX(c.latestMs) + (BLOCK_W / 2 + 6);
+          const xLeft = axis.toX(c.visualMinMs) - (BLOCK_W / 2 + 6);
+          const xRight = axis.toX(c.visualMaxMs) + (BLOCK_W / 2 + 6);
           // Vertical extent: top of marker zone (above tallest stack) to slightly
           // below the axis line (covers axis-level markers like fines/denials).
           const yTop = 0;
