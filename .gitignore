@@ -103,7 +103,6 @@ logs/
 # Frontend build artifacts and dependencies
 frontend/.next/
 frontend/node_modules/
-frontend/public/distributions.json
 frontend/tsconfig.tsbuildinfo
 frontend/next-env.d.ts
 
@@ -111,6 +110,11 @@ frontend/next-env.d.ts
 data/
 build/data/
 build/data_staging/
+# Re-include small index files that need to ship with the Pages deployment.
+# Per-provider JSONs (22K of them) stay ignored — they live in Cloudflare R2.
+!frontend/public/data/
+frontend/public/data/*
+!frontend/public/data/provider_directory.json
 docs/pipeline_decisions.md
 docs/HOSPITAL_Data_Dictionary.pdf
 docs/HOSPITAL_Data_Dictionary.txt
