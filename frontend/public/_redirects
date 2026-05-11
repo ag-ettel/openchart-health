@@ -1,0 +1,13 @@
+# Cloudflare Pages SPA fallback for provider pages.
+#
+# Per-provider HTML files don't ship with the deployment (22K JSONs in R2 +
+# 22K HTMLs would exceed Cloudflare Pages' 20K file limit). The static
+# export emits one shell at /hospital/_unavailable/ and one at
+# /nursing-home/_unavailable/. These rewrites route every per-provider URL
+# to its respective shell, where a client component reads the URL, extracts
+# the CCN, fetches from R2, and renders.
+#
+# 200 = internal rewrite (URL stays, content served from shell)
+
+/hospital/*  /hospital/_unavailable/index.html  200
+/nursing-home/*  /nursing-home/_unavailable/index.html  200
