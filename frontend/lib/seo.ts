@@ -180,6 +180,11 @@ export function buildRootMetadata(): Metadata {
       ],
       apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     },
+    // Search engine ownership verification tags. These render as
+    // <meta name="..." content="..."> in the document head.
+    verification: {
+      google: "VLK0jqgo037_50uRaTEqh9bJUzpe46OojlWONvBPYqo",
+    },
   };
 }
 
