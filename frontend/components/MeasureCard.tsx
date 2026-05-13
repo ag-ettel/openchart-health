@@ -394,16 +394,16 @@ export function MeasureCard({
         </div>
       )}
 
-      {/* CMS Definition — only when available */}
+      {/* CMS Definition — collapsed by default */}
       {measure.cms_measure_definition && (
-        <div className="mb-4 rounded border border-gray-100 bg-gray-50 px-4 py-3">
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
+        <details className="mb-4 rounded border border-gray-100 bg-gray-50 px-4 py-3">
+          <summary className="cursor-pointer text-xs font-semibold uppercase tracking-wide text-gray-500 hover:text-gray-700">
             CMS Definition
-          </p>
-          <p className="text-xs leading-relaxed text-gray-700">
+          </summary>
+          <p className="mt-2 text-xs leading-relaxed text-gray-700">
             {measure.cms_measure_definition}
           </p>
-        </div>
+        </details>
       )}
 
 
