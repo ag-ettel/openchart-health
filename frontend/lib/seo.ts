@@ -184,6 +184,11 @@ export function buildRootMetadata(): Metadata {
     // <meta name="..." content="..."> in the document head.
     verification: {
       google: "VLK0jqgo037_50uRaTEqh9bJUzpe46OojlWONvBPYqo",
+      // Bing uses the msvalidate.01 meta name; Next.js emits non-standard
+      // verification names via the `other` map.
+      other: {
+        "msvalidate.01": "D898468D758C55D665D72989A0CCD510",
+      },
     },
   };
 }
