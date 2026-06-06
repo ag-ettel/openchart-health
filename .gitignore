@@ -125,6 +125,11 @@ docs/nh-five-star-users-guide-january-2026.txt
 docs/snf-qm-calculations-and-reporting-users-manual-v7.0.pdf
 docs/snf-qm-calculations-and-reporting-users-manual-v7.0.txt
 
+# Ownership-change diffs: keep the human-readable .md, ignore the bulky .json
+# (the .json is machine-readable detail and can be regenerated from the
+# Ownership CSVs via scripts/check_ownership_changes.py).
+docs/ownership_changes_*.json
+
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
 #   intended to run in multiple environments; otherwise, check them in:
