@@ -1,16 +1,23 @@
 """Build national distribution histograms for each measure.
 
-Outputs build/data/distributions.json with 25-bin histograms for every
-(measure_id, period_label) pair. Used by the frontend histogram component.
+Writes 25-bin histograms for every (measure_id, period_label) pair to:
+  build/data/distributions.json       (canonical, gitignored)
+  frontend/public/distributions.json  (shipped with Cloudflare Pages deploy)
+
+Both must be written every refresh — the frontend copy is the one served in
+production (use-distributions.ts fetches `/distributions.json` from the same
+origin), while the build/data copy is what export_all would consult if it
+ever needed to.
 
 Usage:
     python scripts/build_distributions.py
 
-Reads from provider_measure_values in the database. No migration needed.
+Reads from provider_measure_values in the database.
 """
 
 import json
 import math
+import shutil
 from pathlib import Path
 
 import numpy as np
@@ -18,6 +25,7 @@ import sqlalchemy as sa
 
 DB_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/openchart"
 OUTPUT_PATH = Path("build/data/distributions.json")
+FRONTEND_PATH = Path("frontend/public/distributions.json")
 NUM_BINS = 25
 
 
@@ -70,12 +78,19 @@ def main() -> None:
             key = f"{measure_id}|{period_label}"
             distributions[key] = hist
 
-    # Write output
+    # Write canonical copy
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w") as f:
         json.dump(distributions, f)
 
-    print(f"Built distributions for {len(distributions)} measure/period pairs -> {OUTPUT_PATH}")
+    # Mirror into frontend/public so Cloudflare Pages serves it
+    FRONTEND_PATH.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(OUTPUT_PATH, FRONTEND_PATH)
+
+    print(
+        f"Built distributions for {len(distributions)} measure/period pairs "
+        f"-> {OUTPUT_PATH} (mirrored to {FRONTEND_PATH})"
+    )
 
 
 if __name__ == "__main__":

@@ -4,14 +4,19 @@ Reads HCAHPS rows from provider_measure_values, derives numerator from
 the adjusted percentage × survey count, computes Beta-Binomial CIs using
 state/national average priors from measure_benchmarks, and updates the DB.
 
-Then re-exports affected provider JSON files.
+By default does NOT re-export per-provider JSONs. The single-threaded
+re-export in this script is much slower than running pipeline.export.build_json
+:export_all afterward (which is what the refresh runbook does). Pass
+--reexport to keep the legacy behavior.
 
 Usage:
-    python scripts/compute_hcahps_ci.py
+    python scripts/compute_hcahps_ci.py             # DB updates only (~2 min)
+    python scripts/compute_hcahps_ci.py --reexport  # also serial re-export (slow)
 
 Requires PostgreSQL running. See DEC-039 for methodology.
 """
 
+import argparse
 import logging
 from decimal import Decimal
 
@@ -42,6 +47,15 @@ PRIMARY_HCAHPS = [
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
+    parser.add_argument(
+        "--reexport",
+        action="store_true",
+        help="After updating the DB, serially re-export affected provider JSON "
+             "files. Default off — prefer running export_all separately.",
+    )
+    args = parser.parse_args()
+
     engine = sa.create_engine(DB_URL)
     logger.info("CI-eligible HCAHPS measures: %d", len(PRIMARY_HCAHPS))
     logger.info("Measures: %s", ", ".join(sorted(PRIMARY_HCAHPS)))
@@ -135,8 +149,9 @@ def main() -> None:
         updated, len(affected_providers),
     )
 
-    # Re-export affected providers
-    if affected_providers:
+    # Re-export affected providers (legacy path — slow and serial).
+    # Default workflow: skip this and run export_all afterward instead.
+    if affected_providers and args.reexport:
         import json
         from pathlib import Path
         from pipeline.export.build_json import build_provider_json, _json_serial
